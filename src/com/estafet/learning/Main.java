@@ -7,5 +7,7 @@ public class Main {
         dynamicText = "Hello Estafet!";
         System.out.println(dynamicText);
 
+        String hiMitko ="";
+
     }
 }
