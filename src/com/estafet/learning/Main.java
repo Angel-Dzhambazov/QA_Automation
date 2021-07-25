@@ -7,7 +7,7 @@ public class Main {
         dynamicText = "Hello Estafet!";
         System.out.println(dynamicText);
 
-        String hiMitko ="";
+        System.out.println("I finally imported a project as module in intellij!");
 
     }
 }
