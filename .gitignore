@@ -18,5 +18,4 @@
 *.iws
 *.iml
 *.ipr
-/out/
-test-output/
+/out/test-output/
