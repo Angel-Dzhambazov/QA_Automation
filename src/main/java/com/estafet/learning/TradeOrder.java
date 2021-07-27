@@ -12,7 +12,7 @@ public class TradeOrder extends Order {
         super(orderNumber, zipCode, clientDetails, accountName, dateOfActivation, billingCity, orderAuthorizedBy, dateOfAuthorization);
     }
 
-    public TradeOrder(int orderNumber, String clientDetails, String[] listWithArticles, long totalAmount, String accountName, String dateOfActivation, String billingCity, int zipCode, boolean paymentMethod, String orderAuthorizedBy, String dateOfAuthorization, long[] itemPrice) {
+    public TradeOrder(int orderNumber, String clientDetails, String[] listWithArticles, Double totalAmount, String accountName, String dateOfActivation, String billingCity, int zipCode, boolean paymentMethod, String orderAuthorizedBy, String dateOfAuthorization, Double[] itemPrice) {
         super(orderNumber, clientDetails, listWithArticles, totalAmount, accountName, dateOfActivation, billingCity, zipCode, paymentMethod, orderAuthorizedBy, dateOfAuthorization, itemPrice);
     }
 
@@ -30,12 +30,12 @@ public class TradeOrder extends Order {
             }switch (userChoice) {
                 case 1:
                     super.setListWithArticles(new String[]{"Banana", "Water"});
-                    super.setItemPrice(new long[]{25, 15});
+                    super.setItemPrice(new Double[]{25.0, 15.0});
                     System.out.println();
                     break;
                 case 2:
                     super.setListWithArticles(new String[]{"Socks", "Shoes"});
-                    super.setItemPrice(new long[]{5, 125});
+                    super.setItemPrice(new Double[]{5.0, 125.0});
                     break;
             }
 

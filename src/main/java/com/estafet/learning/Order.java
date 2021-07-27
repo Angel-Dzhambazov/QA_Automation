@@ -3,11 +3,14 @@ package com.estafet.learning;
 import java.util.Arrays;
 
 public abstract class Order {
-    private static final String orderName = "*Shop Order*";// the variable is not inherited in extended classes and cannot be changed it can be only read
+
+    // the variable is not inherited in extended classes and cannot be changed it can be only read
+    private static final String orderName = "*Shop Order*";
+
     private int orderNumber;
     private String clientDetails;
     private String[] listWithArticles;
-    private long totalAmount;
+    private Double totalAmount;
     private String accountName;
     private String dateOfActivation;
     private String billingCity;
@@ -15,13 +18,13 @@ public abstract class Order {
     private boolean paymentMethod;
     private String orderAuthorizedBy;
     private String dateOfAuthorization;
-    private long[] itemPrice;
+    private Double[] itemPrice;
 
-    public long[] getItemPrice() {
+    public Double[] getItemPrice() {
         return itemPrice;
     }
 
-    public void setItemPrice(long[] itemPrice) {
+    public void setItemPrice(Double[] itemPrice) {
         this.itemPrice = itemPrice;
     }
 
@@ -102,11 +105,11 @@ public abstract class Order {
         this.orderAuthorizedBy = orderAuthorizedBy;
     }
 
-    protected long getTotalAmount() {
+    protected Double getTotalAmount() {
         return totalAmount;
     }
 
-    protected void setTotalAmount(long totalAmount) {
+    protected void setTotalAmount(Double totalAmount) {
         this.totalAmount = totalAmount;
     }
 
@@ -140,7 +143,7 @@ public abstract class Order {
 
     }
 
-    public Order(int orderNumber, String clientDetails, String[] listWithArticles,long totalAmount, String accountName, String dateOfActivation, String billingCity, int zipCode, boolean paymentMethod, String orderAuthorizedBy, String dateOfAuthorization, long[] itemPrice) {
+    public Order(int orderNumber, String clientDetails, String[] listWithArticles,Double totalAmount, String accountName, String dateOfActivation, String billingCity, int zipCode, boolean paymentMethod, String orderAuthorizedBy, String dateOfAuthorization, Double[] itemPrice) {
         this.orderNumber = orderNumber;
         this.clientDetails = clientDetails;
         this.listWithArticles = listWithArticles;
