@@ -181,7 +181,7 @@ public abstract class Order {
     public String toString() {
 
     StringBuilder sb = new StringBuilder();
-    sb.append("{" + orderName + " ").append(System.lineSeparator());
+    sb.append("{" + orderName).append(System.lineSeparator());
     sb.append("Order Number: " + orderNumber).append(System.lineSeparator());
     sb.append("Client details: " + clientDetails).append(System.lineSeparator());
     sb.append("Account: " + accountName).append(System.lineSeparator());
@@ -195,10 +195,11 @@ public abstract class Order {
 
     public void calculateTotalAmountOfAllItems() {
 
-
+        Double zeroValue = 0.0;
         for (Double amount : this.itemPrice) {
-            totalAmount += amount;
+            zeroValue += amount;
         }
+        totalAmount = zeroValue;
     }
 
     @Override

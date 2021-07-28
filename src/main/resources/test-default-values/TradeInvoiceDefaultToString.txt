@@ -1,0 +1,8 @@
+{*Shop Order*
+Order Number: 2021100
+Client details: EstafetTestClient
+Account: JUnitTestAccount
+List With Articles: []
+Order date: 28th July 2021
+zipCode: 4400
+Total amount: 40.0}

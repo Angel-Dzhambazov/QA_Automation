@@ -5,12 +5,19 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 
 import static org.junit.Assert.*;
+
 
 
 public class OrderTest {
@@ -20,16 +27,23 @@ public class OrderTest {
     @Before
     public void setUp() throws Exception {
         testOrder = generateFullDefaultOrder(testOrder);
-
     }
 
     @Test
-    public void testOrder() {
+    public void testToStringMehtod() {
         log.info(testOrder.toString());
 
-        log.info(testOrder.getItemPrice().toString());
+        String filePath = "D:\\intelliJ\\QA_Automation\\src\\main\\resources\\test-default-values\\TradeInvoiceDefaultToString.txt";
+
+        String expected = readLineByLine(filePath);
+        String actual = testOrder.toString();
+        assertEquals("toString method is not as expected!", expected, actual);
+
+        //log.info(testOrder.getItemPrice().toString());
 
     }
+
+
 
     private static TradeOrder generateFullDefaultOrder(Order order) {
         int orderNumber = 2021100;
@@ -42,9 +56,30 @@ public class OrderTest {
         boolean paymentMethod = true;
         String orderAuthorizedBy = "Angel Dzhambazov";
         String dateOfAuthorization = "28th July 2021";
-        List<Double> itemPrices = new ArrayList<>(Arrays. asList(25.0, 15.0));
+        List<Double> itemPrices = new ArrayList<>(Arrays.asList(25.0, 15.0));
 
-        return new TradeOrder(orderNumber, clientDetails, listWithArticles,accountName,dateOfActivation,billingCity,
-                zipCode,paymentMethod,orderAuthorizedBy,dateOfAuthorization,itemPrices);
+        return new TradeOrder(orderNumber, clientDetails, listWithArticles, accountName, dateOfActivation, billingCity,
+                zipCode, paymentMethod, orderAuthorizedBy, dateOfAuthorization, itemPrices);
     }
+
+    //Read file content into the string with - Files.lines(Path path, Charset cs)
+
+    private static String readLineByLine(String filePath)
+    {
+        StringBuilder contentBuilder = new StringBuilder();
+
+        try (Stream<String> stream = Files.lines( Paths.get(filePath), StandardCharsets.UTF_8))
+        {
+            stream.forEach(s -> contentBuilder.append(s).append(System.lineSeparator()));
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+        return contentBuilder.toString().trim();
+    }
+
+
+
 }

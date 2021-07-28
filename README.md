@@ -1,12 +1,12 @@
 # QA_Automation 
 
-OrederTest - Here we are testing all custom methods:
+OrderTest - Here we are testing all custom methods:
 
-- add item addItemPrie(Double itemPrice)
+- add item addItemPrice(Double itemPrice)
 - add addArticleToListWithArticles(String article)
 - calculateTotalAmountOfAllItems()
   
 Override methods 
--  toString()
+- toString()
 - equals(Object o)
 - hashCode() 
