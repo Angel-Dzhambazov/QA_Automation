@@ -139,6 +139,7 @@ public abstract class Invoice {
         this.amountAfterVat = amountAfterVat;
     }
 
+    //how does this work?
     public long itemAmountCalculation() {
         long amountInvoice = itemPrice[0] + itemPrice[1];
         return amountInvoice;

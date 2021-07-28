@@ -9,12 +9,19 @@ public class TradeInvoice extends Invoice implements TradeInvoiceCalculation {
     public TradeInvoice() {
     }
 
-    public TradeInvoice(String clientDetailsInvoice, int invoiceNumber, String bankAccountIndexInvoice, int dateOfReleaseInvoice, long businessDiscountInvoice) {
-        super(clientDetailsInvoice, invoiceNumber, bankAccountIndexInvoice, dateOfReleaseInvoice, businessDiscountInvoice);
+    public TradeInvoice(String clientDetailsInvoice, int invoiceNumber, String bankAccountIndexInvoice,
+                        int dateOfReleaseInvoice, long businessDiscountInvoice) {
+
+        super(clientDetailsInvoice, invoiceNumber, bankAccountIndexInvoice, dateOfReleaseInvoice,
+                businessDiscountInvoice);
     }
 
-    public TradeInvoice(String clientDetailsInvoice, String[] listWithArticlesInvoice, long totalAmountInvoice, int invoiceNumber, String bankAccountIndexInvoice, int dateOfReleaseInvoice, long businessDiscountInvoice, int vaTInvoice) {
-        super(clientDetailsInvoice, listWithArticlesInvoice, totalAmountInvoice, invoiceNumber, bankAccountIndexInvoice, dateOfReleaseInvoice, businessDiscountInvoice, vaTInvoice);
+    public TradeInvoice(String clientDetailsInvoice, String[] listWithArticlesInvoice, long totalAmountInvoice,
+                        int invoiceNumber, String bankAccountIndexInvoice, int dateOfReleaseInvoice,
+                        long businessDiscountInvoice, int vaTInvoice) {
+
+        super(clientDetailsInvoice, listWithArticlesInvoice, totalAmountInvoice, invoiceNumber, bankAccountIndexInvoice,
+                dateOfReleaseInvoice, businessDiscountInvoice, vaTInvoice);
     }
 
 
@@ -59,6 +66,7 @@ public class TradeInvoice extends Invoice implements TradeInvoiceCalculation {
 
     public void vatCalculation() {
 
+        //TODO this is always 0 and needs to be fixed!
         long b;
         long a = super.getTotalAmountInvoice();
         b = a * (20 / 100);

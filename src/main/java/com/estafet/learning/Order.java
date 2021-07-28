@@ -1,6 +1,9 @@
 package com.estafet.learning;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public abstract class Order {
 
@@ -9,7 +12,8 @@ public abstract class Order {
 
     private int orderNumber;
     private String clientDetails;
-    private String[] listWithArticles;
+    // Changing listWithArticles from array of doubles to list of doubles, by Angel
+    private List<String> listWithArticles;
     private Double totalAmount;
     private String accountName;
     private String dateOfActivation;
@@ -18,14 +22,55 @@ public abstract class Order {
     private boolean paymentMethod;
     private String orderAuthorizedBy;
     private String dateOfAuthorization;
-    private Double[] itemPrice;
 
-    public Double[] getItemPrice() {
-        return itemPrice;
+    // Changing itemPrice from array of doubles to list of doubles, by Angel
+    private List<Double> itemPrice;
+
+    public Order() {
+
     }
 
-    public void setItemPrice(Double[] itemPrice) {
-        this.itemPrice = itemPrice;
+
+    public Order(int orderNumber, int zipCode, String clientDetails, String accountName, String dateOfActivation,
+                 String billingCity, String orderAuthorizedBy, String dateOfAuthorization) {
+        this.orderNumber = orderNumber;
+        this.zipCode = zipCode;
+        this.clientDetails = clientDetails;
+        this.accountName = accountName;
+        this.dateOfActivation = dateOfActivation;
+        this.billingCity = billingCity;
+        this.orderAuthorizedBy = orderAuthorizedBy;
+        this.dateOfAuthorization = dateOfAuthorization;
+
+    }
+
+    public Order(int orderNumber, String clientDetails, List<String> listWithArticles,
+                 String accountName, String dateOfActivation, String billingCity, int zipCode, boolean paymentMethod,
+                 String orderAuthorizedBy, String dateOfAuthorization, List<Double> itemPrice) {
+        this.orderNumber = orderNumber;
+        this.clientDetails = clientDetails;
+        this.listWithArticles = new ArrayList<String>(listWithArticles);
+        this.accountName = accountName;
+        this.dateOfActivation = dateOfActivation;
+        this.billingCity = billingCity;
+        this.zipCode = zipCode;
+        this.paymentMethod = paymentMethod;
+        this.orderAuthorizedBy = orderAuthorizedBy;
+        this.dateOfAuthorization = dateOfAuthorization;
+        this.itemPrice = new ArrayList<Double>(itemPrice);
+        this.totalAmount = 0.0;
+    }
+
+    public List<Double> getItemPrice() {
+        return Collections.unmodifiableList(this.itemPrice);
+    }
+
+    public void setItemPrice(List<Double> itemPrice) {
+        this.itemPrice = new ArrayList<Double>(itemPrice);
+    }
+
+    public void addItemPrice(Double itemPrice) {
+        this.itemPrice.add(itemPrice);
     }
 
     protected boolean isPaymentMethod() {
@@ -106,6 +151,7 @@ public abstract class Order {
     }
 
     protected Double getTotalAmount() {
+        this.calculateTotalAmountOfAllItems();
         return totalAmount;
     }
 
@@ -115,60 +161,44 @@ public abstract class Order {
 
     public abstract void articles();
 
-    public String[] getListWithArticles() {
-        return listWithArticles;
+    public List<String> getListWithArticles() {
+        return Collections.unmodifiableList(this.listWithArticles);
+
     }
 
-    public void setListWithArticles(String[] listWithArticles) {
-        this.listWithArticles = listWithArticles;
+    public void setListWithArticles(List<String> listWithArticles) {
+        this.listWithArticles = new ArrayList<String>(listWithArticles);
+    }
+
+    public void addArticleToListWithArticles(String article){
+        this.listWithArticles.add(article);
     }
 
     protected abstract void methodOfPayment(boolean paymentMethod);
 
 
-    public Order() {
-
-    }
-
-
-    public Order(int orderNumber, int zipCode, String clientDetails, String accountName, String dateOfActivation, String billingCity, String orderAuthorizedBy, String dateOfAuthorization) {
-        this.orderNumber = orderNumber;
-        this.zipCode = zipCode;
-        this.clientDetails = clientDetails;
-        this.accountName = accountName;
-        this.dateOfActivation = dateOfActivation;
-        this.billingCity = billingCity;
-        this.orderAuthorizedBy = orderAuthorizedBy;
-        this.dateOfAuthorization = dateOfAuthorization;
-
-    }
-
-    public Order(int orderNumber, String clientDetails, String[] listWithArticles,Double totalAmount, String accountName, String dateOfActivation, String billingCity, int zipCode, boolean paymentMethod, String orderAuthorizedBy, String dateOfAuthorization, Double[] itemPrice) {
-        this.orderNumber = orderNumber;
-        this.clientDetails = clientDetails;
-        this.listWithArticles = listWithArticles;
-        this.totalAmount = totalAmount;
-        this.accountName = accountName;
-        this.dateOfActivation = dateOfActivation;
-        this.billingCity = billingCity;
-        this.zipCode = zipCode;
-        this.paymentMethod = paymentMethod;
-        this.orderAuthorizedBy = orderAuthorizedBy;
-        this.dateOfAuthorization = dateOfAuthorization;
-        this.itemPrice = itemPrice;
-    }
-
     @Override
     public String toString() {
-        return "{" + orderName + " " +
-                " \n Order Number: " + orderNumber + "\n Client details: " + clientDetails + "\n Account: " + accountName +
-                "\n List With Articles: " + Arrays.toString(listWithArticles) + "\n Order date: " + dateOfActivation +
-                "\n zipCode:" + zipCode + "\n Total amount: " + totalAmount +
-                '}';
+
+    StringBuilder sb = new StringBuilder();
+    sb.append("{" + orderName + " ").append(System.lineSeparator());
+    sb.append("Order Number: " + orderNumber).append(System.lineSeparator());
+    sb.append("Client details: " + clientDetails).append(System.lineSeparator());
+    sb.append("Account: " + accountName).append(System.lineSeparator());
+    sb.append("List With Articles: " + listWithArticles.toString()).append(System.lineSeparator());
+    sb.append("Order date: " + dateOfActivation).append(System.lineSeparator());
+    sb.append("zipCode: " + zipCode).append(System.lineSeparator());
+    sb.append("Total amount: " + this.getTotalAmount()).append("}");
+
+    return sb.toString();
     }
 
-    public void amount() {
-        totalAmount = itemPrice[0] + itemPrice[1];
+    public void calculateTotalAmountOfAllItems() {
+
+
+        for (Double amount : this.itemPrice) {
+            totalAmount += amount;
+        }
     }
 
     @Override
@@ -178,20 +208,20 @@ public abstract class Order {
         Order order = (Order) o;
         return
                 getZipCode() == order.getZipCode() &&
-                getClientDetails().equals(order.getClientDetails()) &&
-                getAccountName().equals(order.getAccountName()) &&
-                getDateOfActivation().equals(order.getDateOfActivation()) &&
-                getBillingCity().equals(order.getBillingCity()) &&
-                getOrderAuthorizedBy().equals(order.getOrderAuthorizedBy()) &&
-                getDateOfAuthorization().equals(order.getDateOfAuthorization());
+                        getClientDetails().equals(order.getClientDetails()) &&
+                        getAccountName().equals(order.getAccountName()) &&
+                        getDateOfActivation().equals(order.getDateOfActivation()) &&
+                        getBillingCity().equals(order.getBillingCity()) &&
+                        getOrderAuthorizedBy().equals(order.getOrderAuthorizedBy()) &&
+                        getDateOfAuthorization().equals(order.getDateOfAuthorization());
     }
 
     @Override
     public int hashCode() {
 
         return getClientDetails().hashCode() +
-                getAccountName().hashCode()+ getDateOfActivation().hashCode()+
-                getBillingCity().hashCode()+ getZipCode()+ getOrderAuthorizedBy().hashCode()
+                getAccountName().hashCode() + getDateOfActivation().hashCode() +
+                getBillingCity().hashCode() + getZipCode() + getOrderAuthorizedBy().hashCode()
                 + getDateOfAuthorization().hashCode();
     }
 }
