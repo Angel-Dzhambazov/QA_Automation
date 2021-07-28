@@ -71,7 +71,6 @@ public class TradeInvoice extends Invoice implements TradeInvoiceCalculation {
         long a = super.getTotalAmountInvoice();
         b = a * (20 / 100);
         super.setAmountAfterVat(a - b);
-~
     }
 
     public void priceCalc() {
