@@ -75,7 +75,7 @@ public class OrderTest {
         try {
             testOrder.addArticleToListWithArticles("TestArticle");
         } catch (ArticleException e) {
-            e.printStackTrace();
+            log.info(e.getMessage());
         }
 
         assertEquals("Unexpected number of articles in testOrder", 1, testOrder.getListWithArticles().size());
