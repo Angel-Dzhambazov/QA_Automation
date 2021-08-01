@@ -37,13 +37,45 @@ public class OrderTest {
 
         String expected = readLineByLine(filePath);
         String actual = testOrder.toString();
-        assertEquals("toString method is not as expected!", expected, actual);
+        boolean isToStringAsExpected = expected.equals(actual);
+        assertTrue("toString method is not as expected!", isToStringAsExpected);
 
         //log.info(testOrder.getItemPrice().toString());
 
     }
 
+    @Test
+    public void addItemPrice(){
+        //first check number of items
+        // second check total price of all items
+        // add an item with its price
+        //check if total item price has increased with the price of the item
 
+
+        int expectedNumberOfItems = 2;
+        assertEquals("testOrder has unexpected number of items",expectedNumberOfItems,
+                testOrder.getItemPrice().size());
+
+
+        double expectedTotalPriceOfItems = 40.0;
+        assertEquals("testOrder has unexpected number of items",0 ,
+                Double.compare(expectedTotalPriceOfItems, testOrder.getTotalAmount()));
+    }
+
+
+    @Test
+    public void addArticle(){
+        //check for articles //getListWithArticles
+        //add articles addArticleToListWithArticles()
+        // check for new articles //getListWithArticles
+
+        assertEquals("Unexpected number of articles in testOrder", 0, testOrder.getListWithArticles().size());
+
+        testOrder.addArticleToListWithArticles("TestArticle");
+
+        assertEquals("Unexpected number of articles in testOrder", 1, testOrder.getListWithArticles().size());
+
+    }
 
     private static TradeOrder generateFullDefaultOrder(Order order) {
         int orderNumber = 2021100;

@@ -150,7 +150,7 @@ public abstract class Order {
         this.orderAuthorizedBy = orderAuthorizedBy;
     }
 
-    protected Double getTotalAmount() {
+    public Double getTotalAmount() {
         this.calculateTotalAmountOfAllItems();
         return totalAmount;
     }

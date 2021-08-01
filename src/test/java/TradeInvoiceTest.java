@@ -1,14 +1,15 @@
 import com.estafet.learning.TradeInvoice;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.logging.Logger;
 
 import static org.junit.Assert.*;
 
-
-public class TradeInvoiceTest {
+@Ignore
+public class TradeInvoiceTest  {
 
     private static Logger log = Logger.getLogger(TradeInvoiceTest.class.getName());
     private static TradeInvoice testInvoice;
