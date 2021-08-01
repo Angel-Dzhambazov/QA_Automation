@@ -1,5 +1,7 @@
 package com.estafet.learning;
 
+import com.estafet.learning.exceptions.ArticleException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -170,8 +172,12 @@ public abstract class Order {
         this.listWithArticles = new ArrayList<String>(listWithArticles);
     }
 
-    public void addArticleToListWithArticles(String article){
+    public void addArticleToListWithArticles(String article) throws ArticleException{
+        if(this.listWithArticles.contains(article)){
+            throw new ArticleException("\n This article is already added!");
+        } else {
         this.listWithArticles.add(article);
+        }
     }
 
     protected abstract void methodOfPayment(boolean paymentMethod);

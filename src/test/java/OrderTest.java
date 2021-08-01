@@ -1,6 +1,7 @@
 
 import com.estafet.learning.Order;
 import com.estafet.learning.TradeOrder;
+import com.estafet.learning.exceptions.ArticleException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,7 +34,7 @@ public class OrderTest {
     public void testToStringMehtod() {
         log.info(testOrder.toString());
 
-        String filePath = "D:\\intelliJ\\QA_Automation\\src\\main\\resources\\test-default-values\\TradeInvoiceDefaultToString.txt";
+        String filePath = "E:\\Estafet\\QA_Automation\\src\\main\\resources\\test-default-values\\TradeInvoiceDefaultToString.txt";
 
         String expected = readLineByLine(filePath);
         String actual = testOrder.toString();
@@ -71,7 +72,11 @@ public class OrderTest {
 
         assertEquals("Unexpected number of articles in testOrder", 0, testOrder.getListWithArticles().size());
 
-        testOrder.addArticleToListWithArticles("TestArticle");
+        try {
+            testOrder.addArticleToListWithArticles("TestArticle");
+        } catch (ArticleException e) {
+            e.printStackTrace();
+        }
 
         assertEquals("Unexpected number of articles in testOrder", 1, testOrder.getListWithArticles().size());
 
