@@ -172,11 +172,11 @@ public abstract class Order {
         this.listWithArticles = new ArrayList<String>(listWithArticles);
     }
 
-    public void addArticleToListWithArticles(String article) throws ArticleException{
-        if(this.listWithArticles.contains(article)){
+    public void addArticleToListWithArticles(String article) throws ArticleException {
+        if (this.listWithArticles.contains(article)) {
             throw new ArticleException("\n This article is already added!");
         } else {
-        this.listWithArticles.add(article);
+            this.listWithArticles.add(article);
         }
     }
 
@@ -186,17 +186,17 @@ public abstract class Order {
     @Override
     public String toString() {
 
-    StringBuilder sb = new StringBuilder();
-    sb.append("{" + orderName).append(System.lineSeparator());
-    sb.append("Order Number: " + orderNumber).append(System.lineSeparator());
-    sb.append("Client details: " + clientDetails).append(System.lineSeparator());
-    sb.append("Account: " + accountName).append(System.lineSeparator());
-    sb.append("List With Articles: " + listWithArticles.toString()).append(System.lineSeparator());
-    sb.append("Order date: " + dateOfActivation).append(System.lineSeparator());
-    sb.append("zipCode: " + zipCode).append(System.lineSeparator());
-    sb.append("Total amount: " + this.getTotalAmount()).append("}");
+        StringBuilder sb = new StringBuilder();
+        sb.append("{" + orderName).append(System.lineSeparator());
+        sb.append("Order Number: " + orderNumber).append(System.lineSeparator());
+        sb.append("Client details: " + clientDetails).append(System.lineSeparator());
+        sb.append("Account: " + accountName).append(System.lineSeparator());
+        sb.append("List With Articles: " + listWithArticles.toString()).append(System.lineSeparator());
+        sb.append("Order date: " + dateOfActivation).append(System.lineSeparator());
+        sb.append("zipCode: " + zipCode).append(System.lineSeparator());
+        sb.append("Total amount: " + this.getTotalAmount()).append("}");
 
-    return sb.toString();
+        return sb.toString();
     }
 
     public void calculateTotalAmountOfAllItems() {
