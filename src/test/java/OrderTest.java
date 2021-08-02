@@ -23,15 +23,14 @@ public class OrderTest {
     private static Logger log = Logger.getLogger(OrderTest.class.getName());
     private static Order testOrder;
 
-    @BeforeClass
-    public void setUp() throws Exception {
+    @Before
+    public void setUp(){
         testOrder = generateFullDefaultOrder(testOrder);
         assertNotNull("Class testOrder was not initiated!",testOrder);
     }
 
     @Test
-    public void testToStringMehtod() {
-
+    public void testToStringMethod() {
         log.info("Executing toStringMethod() test!");
         log.info(testOrder.toString());
 
@@ -43,7 +42,6 @@ public class OrderTest {
         assertTrue("toString method is not as expected!", isToStringAsExpected);
 
         //log.info(testOrder.getItemPrice().toString());
-
     }
 
     @Test
@@ -53,18 +51,17 @@ public class OrderTest {
         // add an item with its price
         //check if total item price has increased with the price of the item
 
+        log.info("=========== Test_002 ==========");
         log.info("Executing addItemPrice() test!");
 
         int expectedNumberOfItems = 2;
         assertEquals("testOrder has unexpected number of items",expectedNumberOfItems,
                 testOrder.getItemPrice().size());
 
-
         double expectedTotalPriceOfItems = 40.0;
         assertEquals("testOrder has unexpected number of items",0 ,
                 Double.compare(expectedTotalPriceOfItems, testOrder.getTotalAmount()));
     }
-
 
     @Test
     public void addArticle(){
@@ -80,19 +77,36 @@ public class OrderTest {
             testOrder.addArticleToListWithArticles("TestArticle");
         } catch (ArticleException e) {
             log.warning(e.getMessage());
+            Assert.fail("Could not add article!");
         }
 
         assertEquals("Unexpected number of articles in testOrder", 1, testOrder.getListWithArticles().size());
 
         try {
-            testOrder.addArticleToListWithArticles("TestArticle");
+            testOrder.removeArticleToListWithArticles("TestArticle");
         } catch (ArticleException e) {
             log.warning(e.getMessage());
-
+            Assert.fail("Could not remove added article!");
         }
+
+        assertEquals("Unexpected number of articles in testOrder", 0, testOrder.getListWithArticles().size());
     }
 
-    @AfterClass
+    @Test (expected =  ArticleException.class)
+    public void testArticleException() throws Exception{
+        log.info("Executing testArticleException() test!");
+
+        assertEquals("Unexpected number of articles in testOrder", 0, testOrder.getListWithArticles().size());
+
+        testOrder.addArticleToListWithArticles("TestArticle");
+        testOrder.addArticleToListWithArticles("TestArticle");
+
+        testOrder.removeArticleToListWithArticles("TestArticle");
+
+        assertEquals("Unexpected number of articles in testOrder", 0, testOrder.getListWithArticles().size());
+    }
+
+    @After
     public void cleanUp(){
         testOrder = null;
         assertNull("Class testOrder was not successfully set as null!",testOrder);
@@ -130,10 +144,6 @@ public class OrderTest {
         {
             e.printStackTrace();
         }
-
         return contentBuilder.toString().trim();
     }
-
-
-
 }

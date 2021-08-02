@@ -180,6 +180,14 @@ public abstract class Order {
         }
     }
 
+    public void removeArticleToListWithArticles(String article) throws ArticleException {
+        if (this.listWithArticles.contains(article)) {
+            this.listWithArticles.remove(article);
+        } else {
+            throw new ArticleException("\n This article is not part of that order!");
+        }
+    }
+
     protected abstract void methodOfPayment(boolean paymentMethod);
 
 
