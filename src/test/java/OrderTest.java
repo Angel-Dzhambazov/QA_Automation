@@ -2,9 +2,7 @@
 import com.estafet.learning.Order;
 import com.estafet.learning.TradeOrder;
 import com.estafet.learning.exceptions.ArticleException;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 
 import java.io.IOException;
@@ -25,7 +23,7 @@ public class OrderTest {
     private static Logger log = Logger.getLogger(OrderTest.class.getName());
     private static Order testOrder;
 
-    @Before
+    @BeforeClass
     public void setUp() throws Exception {
         testOrder = generateFullDefaultOrder(testOrder);
         assertNotNull("Class testOrder was not initiated!",testOrder);
@@ -35,7 +33,6 @@ public class OrderTest {
     public void testToStringMehtod() {
 
         log.info("Executing toStringMethod() test!");
-
         log.info(testOrder.toString());
 
         String filePath = "E:\\Estafet\\QA_Automation\\src\\main\\resources\\test-default-values\\TradeInvoiceDefaultToString.txt";
@@ -95,7 +92,7 @@ public class OrderTest {
         }
     }
 
-    @After
+    @AfterClass
     public void cleanUp(){
         testOrder = null;
         assertNull("Class testOrder was not successfully set as null!",testOrder);
