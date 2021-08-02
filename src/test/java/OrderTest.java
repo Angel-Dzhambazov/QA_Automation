@@ -28,10 +28,14 @@ public class OrderTest {
     @Before
     public void setUp() throws Exception {
         testOrder = generateFullDefaultOrder(testOrder);
+        assertNotNull("Class testOrder was not initiated!",testOrder);
     }
 
     @Test
     public void testToStringMehtod() {
+
+        log.info("Executing toStringMethod() test!");
+
         log.info(testOrder.toString());
 
         String filePath = "E:\\Estafet\\QA_Automation\\src\\main\\resources\\test-default-values\\TradeInvoiceDefaultToString.txt";
@@ -52,6 +56,7 @@ public class OrderTest {
         // add an item with its price
         //check if total item price has increased with the price of the item
 
+        log.info("Executing addItemPrice() test!");
 
         int expectedNumberOfItems = 2;
         assertEquals("testOrder has unexpected number of items",expectedNumberOfItems,
@@ -70,17 +75,32 @@ public class OrderTest {
         //add articles addArticleToListWithArticles()
         // check for new articles //getListWithArticles
 
+        log.info("Executing addArticle() test!");
+
         assertEquals("Unexpected number of articles in testOrder", 0, testOrder.getListWithArticles().size());
 
         try {
             testOrder.addArticleToListWithArticles("TestArticle");
         } catch (ArticleException e) {
-            log.info(e.getMessage());
+            log.warning(e.getMessage());
         }
 
         assertEquals("Unexpected number of articles in testOrder", 1, testOrder.getListWithArticles().size());
 
+        try {
+            testOrder.addArticleToListWithArticles("TestArticle");
+        } catch (ArticleException e) {
+            log.warning(e.getMessage());
+
+        }
     }
+
+    @After
+    public void cleanUp(){
+        testOrder = null;
+        assertNull("Class testOrder was not successfully set as null!",testOrder);
+    }
+
 
     private static TradeOrder generateFullDefaultOrder(Order order) {
         int orderNumber = 2021100;
