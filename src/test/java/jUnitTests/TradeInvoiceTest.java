@@ -1,3 +1,5 @@
+package jUnitTests;
+
 import com.estafet.learning.TradeInvoice;
 import org.junit.After;
 import org.junit.Before;
