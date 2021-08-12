@@ -1,5 +1,6 @@
 package stepDefinitions;
 
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -8,25 +9,16 @@ import io.cucumber.java.en.When;
 import utils.Helper;
 
 import java.sql.*;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class subjectSteps {
+public class SubjectSteps {
+    private static List<List<String>> subjectsEntries = null;
 
     @Given("Table is created and I see some records")
     public void tableIsCreatedAndISeeSomeRecords() {
         assertTrue("Could not connect to database!", Helper.isConnectionEstablished());
-    }
-
-    @When("I insert {string} with {int}")
-    public void insertEntry(String subjectName, Integer year) {
-        try {
-            Helper.getStatement().executeUpdate("INSERT INTO subjects\n" +
-                    "VALUES ('" + subjectName + "', " + year + ");");
-        } catch (SQLException e) {
-            e.printStackTrace();
-            assertFalse("Could not insert data into database table", false);
-        }
     }
 
     @Then("data should be visible with select from datatable")
@@ -51,9 +43,27 @@ public class subjectSteps {
     public void clearTestEntries() {
     }
 
-    @After
-    public void tidyUp() {
-        Helper.deleteEntries("subjects");
-        System.out.println("All entries deleted!");
+    @When("I insert subjectName with year")
+    public void iInsertSubjectNameWithYear(DataTable table) {
+        subjectsEntries = table.asLists(String.class);
+
+        for (List<String> columns : subjectsEntries) {
+            String subjectName = columns.get(0);
+            String year = columns.get(1);
+            try {
+                Helper.getStatement().executeUpdate("INSERT INTO subjects (name,year)\n" +
+                        "VALUES ('" + subjectName + "', " + Integer.valueOf(year) + ");");
+            } catch (SQLException e) {
+                e.printStackTrace();
+                assertFalse("Could not insert data into database table", false);
+            }
+        }
+        System.out.println("Successfully inserted subjects into data table");
+    }
+
+    @And("I delete test data from {string}")
+    public void iDeleteTestDataFrom(String table) {
+        assertTrue("Could not delete entries from " + table + "!", Helper.deleteEntries(table));
+        subjectsEntries = null;
     }
 }

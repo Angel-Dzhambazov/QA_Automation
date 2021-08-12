@@ -46,6 +46,16 @@ public class Helper {
         return null;
     }
 
+    public static boolean selectFromTableBoolean(String tableToSelectFrom) {
+        try {
+            statement.executeQuery("SELECT * FROM " + tableToSelectFrom);
+            return  true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public static ResultSet selectFromTable(String tableToSelectFrom, String columnName, String whereClause) {
         ResultSet rs = null;
         try {
@@ -87,11 +97,24 @@ public class Helper {
         return statement;
     }
 
-    public static void deleteEntries(String dataTable){
+    public static boolean deleteEntries(String dataTable) {
         try {
-            connection.prepareStatement("DELETE FROM dataTable;");
+            if (connection == null) {
+                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdatabase", "root", "Seenee#1");
+                statement = connection.createStatement();
+            }
+            String query = "DELETE FROM " + dataTable;
+            int deletedRows = statement.executeUpdate(query);
+            if (deletedRows > 0) {
+                System.out.println("Deleted All Rows In The Table Successfully...");
+                return true;
+            } else {
+                System.out.println("Table already empty.");
+                return true;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 }

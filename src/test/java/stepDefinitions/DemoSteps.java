@@ -4,7 +4,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class demoSteps {
+public class DemoSteps {
     @Given("I have set up {string}")
     public void iHaveSetUp(String arg0) {
     }
