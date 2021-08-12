@@ -1,5 +1,6 @@
 package stepDefinitions;
 
+import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -48,5 +49,11 @@ public class subjectSteps {
 
     @When("I clear test entries")
     public void clearTestEntries() {
+    }
+
+    @After
+    public void tidyUp() {
+        Helper.deleteEntries("subjects");
+        System.out.println("All entries deleted!");
     }
 }

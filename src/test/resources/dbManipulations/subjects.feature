@@ -1,4 +1,4 @@
-Feature: Insert subjects into table
+Feature: Insert entries into table `subjects`
 
   Scenario Outline:
     Given Table is created and I see some records
@@ -11,5 +11,3 @@ Feature: Insert subjects into table
       | mavenProject | 2002 | 0            |
       | mySQL        | 1995 | 1            |
       | intelliJ     | 2001 | 2            |
-
-

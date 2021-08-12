@@ -39,7 +39,6 @@ public class Helper {
 
     public static ResultSet selectFromTable(String tableToSelectFrom) {
         try {
-            System.out.println(tableToSelectFrom);
             return statement.executeQuery("SELECT * FROM " + tableToSelectFrom);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -86,5 +85,13 @@ public class Helper {
 
     public static Statement getStatement() {
         return statement;
+    }
+
+    public static void deleteEntries(String dataTable){
+        try {
+            connection.prepareStatement("DELETE FROM dataTable;");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
