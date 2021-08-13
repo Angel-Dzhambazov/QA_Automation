@@ -14,30 +14,42 @@ public class Helper {
 
         // Print column names (a header).
         for (int i = 1; i <= columnsNumber; i++) {
-            if (i > 1) System.out.print(" | ");
-            System.out.print(rsmd.getColumnName(i));
+            if (i > 1) System.out.print(" | "); // appending a divider between column names
+            System.out.print(rsmd.getColumnName(i)); //printing column name
         }
-        System.out.println("");
+        System.out.println(""); //new line after finishing all elements in resultSet row. (i.e. system line separator)
 
         StringBuilder sb = new StringBuilder();
-        int rowsSelected = 0;
+        int rowsSelected = 0; //counting rows in resultSet
         while (rs.next()) {
             rowsSelected++;
             for (int i = 1; i <= columnsNumber; i++) {
 
                 if (i > 1) sb.append(" | ");
                 sb.append(rs.getString(i));
-                System.out.print(rs.getString(i));
+                System.out.print(rs.getString(i)); //printing column name
             }
-            System.out.println("");
+            System.out.println(""); //new line after finishing all elements in resultSet row.
             sb.append(System.lineSeparator());
         }
 
-        System.out.println(rowsSelected);
+        System.out.println("Total rows in current ResultSet = " + rowsSelected);
+        System.out.println("The database table looks like this: ");
         System.out.println(sb.toString());
     }
 
     public static ResultSet selectFromTable(String tableToSelectFrom) {
+
+        if (connection == null | statement == null) {
+            try {
+                connection =
+                        DriverManager.getConnection("jdbc:mysql://localhost:3306/testdatabase", "root", "Estafet#1");
+                statement = connection.createStatement();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
         try {
             return statement.executeQuery("SELECT * FROM " + tableToSelectFrom);
         } catch (SQLException e) {
@@ -49,17 +61,19 @@ public class Helper {
     public static boolean selectFromTableBoolean(String tableToSelectFrom) {
         try {
             statement.executeQuery("SELECT * FROM " + tableToSelectFrom);
-            return  true;
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
     }
 
-    public static ResultSet selectFromTable(String tableToSelectFrom, String columnName, String whereClause) {
+    public static ResultSet selectFromTable(String tableToSelectFrom, String columnName, String value) {
         ResultSet rs = null;
         try {
-            statement.executeQuery("SELECT * FROM " + tableToSelectFrom + "Where");
+            String query = "SELECT * FROM `" + tableToSelectFrom + "` WHERE `" + columnName + "` = '" + value + "';";
+            System.out.println("Select Where query = " + query);
+            rs = statement.executeQuery(query);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -69,7 +83,8 @@ public class Helper {
     public static boolean isConnectionEstablished() {
         if (connection == null | statement == null) {
             try {
-                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdatabase", "root", "Seenee#1");
+                connection =
+                        DriverManager.getConnection("jdbc:mysql://localhost:3306/testdatabase", "root", "Estafet#1");
                 statement = connection.createStatement();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -93,6 +108,19 @@ public class Helper {
         return result;
     }
 
+    public static int getTotalEntriesInResultSet(ResultSet rs) {
+        int result = 0;
+        while (true) {
+            try {
+                if (!rs.next()) break;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            result++;
+        }
+        return result;
+    }
+
     public static Statement getStatement() {
         return statement;
     }
@@ -100,7 +128,8 @@ public class Helper {
     public static boolean deleteEntries(String dataTable) {
         try {
             if (connection == null) {
-                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdatabase", "root", "Seenee#1");
+                connection =
+                        DriverManager.getConnection("jdbc:mysql://localhost:3306/testdatabase", "root", "Seenee#1");
                 statement = connection.createStatement();
             }
             String query = "DELETE FROM " + dataTable;

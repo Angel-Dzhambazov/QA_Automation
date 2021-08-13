@@ -11,3 +11,12 @@ Override methods
 - equals(Object o)
 - hashCode() 
 
+DataBase manipulations with features and step definitions
+
+- Manually create schema and tables (students, grades, subjects)
+- fill tables with data (then clean the test data)
+
+Fill with more data and extract information from tables
+- calculate average grade in "math" subject for the class
+- create another table product, and alter its columns
+- then create another table customer
