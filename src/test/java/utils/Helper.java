@@ -1,6 +1,9 @@
 package utils;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Helper {
 
@@ -39,19 +42,8 @@ public class Helper {
     }
 
     public static ResultSet selectFromTable(String tableToSelectFrom) {
-
-        if (connection == null | statement == null) {
-            try {
-                connection =
-                        DriverManager.getConnection("jdbc:mysql://localhost:3306/testdatabase", "root", "Estafet#1");
-                statement = connection.createStatement();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-
         try {
-            return statement.executeQuery("SELECT * FROM " + tableToSelectFrom);
+            return getStatement().executeQuery("SELECT * FROM " + tableToSelectFrom);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -60,7 +52,7 @@ public class Helper {
 
     public static boolean selectFromTableBoolean(String tableToSelectFrom) {
         try {
-            statement.executeQuery("SELECT * FROM " + tableToSelectFrom);
+            getStatement().executeQuery("SELECT * FROM " + tableToSelectFrom);
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -73,7 +65,7 @@ public class Helper {
         try {
             String query = "SELECT * FROM `" + tableToSelectFrom + "` WHERE `" + columnName + "` = '" + value + "';";
             System.out.println("Select Where query = " + query);
-            rs = statement.executeQuery(query);
+            rs = getStatement().executeQuery(query);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -82,16 +74,9 @@ public class Helper {
 
     public static boolean isConnectionEstablished() {
         if (connection == null | statement == null) {
-            try {
-                connection =
-                        DriverManager.getConnection("jdbc:mysql://localhost:3306/testdatabase", "root", "Estafet#1");
-                statement = connection.createStatement();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                return false;
-            }
+            connectToDatabase();
         }
-        return true;
+        return connection != null;
     }
 
     public static int getTotalEntriesInTable(String table) {
@@ -122,18 +107,16 @@ public class Helper {
     }
 
     public static Statement getStatement() {
+        if (connection == null | statement == null) {
+            connectToDatabase();
+        }
         return statement;
     }
 
     public static boolean deleteEntries(String dataTable) {
         try {
-            if (connection == null) {
-                connection =
-                        DriverManager.getConnection("jdbc:mysql://localhost:3306/testdatabase", "root", "Seenee#1");
-                statement = connection.createStatement();
-            }
             String query = "DELETE FROM " + dataTable;
-            int deletedRows = statement.executeUpdate(query);
+            int deletedRows = getStatement().executeUpdate(query);
             if (deletedRows > 0) {
                 System.out.println("Deleted All Rows In The Table Successfully...");
                 return true;
@@ -144,6 +127,53 @@ public class Helper {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
+        }
+    }
+
+    public static boolean doesTableExist(String tableName) {
+        ResultSet resultSet = null;
+        try {
+            String query = SqlQueryBuilder.doesTableExistQuery(tableName);
+            System.out.println("SQL Query: does table exist:\n" + query);
+            resultSet = getStatement().executeQuery(query);
+            return resultSet.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
+    public static List<String> generateListFromStringArgs(String... parameter) {
+        return new ArrayList<>(Arrays.asList(parameter));
+    }
+
+    public static ResultSet executeQuery(String query) {
+        try {
+            return getStatement().executeQuery(query);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    public static boolean executeUpdateQueryBoolean(String query) {
+        int result = -9999;
+
+        try {
+            result = getStatement().executeUpdate(query);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return result >= 0;
+    }
+
+    private static void connectToDatabase() {
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdatabase", "root", "Estafet#1");
+            statement = connection.createStatement();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
     }
 }

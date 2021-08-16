@@ -13,13 +13,13 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class SubjectSteps {
-    private static List<List<String>> subjectsEntries = null;
+//    private static List<List<String>> subjectsEntries = null;
 
     @Given("Table {string} is created and I see some records")
     public void isTableCreated(String tableName) {
         System.out.println("Establishing connection with database");
         assertTrue("Could not connect to database!", Helper.isConnectionEstablished());
-        assertTrue("Table " + tableName + " does not exist!", Helper.selectFromTableBoolean(tableName));
+        assertTrue("Table " + tableName + " does not exist!", Helper.doesTableExist(tableName));
     }
 
     @And("Total entries in {string} table should be greater or equal to {int}")
@@ -44,24 +44,7 @@ public class SubjectSteps {
     @And("I delete test data from {string}")
     public void deleteEntriesFromTable(String table) {
         assertTrue("Could not delete entries from " + table + "!", Helper.deleteEntries(table));
-        subjectsEntries = null;
     }
 
-    @When("I add {string} into students table")
-    public void addEntriesIntoTable(String tableName, DataTable table) {
-        subjectsEntries = table.asLists(String.class);
 
-        for (List<String> columns : subjectsEntries) {
-            String subjectName = columns.get(0);
-            String year = columns.get(1);
-            try {
-                Helper.getStatement().executeUpdate("INSERT INTO " + tableName + " (name,year)\n" +
-                        "VALUES ('" + subjectName + "', " + Integer.valueOf(year) + ");");
-            } catch (SQLException e) {
-                e.printStackTrace();
-                assertFalse("Could not insert data into database table", false);
-            }
-        }
-        System.out.println("Successfully inserted subjects into data table");
-    }
 }
