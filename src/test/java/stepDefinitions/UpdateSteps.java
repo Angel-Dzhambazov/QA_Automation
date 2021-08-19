@@ -17,10 +17,6 @@ public class UpdateSteps {
     private static int quantityToCopy;
     private static double priceToCopy;
 
-    private static final String sqlUpdateQuery =
-            "UPDATE `products` SET quantity = " + quantityToCopy + ", price = " + priceToCopy + " WHERE " +
-                    "product_code = " + randomEntryUniqueID + ";";
-
     @When("I pick a random product from {string}")
     public void pickRandomEntryFromTable(String tableName) {
         ResultSet rs = Helper.selectFromTable(tableName);
@@ -37,8 +33,9 @@ public class UpdateSteps {
     }
 
 
-    @And("I get quantity and price from next item and update {string}")
-    public void getValuesAndUpdate(String tableName) {
+    @And("I get quantity and price from next item")
+    public void getValuesAndUpdate() {
+        String tableName = "products";
         ResultSet rs = Helper.selectFromTable(tableName, "product_code", Integer.toString(followingEntryOfRandomOne));
 
 
@@ -49,8 +46,6 @@ public class UpdateSteps {
             System.out.println("quantityToCopy = " + quantityToCopy);
             System.out.println("priceToCopy = " + priceToCopy);
             rs.close();
-
-            assertTrue("Could not update random Query", Helper.executeUpdateQueryBoolean(sqlUpdateQuery));
 
             /*
             rs = Helper.selectFromTable(tableName, "product_code", Integer.toString(followingEntryOfRandomOne));
@@ -116,5 +111,29 @@ public class UpdateSteps {
             throwables.printStackTrace();
         }
 
+    }
+
+    @And("I delete this product")
+    public void deleteSelectedEntry() {
+        String deleteSelectedEntry =
+                "DELETE FROM products WHERE product_code = " + followingEntryOfRandomOne + ";";
+        assertTrue("Could not delete picked entry!", Helper.executeUpdateQueryBoolean(deleteSelectedEntry));
+    }
+
+    @Then("This product should not exist anymore")
+    public void checkForProduct() {
+
+        ResultSet rs = Helper.selectFromTable("products", "product_code", String.valueOf(followingEntryOfRandomOne));
+        int totalRowsInThisRS = Helper.getTotalEntriesInResultSet(rs);
+
+        assertEquals("Product is still visible", 0, totalRowsInThisRS);
+    }
+
+    @And("I update products;")
+    public void updateProduct() {
+        String sqlUpdateQuery =
+                "UPDATE `products` SET quantity = " + quantityToCopy + ", price = " + priceToCopy + " WHERE " +
+                        "product_code = " + randomEntryUniqueID + ";";
+        assertTrue("Could not update random Query", Helper.executeUpdateQueryBoolean(sqlUpdateQuery));
     }
 }

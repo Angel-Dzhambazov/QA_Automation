@@ -41,7 +41,6 @@ public class TradeInvoiceTest  {
 
     @After
     public void tearDown() throws Exception {
-
         testInvoice = null;
     }
 
@@ -56,15 +55,10 @@ public class TradeInvoiceTest  {
         long businessDiscountInvoice = 0;
         int vaTInvoice = 17;
 
-
         return new TradeInvoice(clientDetailsInvoice, listWithArticlesInvoice, totalAmountInvoice, invoiceNumber,
                         bankAccountIndexInvoice,
                         dateOfReleaseInvoice, businessDiscountInvoice, vaTInvoice);
-
-
-
     }
-
 }
 
 
