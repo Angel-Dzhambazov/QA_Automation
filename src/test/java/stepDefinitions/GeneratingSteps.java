@@ -19,6 +19,7 @@ public class GeneratingSteps {
     private static final String SUBJECTS_TABLE_NAME = "subjects";
     private static final String STUDENTS_TABLE_NAME = "students";
     private static final String PRODUCTS_TABLE_NAME = "products";
+    private static final String CUSTOMERS_TABLE_NAME = "customers";
     private static final String CREATE_PRODUCTS_TABLE_QUERY = "CREATE TABLE `products` (\n" +
             "  `product_code` INT NOT NULL AUTO_INCREMENT,\n" +
             "  `product_name` VARCHAR(45) NULL,\n" +
@@ -26,6 +27,17 @@ public class GeneratingSteps {
             "  `quantity` INT NULL,\n" +
             "  `price` DECIMAL(10,2) NULL,\n" +
             "  PRIMARY KEY (`product_code`));\n";
+
+    private static final String CREATE_CUSTOMERS_TABLE_QUERY = "CREATE TABLE `testdatabase`.`customers` (\n" +
+            "  `customer_number` INT NOT NULL AUTO_INCREMENT,\n" +
+            "  `first_name` VARCHAR(45) NOT NULL,\n" +
+            "  `last_name` VARCHAR(45) NOT NULL,\n" +
+            "  `phone` VARCHAR(45) NOT NULL,\n" +
+            "  `address_line1` VARCHAR(45) NULL,\n" +
+            "  `address_line2` VARCHAR(45) NULL,\n" +
+            "  `city` VARCHAR(45) NULL,\n" +
+            "  `postcode` VARCHAR(45) NULL,\n" +
+            "  PRIMARY KEY (`customer_number`));";
 
     @Given("Successful generation of table {string};")
     public void createDataTable(String tableName) {
@@ -36,6 +48,14 @@ public class GeneratingSteps {
                 } else {
                     assertTrue("Could not generate table " + PRODUCTS_TABLE_NAME + "!",
                             Helper.executeUpdateQueryBoolean(CREATE_PRODUCTS_TABLE_QUERY));
+                }
+                break;
+            case CUSTOMERS_TABLE_NAME:
+                if (Helper.doesTableExist(CUSTOMERS_TABLE_NAME)) {
+                    System.out.println("Table already created!");
+                } else {
+                    assertTrue("Could not generate table " + CUSTOMERS_TABLE_NAME + "!",
+                            Helper.executeUpdateQueryBoolean(CREATE_CUSTOMERS_TABLE_QUERY));
                 }
                 break;
             case STUDENTS_TABLE_NAME:
@@ -70,6 +90,9 @@ public class GeneratingSteps {
                 break;
             case PRODUCTS_TABLE_NAME:
                 addEntryToProducts(tableName, dataTable);
+                break;
+            case CUSTOMERS_TABLE_NAME:
+                addEntryToCustomers(tableName, dataTable);
                 break;
             default:
                 System.out.println("Could not find such table!");
@@ -109,6 +132,28 @@ public class GeneratingSteps {
                         "INSERT INTO " + tableName + " (product_name, product_description, quantity, price)\n" +
                                 "VALUES ('" + product_name + "', '" + product_description + "', " + quantity + ", " +
                                 price + ");");
+            } catch (SQLException e) {
+                e.printStackTrace();
+                assertFalse("Could not insert data into database table", false);
+            }
+        }
+    }
+
+    private static void addEntryToCustomers(String tableName, DataTable table) {
+        List<List<String>> subjectsEntries = table.asLists(String.class);
+
+        for (List<String> columns : subjectsEntries) {
+            String first_name = columns.get(0);
+            String last_name = columns.get(1);
+            String phone = columns.get(1);
+            String address_line1 = columns.get(1);
+            String address_line2 = columns.get(1);
+            String city = columns.get(1);
+            String postcode = columns.get(1);
+            try {
+                Helper.getStatement().executeUpdate("INSERT INTO " + tableName +
+                        " (first_name, last_name, phone, address_line1, address_line2, city, postcode)\n" +
+                        "VALUES ('" + first_name + "', '" + last_name + "', '"+phone+"', '"+address_line1+"', '"+address_line2+"', '"+city+"', '"+postcode+"' );");
             } catch (SQLException e) {
                 e.printStackTrace();
                 assertFalse("Could not insert data into database table", false);

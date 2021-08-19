@@ -7,10 +7,10 @@ import utils.Helper;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
+
 
 public class GradesSteps {
-    private static final Logger log = Logger.getLogger(GradesSteps.class.getName());
+
     private static final int STUDENT_ID_INDEX = 1;
     private static final int SUBJECT_ID_INDEX = 3;
 
