@@ -1,3 +1,4 @@
+@sprint3
 Feature: Add products to our database
 
   Background: Initial check for successful generation of data tables.

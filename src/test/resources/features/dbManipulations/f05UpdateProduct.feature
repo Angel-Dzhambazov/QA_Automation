@@ -1,3 +1,4 @@
+@sprint3
 Feature:  Update product from datatable
 
   Background: Check if datatable "products" exist

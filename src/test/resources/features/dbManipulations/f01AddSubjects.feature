@@ -1,5 +1,7 @@
+@sprint3
 Feature: Insert entries into table `subjects`
 
+  @subjects
   Scenario: Adding 5 subjects into table "testdatabase.subjects"
     Given Table "subjects" is created and I see some records
     And Total entries in "subjects" table should be greater or equal to 0

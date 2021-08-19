@@ -1,3 +1,4 @@
+@sprint3
 Feature: Calculate average grades in given subject
 
   Scenario: Fill 15 grades into grades datatable

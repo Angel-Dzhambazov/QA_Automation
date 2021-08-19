@@ -1,3 +1,4 @@
+@sprint3
 Feature:  6) Delete existing product - Use the DB table from the previous scenario
 
   Scenario: Pick a random entry and delete it
