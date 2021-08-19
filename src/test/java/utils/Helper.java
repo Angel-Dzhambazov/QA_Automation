@@ -12,7 +12,10 @@ public class Helper {
 
     public static void printResultSet(ResultSet rs) throws SQLException {
         // Prepare metadata object and get the number of columns.
-        ResultSetMetaData rsmd = rs.getMetaData();
+        ResultSetMetaData rsmd = null;
+
+        rsmd = rs.getMetaData();
+
         int columnsNumber = rsmd.getColumnCount();
 
         // Print column names (a header).
@@ -20,7 +23,8 @@ public class Helper {
             if (i > 1) System.out.print(" | "); // appending a divider between column names
             System.out.print(rsmd.getColumnName(i)); //printing column name
         }
-        System.out.println(""); //new line after finishing all elements in resultSet row. (i.e. system line separator)
+        System.out
+                .println(""); //new line after finishing all elements in resultSet row. (i.e. system line separator)
 
         StringBuilder sb = new StringBuilder();
         int rowsSelected = 0; //counting rows in resultSet
@@ -39,6 +43,7 @@ public class Helper {
         System.out.println("Total rows in current ResultSet = " + rowsSelected);
         System.out.println("The database table looks like this: ");
         System.out.println(sb.toString());
+
     }
 
     public static ResultSet selectFromTable(String tableToSelectFrom) {
@@ -161,6 +166,7 @@ public class Helper {
         int result = -9999;
 
         try {
+            System.out.println("Update query is: " + query);
             result = getStatement().executeUpdate(query);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
