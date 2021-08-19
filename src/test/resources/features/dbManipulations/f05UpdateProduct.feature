@@ -8,5 +8,5 @@ Feature:  Update product from datatable
     Given Total entries in "products" table should be greater or equal to 2
     When I pick a random product from "products"
     And I get quantity and price from next item
-    And I update products;
+    And I update "products";
     Then the needed item should have the update information

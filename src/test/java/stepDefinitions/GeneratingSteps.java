@@ -145,15 +145,16 @@ public class GeneratingSteps {
         for (List<String> columns : subjectsEntries) {
             String first_name = columns.get(0);
             String last_name = columns.get(1);
-            String phone = columns.get(1);
-            String address_line1 = columns.get(1);
-            String address_line2 = columns.get(1);
-            String city = columns.get(1);
-            String postcode = columns.get(1);
+            String phone = columns.get(2);
+            String address_line1 = columns.get(3);
+            String address_line2 = columns.get(4);
+            String city = columns.get(5);
+            String postcode = columns.get(6);
             try {
                 Helper.getStatement().executeUpdate("INSERT INTO " + tableName +
                         " (first_name, last_name, phone, address_line1, address_line2, city, postcode)\n" +
-                        "VALUES ('" + first_name + "', '" + last_name + "', '"+phone+"', '"+address_line1+"', '"+address_line2+"', '"+city+"', '"+postcode+"' );");
+                        "VALUES ('" + first_name + "', '" + last_name + "', '" + phone + "', '" + address_line1 +
+                        "', '" + address_line2 + "', '" + city + "', '" + postcode + "' );");
             } catch (SQLException e) {
                 e.printStackTrace();
                 assertFalse("Could not insert data into database table", false);

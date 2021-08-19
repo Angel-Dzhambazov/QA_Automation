@@ -129,11 +129,23 @@ public class UpdateSteps {
         assertEquals("Product is still visible", 0, totalRowsInThisRS);
     }
 
-    @And("I update products;")
-    public void updateProduct() {
-        String sqlUpdateQuery =
-                "UPDATE `products` SET quantity = " + quantityToCopy + ", price = " + priceToCopy + " WHERE " +
-                        "product_code = " + randomEntryUniqueID + ";";
+    @And("I update {string};")
+    public void updateProduct(String type) {
+        String sqlUpdateQuery = "";
+
+        switch (type) {
+            case "products":
+                sqlUpdateQuery =
+                        "UPDATE `products` SET quantity = " + quantityToCopy + ", price = " + priceToCopy +
+                                " WHERE product_code = " + randomEntryUniqueID + ";";
+                break;
+            case "customers":
+                break;
+            default:
+                break;
+
+        }
         assertTrue("Could not update random Query", Helper.executeUpdateQueryBoolean(sqlUpdateQuery));
     }
+
 }
