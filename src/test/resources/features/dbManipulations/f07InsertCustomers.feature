@@ -5,7 +5,6 @@ Feature: 7) Insert a new customer in a table with next columns
 
   Background: Initial check for successful generation of data tables.
     Given Successful generation of table "customers";
-    And Table "customers" is created and I see some records
 
   @customers
   Scenario: Insert customers to table.

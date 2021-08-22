@@ -182,4 +182,44 @@ public class Helper {
             throwables.printStackTrace();
         }
     }
+
+    public static int getRandomUniqueIDFromTable(String tableName) {
+        ResultSet rs = Helper.selectFromTable(tableName);
+        int countOfTotalEntries = Helper.getTotalEntriesInResultSet(rs);
+        //returns a number [0, countOfTotalEntries)
+        int randomEntry = (int) ((Math.random() * (countOfTotalEntries)) + 0);
+        //System.out.println("randomEntry = " + randomEntry);
+        try {
+            rs.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        rs = Helper.selectFromTable(tableName);
+        int tempCounter = 0;
+        int randomUniqueIDFromTable = -999;
+        try {
+            while (rs.next()) {
+                if (tempCounter == randomEntry) {
+                    randomUniqueIDFromTable = rs.getInt(1);
+                    System.out.println("randomUniqueIDFromTable " + tableName + " = " + randomUniqueIDFromTable);
+                }
+                tempCounter++;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return randomUniqueIDFromTable;
+    }
+
+    public static double getPriceForItem(int product_code) {
+        double result = -999.0;
+        ResultSet rs = Helper.selectFromTable("products", "product_code", String.valueOf(product_code));
+        try {
+            rs.next();
+            result = rs.getDouble(5);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return result;
+    }
 }

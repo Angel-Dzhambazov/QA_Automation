@@ -2,10 +2,9 @@
 Feature: Add products to our database
 
   Background: Initial check for successful generation of data tables.
-    Given Successful generation of table "products";
-    And Table "products" is created and I see some records
+    Given Successful generation of table "Students";
 
-    @studentsManipulation
+  @students
   Scenario: Adding 10 products into table "products"
     Given Total entries in "students" table should be greater or equal to 0
     When I add "products" into data table

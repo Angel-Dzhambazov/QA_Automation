@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 public class SubjectSteps {
 //    private static List<List<String>> subjectsEntries = null;
 
-    @Given("Table {string} is created and I see some records")
+    @Given("Table {string} is created")
     public void isTableCreated(String tableName) {
         System.out.println("Establishing connection with database");
         assertTrue("Could not connect to database!", Helper.isConnectionEstablished());

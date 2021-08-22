@@ -1,7 +1,6 @@
 package stepDefinitions;
 
 import io.cucumber.datatable.DataTable;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import utils.Helper;
@@ -9,6 +8,8 @@ import utils.SqlQueryBuilder;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class GeneratingSteps {
     private static final String STUDENTS_TABLE_NAME = "students";
     private static final String PRODUCTS_TABLE_NAME = "products";
     private static final String CUSTOMERS_TABLE_NAME = "customers";
+    private static final String ORDERS_TABLE_NAME = "orders";
     private static final String CREATE_PRODUCTS_TABLE_QUERY = "CREATE TABLE `products` (\n" +
             "  `product_code` INT NOT NULL AUTO_INCREMENT,\n" +
             "  `product_name` VARCHAR(45) NULL,\n" +
@@ -39,8 +41,18 @@ public class GeneratingSteps {
             "  `postcode` VARCHAR(45) NULL,\n" +
             "  PRIMARY KEY (`customer_number`));";
 
+    private static final String CREATE_ORDERS_TABLE_QUERY = "CREATE TABLE `testdatabase`.`orders` (\n" +
+            "  `order_number` INT NOT NULL AUTO_INCREMENT,\n" +
+            "  `customer_number` INT NOT NULL,\n" +
+            "  `product_code` INT NOT NULL,\n" +
+            "  `quantity` INT NULL,\n" +
+            "  `total_price` DOUBLE NULL,\n" +
+            "  `date` VARCHAR(45) NULL,\n" +
+            "  PRIMARY KEY (`order_number`));";
+
     @Given("Successful generation of table {string};")
     public void createDataTable(String tableName) {
+        assertTrue("Could not establish connection!", Helper.isConnectionEstablished());
         switch (tableName) {
             case PRODUCTS_TABLE_NAME:
                 if (Helper.doesTableExist(PRODUCTS_TABLE_NAME)) {
@@ -56,6 +68,14 @@ public class GeneratingSteps {
                 } else {
                     assertTrue("Could not generate table " + CUSTOMERS_TABLE_NAME + "!",
                             Helper.executeUpdateQueryBoolean(CREATE_CUSTOMERS_TABLE_QUERY));
+                }
+                break;
+            case ORDERS_TABLE_NAME:
+                if (Helper.doesTableExist(ORDERS_TABLE_NAME)) {
+                    System.out.println("Table already created!");
+                } else {
+                    assertTrue("Could not generate table " + ORDERS_TABLE_NAME + "!",
+                            Helper.executeUpdateQueryBoolean(CREATE_ORDERS_TABLE_QUERY));
                 }
                 break;
             case STUDENTS_TABLE_NAME:
@@ -99,6 +119,13 @@ public class GeneratingSteps {
 
         }
         System.out.println("Successfully inserted subjects into data table");
+    }
+
+    @When("I add {int} orders into data table")
+    public void addEntriesIntoTable(int numberOfOrders) {
+        for (int i = 0; i < numberOfOrders; i++) {
+            addEntryToOrders();
+        }
     }
 
     private static void addEntryToStudentsOrSubjects(String tableName, DataTable table) {
@@ -161,4 +188,37 @@ public class GeneratingSteps {
             }
         }
     }
+
+    private static void addEntryToOrders() {
+        String addOrderQuery = "";
+
+        // find customer ..
+        // find some products ..
+        // query = INSERT INTO "orders" (customer_number, product_code, quantity, date)
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+
+
+        int customer_number = Helper.getRandomUniqueIDFromTable(CUSTOMERS_TABLE_NAME);
+        int product_code = Helper.getRandomUniqueIDFromTable(PRODUCTS_TABLE_NAME);
+        int quantity = (int) ((Math.random() * (10)) + 1);
+        double totalPrice = 1.0 * quantity * Helper.getPriceForItem(product_code);
+        String date = dtf.format(now);
+        try {
+            String query = "INSERT INTO " + ORDERS_TABLE_NAME + " (customer_number, product_code, quantity, " +
+                    "total_price, date)\n" + "VALUES (" + customer_number + ", " + product_code + ", " + quantity +
+                    ", " + totalPrice + ", '" + date + "' );";
+            System.out.println("Insert into orders query: " + query);
+            Helper.getStatement().executeUpdate("INSERT INTO " + ORDERS_TABLE_NAME +
+                    " (customer_number, product_code, quantity, total_price, date)\n" +
+                    "VALUES (" + customer_number + ", " + product_code + ", " + quantity + ", " + totalPrice +
+                    ", '" + date + "' );");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            assertFalse("Could not insert data into database table", false);
+        }
+    }
+
+
 }
