@@ -5,7 +5,7 @@ Feature: 04) Add products to our database
     Given Successful generation of table "products";
 
   @students
-  Scenario: Adding 10 products into table "products"
+  Scenario: Adding 5 products into table "products"
     Given Total entries in "products" table should be greater or equal to 0
     When I add "products" into data table
       | Banana  | Fruit to eat                  | 256  | 2.69  |

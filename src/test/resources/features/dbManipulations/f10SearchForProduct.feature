@@ -1,5 +1,5 @@
 @sprint3
-Feature: 10) Search for a product/customer in the db - list in Examples search_term and table - Use the DB table from the previous scenario
+Feature: 10) Search for a product/customer in the db - list in Examples search_term and table
 
   @products
   Scenario: Search for a product in the products datatable

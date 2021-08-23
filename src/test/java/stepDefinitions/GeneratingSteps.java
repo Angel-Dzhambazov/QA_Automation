@@ -210,10 +210,14 @@ public class GeneratingSteps {
                     "total_price, date)\n" + "VALUES (" + customer_number + ", " + product_code + ", " + quantity +
                     ", " + totalPrice + ", '" + date + "' );";
             System.out.println("Insert into orders query: " + query);
+            Helper.getStatement().executeUpdate(query);
+            /*
             Helper.getStatement().executeUpdate("INSERT INTO " + ORDERS_TABLE_NAME +
                     " (customer_number, product_code, quantity, total_price, date)\n" +
                     "VALUES (" + customer_number + ", " + product_code + ", " + quantity + ", " + totalPrice +
                     ", '" + date + "' );");
+
+             */
         } catch (SQLException e) {
             e.printStackTrace();
             assertFalse("Could not insert data into database table", false);
