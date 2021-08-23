@@ -1,5 +1,5 @@
 @sprint3
-Feature: Assign students to our university
+Feature: 01) Assign students to our university
 
 #    This table is created manually as per instructions
 #  Background: Initial check for successful generation of data tables.

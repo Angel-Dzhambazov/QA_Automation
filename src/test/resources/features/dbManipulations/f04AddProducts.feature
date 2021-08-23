@@ -1,12 +1,12 @@
 @sprint3
-Feature: Add products to our database
+Feature: 04) Add products to our database
 
   Background: Initial check for successful generation of data tables.
-    Given Successful generation of table "Students";
+    Given Successful generation of table "products";
 
   @students
   Scenario: Adding 10 products into table "products"
-    Given Total entries in "students" table should be greater or equal to 0
+    Given Total entries in "products" table should be greater or equal to 0
     When I add "products" into data table
       | Banana  | Fruit to eat                  | 256  | 2.69  |
       | Apple   | Fruit to eat                  | 16   | 0.99  |

@@ -1,5 +1,5 @@
 @sprint3
-Feature: Calculate average grades in given subject
+Feature: 03) Calculate average grades in given subject
 
 #  This table is created manually as per instructions
 #  Background: Initial check for successful generation of data tables.

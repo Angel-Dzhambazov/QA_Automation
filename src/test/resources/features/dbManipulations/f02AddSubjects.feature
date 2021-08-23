@@ -1,5 +1,5 @@
 @sprint3
-Feature: Insert entries into table `subjects`
+Feature: 02) Insert entries into table `subjects`
 
 #  This table is created manually as per instructions
 #  Background: Initial check for successful generation of data tables.

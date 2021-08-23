@@ -1,8 +1,8 @@
 @sprint3
-Feature:  Update product from datatable
+Feature: 05) Update product from datatable
 
   Background: Initial check for successful generation of data tables.
-    Given Successful generation of table "Students";
+    Given Successful generation of table "products";
 
   Scenario: Pick a random product from table and update it with information from next product in line
     Given Total entries in "products" table should be greater or equal to 2

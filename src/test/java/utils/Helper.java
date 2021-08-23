@@ -176,7 +176,8 @@ public class Helper {
 
     private static void connectToDatabase() {
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdatabase", "root", "Estafet#1");
+//            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdatabase", "root", "Estafet#1");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdatabase", "root", "Seenee#1");
             statement = connection.createStatement();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
