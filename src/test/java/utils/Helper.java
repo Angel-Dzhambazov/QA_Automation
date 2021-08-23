@@ -16,17 +16,22 @@ public class Helper {
 
         rsmd = rs.getMetaData();
 
+        StringBuilder sb = new StringBuilder();
+
         int columnsNumber = rsmd.getColumnCount();
 
         // Print column names (a header).
         for (int i = 1; i <= columnsNumber; i++) {
-            if (i > 1) System.out.print(" | "); // appending a divider between column names
-            System.out.print(rsmd.getColumnName(i)); //printing column name
+            sb.append(" |"); // appending a divider between column names
+            sb.append(rsmd.getColumnName(i)); //printing column name
+//            if (i > 1) System.out.print(" | ");
+//            System.out.print(rsmd.getColumnName(i));
         }
-        System.out
-                .println(""); //new line after finishing all elements in resultSet row. (i.e. system line separator)
+        //new line after finishing all elements in resultSet row. (i.e. system line separator)
+        sb.append(System.lineSeparator());
 
-        StringBuilder sb = new StringBuilder();
+        //System.out.println("");
+
         int rowsSelected = 0; //counting rows in resultSet
         while (rs.next()) {
             rowsSelected++;
@@ -34,16 +39,24 @@ public class Helper {
 
                 if (i > 1) sb.append(" | ");
                 sb.append(rs.getString(i));
-                System.out.print(rs.getString(i)); //printing column name
+                //System.out.print(rs.getString(i));
             }
-            System.out.println(""); //new line after finishing all elements in resultSet row.
+            //new line after finishing all elements in resultSet row.
+            //System.out.println("");
             sb.append(System.lineSeparator());
         }
+        if (rowsSelected > 0) {
+            StringBuilder preBuilder = new StringBuilder();
 
-        System.out.println("Total rows in current ResultSet = " + rowsSelected);
-        System.out.println("The database table looks like this: ");
-        System.out.println(sb.toString());
-
+            preBuilder.append("The database table looks like this: ");
+            preBuilder.append(System.lineSeparator());
+            preBuilder.append("Total rows in current ResultSet = " + rowsSelected);
+            preBuilder.append(System.lineSeparator());
+            preBuilder.append(sb);
+            System.out.println(preBuilder);
+        } else {
+            System.out.println("No records returned");
+        }
     }
 
     public static ResultSet selectFromTable(String tableToSelectFrom) {
@@ -72,6 +85,7 @@ public class Helper {
             System.out.println("Select Where query = " + query);
             rs = getStatement().executeQuery(query);
         } catch (SQLException e) {
+            System.out.println("Could not select any entry!");
             e.printStackTrace();
         }
         return rs;

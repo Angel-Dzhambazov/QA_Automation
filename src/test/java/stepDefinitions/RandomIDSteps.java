@@ -50,6 +50,27 @@ public class RandomIDSteps {
 
     @When("I pick a random number between {int} and {int}")
     public void generateRandomNumber(int min, int max) {
-        randomNumber = (int) ((Math.random() * (max)) + min + 1);
+        randomNumber = (int) ((Math.random() * (max)) + min + 0);
+    }
+
+    @Then("Then I select this random {string}.")
+    public void getRandomEntry(String tableName) {
+        ResultSet rs = null;
+            switch (tableName) {
+                case "products":
+                    rs = Helper.selectFromTable(tableName, "product_code", String.valueOf(randomNumber));
+                    break;
+                case "customers":
+                    rs = Helper.selectFromTable(tableName, "customer_number", String.valueOf(randomNumber));
+                    break;
+                default:
+                    System.out.println("ERROR could not select any case in this switch case!");
+                    break;
+            }
+        try {
+            Helper.printResultSet(rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
