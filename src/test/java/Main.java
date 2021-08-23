@@ -2,6 +2,8 @@
 import java.sql.*;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main {
 
@@ -14,6 +16,8 @@ public class Main {
         for (int i = 0; i < 26; i++) {
             System.out.print((int) ((Math.random() * (10)) + 1) + " ");
         }
+
+
 
 
     }

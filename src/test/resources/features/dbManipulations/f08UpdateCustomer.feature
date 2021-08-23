@@ -1,5 +1,5 @@
 @sprint3
-Feature:  Update customer from datatable
+Feature:  08) Update customer from datatable
 
   Background: Check if datatable "customers" exist
     Given Table "customers" is created

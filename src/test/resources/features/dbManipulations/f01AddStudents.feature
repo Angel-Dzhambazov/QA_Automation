@@ -16,5 +16,5 @@ Feature: 01) Assign students to our university
       | Ivan   | 1994 |
       | Georgi | 1994 |
     Then data should be visible with manipulated table "students"
-    And I delete test data from "students"
+#    And I delete test data from "students"
 

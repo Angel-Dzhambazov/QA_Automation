@@ -35,7 +35,8 @@ public class OrderTest {
         log.info("Executing toStringMethod() test!");
         log.info(testOrder.toString());
 
-        String filePath = "E:\\Estafet\\QA_Automation\\src\\main\\resources\\test-default-values\\TradeInvoiceDefaultToString.txt";
+//        String filePath = "E:\\Estafet\\QA_Automation\\src\\main\\resources\\test-default-values\\TradeInvoiceDefaultToString.txt";
+        String filePath = "src/test/resources/test-default-values/TradeInvoiceDefaultToString.txt";
 
         String expected = readLineByLine(filePath);
         String actual = testOrder.toString();

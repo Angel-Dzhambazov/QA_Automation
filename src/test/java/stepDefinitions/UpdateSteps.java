@@ -158,7 +158,7 @@ public class UpdateSteps {
         assertEquals("Product is still visible", 0, totalRowsInThisRS);
     }
 
-    @And("I update {string};")
+    @And("I update the random {string} with the next one's information;")
     public void updateProduct(String type) {
         String sqlUpdateQuery = "";
 
@@ -176,7 +176,6 @@ public class UpdateSteps {
             default:
                 System.out.println("ERROR: Switch case could not catch what to do!");
                 break;
-
         }
         assertTrue("Could not update random Query", Helper.executeUpdateQueryBoolean(sqlUpdateQuery));
     }
