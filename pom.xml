@@ -11,9 +11,10 @@
 
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.8.0-M1</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
@@ -23,9 +24,19 @@
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-core</artifactId>
+            <version>6.9.1</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
             <version>6.9.1</version>
-            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-jvm</artifactId>
+            <version>6.9.1</version>
+            <type>pom</type>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
@@ -94,7 +105,6 @@
         </dependency>
 
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -104,7 +114,16 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                    <!--
+                    <gluePaths>
+                        <gluePath>src.test.java.com.automatedTests.stepDefinitions</gluePath>
+                    </gluePaths>
+                    <features>
+                        <feature>src/test/resources/features/dbManipulations/f01AddStudents.feature</feature>
+                    </features>
+                    -->
                 </configuration>
+
             </plugin>
             <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
             <plugin>
@@ -120,10 +139,13 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M5</version>
                 <configuration>
+                    <!--
                     <includes>
-                        <include>**/*Tests.java</include>
+                        <include>**/com.automatedTest.com.automatedTests.runners.CucumberRunnerTest.java</include>
+                        <include>**/com.automatedTests.runners.TestRunnerTest.java</include>
                         <include>tags</include>
                     </includes>
+                    -->
                 </configuration>
             </plugin>
             <plugin>

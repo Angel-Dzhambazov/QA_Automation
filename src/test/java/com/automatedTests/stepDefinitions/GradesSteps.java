@@ -1,8 +1,8 @@
-package stepDefinitions;
+package com.automatedTests.stepDefinitions;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import utils.Helper;
+import com.automatedTests.stepDefinitions.utils.Helper;
 
 import java.sql.*;
 import java.util.ArrayList;

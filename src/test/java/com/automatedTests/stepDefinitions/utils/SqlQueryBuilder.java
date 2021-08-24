@@ -1,4 +1,4 @@
-package utils;
+package com.automatedTests.stepDefinitions.utils;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

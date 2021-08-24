@@ -1,4 +1,4 @@
-package seleniumStepDefinitions;
+package com.automatedTests.stepDefinitions.seleniumStepDefinitions;
 
 
 import io.cucumber.java.en.Given;

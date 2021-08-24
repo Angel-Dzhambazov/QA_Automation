@@ -1,10 +1,10 @@
-package stepDefinitions;
+package com.automatedTests.stepDefinitions;
 
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
-import utils.Helper;
-import utils.SqlQueryBuilder;
+import com.automatedTests.stepDefinitions.utils.Helper;
+import com.automatedTests.stepDefinitions.utils.SqlQueryBuilder;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

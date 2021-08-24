@@ -1,4 +1,4 @@
-package jUnitTests;
+package com.automatedTests.jUnitTests;
 
 import com.estafet.learning.TradeInvoice;
 import org.junit.After;

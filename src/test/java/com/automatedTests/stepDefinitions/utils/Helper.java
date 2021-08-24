@@ -1,4 +1,4 @@
-package utils;
+package com.automatedTests.stepDefinitions.utils;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -20,12 +20,9 @@ public class Helper {
 
         int columnsNumber = rsmd.getColumnCount();
 
-        // Print column names (a header).
         for (int i = 1; i <= columnsNumber; i++) {
             sb.append(" |"); // appending a divider between column names
             sb.append(rsmd.getColumnName(i)); //printing column name
-//            if (i > 1) System.out.print(" | ");
-//            System.out.print(rsmd.getColumnName(i));
         }
         //new line after finishing all elements in resultSet row. (i.e. system line separator)
         sb.append(System.lineSeparator());
@@ -39,10 +36,7 @@ public class Helper {
 
                 if (i > 1) sb.append(" | ");
                 sb.append(rs.getString(i));
-                //System.out.print(rs.getString(i));
             }
-            //new line after finishing all elements in resultSet row.
-            //System.out.println("");
             sb.append(System.lineSeparator());
         }
         if (rowsSelected > 0) {

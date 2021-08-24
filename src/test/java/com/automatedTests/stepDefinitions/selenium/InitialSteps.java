@@ -1,12 +1,9 @@
-package stepDefinitions.selenium;
+package com.automatedTests.stepDefinitions.selenium;
 
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import utils.Helper;
 
 import static org.junit.Assert.assertTrue;
 
