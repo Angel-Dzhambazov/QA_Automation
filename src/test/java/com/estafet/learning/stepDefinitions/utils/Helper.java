@@ -1,4 +1,4 @@
-package com.automatedTests.stepDefinitions.utils;
+package com.estafet.learning.stepDefinitions.utils;
 
 import java.sql.*;
 import java.util.ArrayList;

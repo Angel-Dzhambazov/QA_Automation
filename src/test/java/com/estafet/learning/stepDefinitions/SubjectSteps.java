@@ -1,9 +1,9 @@
-package com.automatedTests.stepDefinitions;
+package com.estafet.learning.stepDefinitions;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import com.automatedTests.stepDefinitions.utils.Helper;
+import com.estafet.learning.stepDefinitions.utils.Helper;
 
 import java.sql.*;
 

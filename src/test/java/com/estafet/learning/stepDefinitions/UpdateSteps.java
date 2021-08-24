@@ -1,10 +1,10 @@
-package com.automatedTests.stepDefinitions;
+package com.estafet.learning.stepDefinitions;
 
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import com.automatedTests.stepDefinitions.utils.Helper;
+import com.estafet.learning.stepDefinitions.utils.Helper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

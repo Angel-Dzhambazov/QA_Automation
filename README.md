@@ -1,6 +1,6 @@
 # QA_Automation 
 
-com.automatedTests.jUnitTests.OrderTest - Here we are testing all custom methods:
+OrderTest - Here we are testing all custom methods:
 
 - add item addItemPrice(Double itemPrice)
 - add addArticleToListWithArticles(String article)

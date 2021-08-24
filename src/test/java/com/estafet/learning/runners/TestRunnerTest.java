@@ -1,16 +1,12 @@
-package com.automatedTests.runners;
+package com.estafet.learning.runners;
 
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
-import com.automatedTests.jUnitTests.OrderTest;
-import org.junit.runner.JUnitCore;
-import org.junit.runner.Result;
 import org.junit.runner.RunWith;
-import org.junit.runner.notification.Failure;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "src/test/resources/features", plugin = { "pretty"}, tags = "@sprint3",
-        glue = {"com.automatedTests.stepDefinitions"})
+        glue = {"com.estafet.learning.stepDefinitions"})
 public class TestRunnerTest {
 //    public static void main(String[] args) {
 //        Result result = JUnitCore.runClasses(OrderTest.class);
