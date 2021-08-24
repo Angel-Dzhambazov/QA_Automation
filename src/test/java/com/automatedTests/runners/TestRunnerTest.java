@@ -9,8 +9,8 @@ import org.junit.runner.RunWith;
 import org.junit.runner.notification.Failure;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "src/test/resources/features", plugin = { "pretty"}, tags = "@students",
-        glue = {"src/test/java/com/automatedTests/stepDefinitions"})
+@CucumberOptions(features = "src/test/resources/features", plugin = { "pretty"}, tags = "@sprint3",
+        glue = {"com.automatedTests.stepDefinitions"})
 public class TestRunnerTest {
 //    public static void main(String[] args) {
 //        Result result = JUnitCore.runClasses(OrderTest.class);
