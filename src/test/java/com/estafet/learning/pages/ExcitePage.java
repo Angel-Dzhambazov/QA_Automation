@@ -10,6 +10,5 @@ public class ExcitePage {
     public static WebElement acceptCookies(WebDriver driver) {
         String yesButton = "/html/body/div[1]/div[2]/div[4]/div[2]/div";
         return driver.findElement(By.xpath(yesButton));
-//        return driver.findElement(By.linkText("Yes"));
     }
 }
