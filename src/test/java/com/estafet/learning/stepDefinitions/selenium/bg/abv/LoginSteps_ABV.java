@@ -25,8 +25,8 @@ public class LoginSteps_ABV {
         WebDriverManager.chromedriver().browserVersion("77.0.3865.40").setup();
 
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-        driver.manage().timeouts().pageLoadTimeout(3, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(1, TimeUnit.SECONDS);
 
         driver.manage().window().maximize();
     }

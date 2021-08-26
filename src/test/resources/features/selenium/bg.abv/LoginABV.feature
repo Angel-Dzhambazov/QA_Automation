@@ -12,3 +12,4 @@ Feature:  Test login functionality
     Examples:
       | username               | password   |
       | estafet.234.sba@abv.bg | Estafete#1 |
+      | estafet.234.sba@abv.bg | Estafete#1 |
