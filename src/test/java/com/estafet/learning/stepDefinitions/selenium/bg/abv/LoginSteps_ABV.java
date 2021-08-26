@@ -34,10 +34,7 @@ public class LoginSteps_ABV {
     @And("user is on login page")
     public void isLoginPage() throws InterruptedException {
         driver.get("https://www.abv.bg/");
-        System.out.println("driver.get(\"https://www.abv.bg/\");");
         Thread.sleep(1000);
-
-
     }
 
     @And("user accepts cookies")

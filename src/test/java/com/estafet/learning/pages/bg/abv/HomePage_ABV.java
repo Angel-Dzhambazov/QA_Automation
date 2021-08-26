@@ -21,8 +21,8 @@ public class HomePage_ABV {
 
     public void logout() throws InterruptedException {
         accountOptions.click();
-        Thread.sleep(1000);
+        Thread.sleep(1000 * 2);
         logout.click();
-        Thread.sleep(1000);
+        Thread.sleep(1000 * 2);
     }
 }

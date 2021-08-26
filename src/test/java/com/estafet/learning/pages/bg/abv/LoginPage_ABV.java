@@ -15,16 +15,11 @@ public class LoginPage_ABV {
     @FindBy(id = "loginBut")
     WebElement btn_login;
 
-
-
     WebDriver webDriver;
 
     public LoginPage_ABV(WebDriver webDriver) {
-        System.out.println("public LoginPage_ABV(WebDriver webDriver)");
         this.webDriver = webDriver;
-        System.out.println("this.webDriver = webDriver;");
         PageFactory.initElements(webDriver, this);
-
     }
 
     public void enterUsername(String username) {
@@ -38,6 +33,4 @@ public class LoginPage_ABV {
     public void clickOnLogin() {
         btn_login.click();
     }
-
-
 }
