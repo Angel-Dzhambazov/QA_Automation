@@ -1,0 +1,1 @@
+Feature: register and login into bard.bg
