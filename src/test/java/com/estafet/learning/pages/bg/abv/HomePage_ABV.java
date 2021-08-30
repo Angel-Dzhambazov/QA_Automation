@@ -12,12 +12,13 @@ public class HomePage_ABV {
     @FindBy(id = "gwt-uid-389")
     WebElement logout;
 
+
+    private static WebDriver driver;
+
     public HomePage_ABV(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
-
-    WebDriver driver;
 
     public void logout() throws InterruptedException {
         accountOptions.click();

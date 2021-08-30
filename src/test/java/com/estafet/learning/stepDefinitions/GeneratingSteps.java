@@ -116,7 +116,6 @@ public class GeneratingSteps {
                 break;
             default:
                 System.out.println("Could not find such table!");
-
         }
         System.out.println("Successfully inserted subjects into data table");
     }
@@ -127,6 +126,7 @@ public class GeneratingSteps {
             addEntryToOrders();
         }
     }
+
 
     private static void addEntryToStudentsOrSubjects(String tableName, DataTable table) {
         List<List<String>> subjectsEntries = table.asLists(String.class);
