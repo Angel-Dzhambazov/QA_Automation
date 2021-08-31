@@ -13,12 +13,10 @@ public class CookiesPage_ABV {
     @FindBy(xpath = "/html/body/app-root/app-theme/div/div/app-notice/app-theme/div/div/app-home/div/div[2]/app-footer/div/div[2]/app-action-buttons/div/button[2]/span[1]/div")
     WebElement btn_acceptCookies;
 
-    WebDriver driver;
 
     public CookiesPage_ABV(WebDriver webDriver) {
-        driver = webDriver;
-        driver.switchTo().frame(GDPR_FRAME);
-        driver.switchTo().frame(GDPR_ACCEPT_FRAME);
+        webDriver.switchTo().frame(GDPR_FRAME);
+        webDriver.switchTo().frame(GDPR_ACCEPT_FRAME);
         PageFactory.initElements(webDriver, this);
     }
 

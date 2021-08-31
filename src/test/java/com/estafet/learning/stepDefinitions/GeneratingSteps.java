@@ -5,6 +5,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import com.estafet.learning.stepDefinitions.utils.Helper;
 import com.estafet.learning.stepDefinitions.utils.SqlQueryBuilder;
+import org.junit.Assert;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,6 +16,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class GeneratingSteps {
     private static final String SUBJECTS_TABLE_NAME = "subjects";
@@ -138,8 +140,7 @@ public class GeneratingSteps {
                 Helper.getStatement().executeUpdate("INSERT INTO " + tableName + " (name,year)\n" +
                         "VALUES ('" + subjectName + "', " + Integer.valueOf(year) + ");");
             } catch (SQLException e) {
-                e.printStackTrace();
-                assertFalse("Could not insert data into database table", false);
+                fail("Could not insert data into database table", e);
             }
         }
     }

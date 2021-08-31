@@ -42,6 +42,4 @@ public class SubjectSteps {
     public void deleteEntriesFromTable(String table) {
         assertTrue("Could not delete entries from " + table + "!", Helper.deleteEntries(table));
     }
-
-
 }

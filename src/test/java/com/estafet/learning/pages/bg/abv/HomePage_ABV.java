@@ -13,11 +13,8 @@ public class HomePage_ABV {
     WebElement logout;
 
 
-    private static WebDriver driver;
-
-    public HomePage_ABV(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+    public HomePage_ABV(WebDriver webDriver) {
+        PageFactory.initElements(webDriver, this);
     }
 
     public void logout() throws InterruptedException {

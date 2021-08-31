@@ -14,11 +14,8 @@ public class LoginPage_ABV {
 
     @FindBy(id = "loginBut")
     WebElement btn_login;
-
-    WebDriver webDriver;
-
+    
     public LoginPage_ABV(WebDriver webDriver) {
-        this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);
     }
 

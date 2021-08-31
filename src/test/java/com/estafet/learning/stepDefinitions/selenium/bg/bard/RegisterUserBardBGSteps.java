@@ -26,10 +26,8 @@ public class RegisterUserBardBGSteps {
 
     @Given("Browser is open")
     public void isBrowserOpen() {
-
         configFileReader = new ConfigFile_BardBG_Reader();
 
-        WebDriverManager.chromedriver().setup();
         WebDriverManager.chromedriver().browserVersion(configFileReader.getBrowserVersion()).setup();
 
         driver = new ChromeDriver();
@@ -42,7 +40,6 @@ public class RegisterUserBardBGSteps {
     @And("user is on bard page")
     public void isLoginPage() throws InterruptedException {
         driver.get(configFileReader.getApplicationUrl());
-
         Thread.sleep(1000);
     }
 
