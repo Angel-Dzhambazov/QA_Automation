@@ -6,7 +6,7 @@ import dataProvider.ConfigFile_BardBG_Reader;
 public class FileReaderManager {
 
 
-    private static FileReaderManager fileReaderManager = new FileReaderManager();
+    private static final FileReaderManager fileReaderManager = new FileReaderManager();
     private static ConfigFile_BardBG_Reader configFileReader;
     private static ConfigFile_Lilly_Reader configLillyFileReader;
 

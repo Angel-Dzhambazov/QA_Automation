@@ -34,9 +34,9 @@ public class ConfigFile_Lilly_Reader {
         else throw new RuntimeException("browserVersion not specified in the Configuration.properties file.");
     }
 
-    public long getImplicitlyWait() {
+    public int getImplicitlyWait() {
         String implicitlyWait = properties.getProperty("implicitlyWait");
-        if (implicitlyWait != null) return Long.parseLong(implicitlyWait);
+        if (implicitlyWait != null) return Integer.parseInt(implicitlyWait);
         else throw new RuntimeException("implicitlyWait not specified in the Configuration.properties file.");
     }
 
@@ -46,10 +46,25 @@ public class ConfigFile_Lilly_Reader {
         else throw new RuntimeException("url not specified in the Configuration.properties file.");
     }
 
-    public String getTestDataResourcePath(){
+    public String getUsername() {
+        String username = properties.getProperty("usernameAtLillyShop");
+        if (username != null) return username;
+        else throw new RuntimeException("Username not specified in the Configuration.properties file.");
+    }
+
+
+    public String getPassword() {
+        String password = properties.getProperty("passwordAtLillyShop");
+        if (password != null) return password;
+        else throw new RuntimeException("Password not specified in the Configuration.properties file.");
+    }
+
+    public String getTestDataResourcePath() {
         String testDataResourcePath = properties.getProperty("testDataResourcePath");
-        if(testDataResourcePath!= null) return testDataResourcePath;
-        else throw new RuntimeException("Test Data Resource Path not specified in the Configuration.properties file for the Key:testDataResourcePath");
+        if (testDataResourcePath != null) return testDataResourcePath;
+        else throw new RuntimeException(
+                "Test Data Resource Path not specified in the Configuration.properties file for the " +
+                        "Key:testDataResourcePath");
     }
 
 

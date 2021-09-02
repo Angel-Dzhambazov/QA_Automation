@@ -8,7 +8,7 @@ Feature:  Test login functionality
     And user accepts cookies
     When user enters <username> and <password>
     And user clicks on login
-    Then user is navigated to the home page
+#    Then user is navigated to the home page
     Examples:
       | username               | password   |
       | estafet.234.sba@abv.bg | Estafete#1 |

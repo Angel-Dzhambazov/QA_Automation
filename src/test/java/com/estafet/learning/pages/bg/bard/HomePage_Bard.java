@@ -17,7 +17,7 @@ public class HomePage_Bard {
     WebElement registration;
 
 
-    private static WebDriver driver;
+    private final WebDriver driver;
 
     public HomePage_Bard(WebDriver driver) {
         this.driver = driver;
