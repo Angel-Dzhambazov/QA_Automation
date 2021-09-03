@@ -22,7 +22,7 @@ public class HomePage_Lilly {
     WebElement btn_manCare;
 
 
-    @FindBy(className = "action showcart")
+    @FindBy(xpath = "/html/body/div[2]/header/div[2]/div[1]/a")
     WebElement btn_navigateToCart;
 
 //    @FindBy(xpath = "/html/body/div[2]/div[2]/div/div[2]/nav/div[1]/ul/li[7]/a")
