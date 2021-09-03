@@ -21,6 +21,10 @@ public class HomePage_Lilly {
     @FindBy(id = "ui-id-8")
     WebElement btn_manCare;
 
+
+    @FindBy(className = "action showcart")
+    WebElement btn_navigateToCart;
+
 //    @FindBy(xpath = "/html/body/div[2]/div[2]/div/div[2]/nav/div[1]/ul/li[7]/a")
 //    WebElement btn_manCare;
 
@@ -51,5 +55,9 @@ public class HomePage_Lilly {
         action.moveToElement(we).build().perform();
         Thread.sleep(500);
         driver.findElement(By.id("ui-id-198")).click();
+    }
+
+    public void navigateToCart() {
+        btn_navigateToCart.click();
     }
 }

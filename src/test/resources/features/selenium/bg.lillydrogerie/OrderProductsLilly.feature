@@ -8,6 +8,7 @@ Feature: Login in shop.lillydrogerie.bg and implement two scenarios
     And user buys the first 4 items
     Then total price of the order should be <moreOrLess> than <totalPrice>
     And delivery cost should be <deliveryCost>
+    And delete all items from shopping cart
 
     Examples:
       | category | order     | moreOrLess | totalPrice | deliveryCost |

@@ -105,4 +105,9 @@ public class BuyProducts_Lilly_Steps {
     public void checkDeliveryPrice(String price) {
         shippingPage.getDeliveryPrice();
     }
+
+    @And("delete all items from shopping cart")
+    public void deleteAllItems() {
+        homePage.navigateToCart();
+    }
 }

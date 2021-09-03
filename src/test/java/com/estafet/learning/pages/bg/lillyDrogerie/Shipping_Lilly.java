@@ -28,6 +28,8 @@ public class Shipping_Lilly {
     @FindBy(xpath = "/html/body/div[2]/main/div[2]/div/div[3]/div[4]/ol/li[2]/div/div[3]/form/div[1]/table/tbody/tr/td[2]/span/span")
     WebElement deliveryPrice;
 
+    @FindBy(className = "logo")
+    WebElement btn_navigateToHomePage;
 
 
     private final WebDriver driver;
@@ -56,5 +58,6 @@ public class Shipping_Lilly {
 
     public void getDeliveryPrice() {
         System.out.println(deliveryPrice.getAttribute("data-bind=\"text: getFormattedPrice(method.price_excl_tax)\""));
+        btn_navigateToHomePage.click();
     }
 }
