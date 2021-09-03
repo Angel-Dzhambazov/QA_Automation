@@ -24,7 +24,7 @@ public class RegisterUserBardBGSteps {
 
     ConfigFile_BardBG_Reader configFileReader;
 
-    @Given("Browser is open")
+    @Given("Browser is open on Bard")
     public void isBrowserOpen() {
         configFileReader = new ConfigFile_BardBG_Reader();
 

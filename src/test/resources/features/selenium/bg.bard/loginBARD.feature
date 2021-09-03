@@ -1,7 +1,7 @@
 Feature: register and login into bard.bg
 
   Scenario: Open bard.bg and register a new user
-    Given Browser is open
+    Given Browser is open on Bard
     And user is on bard page
     When I click on registration page
     And I create a test user

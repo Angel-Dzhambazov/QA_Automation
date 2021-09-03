@@ -1,3 +1,4 @@
+@lilly
 Feature: Login in shop.lillydrogerie.bg and implement two scenarios
 
   Scenario Outline: Login, change product page order some products for less than 49E
