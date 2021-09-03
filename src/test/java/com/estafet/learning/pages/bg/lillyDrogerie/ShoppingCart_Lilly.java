@@ -36,7 +36,6 @@ public class ShoppingCart_Lilly {
                 driver.findElement(By.xpath("/html/body/div[2]/main/div[3]/div/div[3]/div[1]/form/div[1]/div/div[2" +
                         "]/div/div[4]/div/a")).click();
             } catch (NoSuchElementException e) {
-                System.out.println("All items deleted.");
                 break;
             }
         }
