@@ -5,29 +5,29 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage_ABV {
+public class LoginPageABV {
     @FindBy(id = "username")
-    WebElement txt_username;
+    WebElement txtUsername;
 
     @FindBy(id = "password")
-    WebElement txt_password;
+    WebElement txtPassword;
 
     @FindBy(id = "loginBut")
-    WebElement btn_login;
+    WebElement btnLogin;
     
-    public LoginPage_ABV(WebDriver webDriver) {
+    public LoginPageABV(WebDriver webDriver) {
         PageFactory.initElements(webDriver, this);
     }
 
     public void enterUsername(String username) {
-        txt_username.sendKeys(username);
+        txtUsername.sendKeys(username);
     }
 
     public void enterPassword(String password) {
-        txt_password.sendKeys(password);
+        txtPassword.sendKeys(password);
     }
 
     public void clickOnLogin() {
-        btn_login.click();
+        btnLogin.click();
     }
 }

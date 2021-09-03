@@ -6,7 +6,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage_Bard {
+public class LoginPageBard {
 
     @FindBy(xpath = "/html/body/div[3]/div[1]/div/div[2]/div")
     WebElement myProfile;
@@ -17,7 +17,7 @@ public class LoginPage_Bard {
     WebDriver webDriver;
 
 
-    public LoginPage_Bard(WebDriver webDriver) {
+    public LoginPageBard(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);
     }

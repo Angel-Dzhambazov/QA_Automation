@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class HomePage_ABV {
+public class HomePageABV {
     @FindBy(id = "gwt-uid-386")
     WebElement accountOptions;
 
@@ -13,7 +13,7 @@ public class HomePage_ABV {
     WebElement logout;
 
 
-    public HomePage_ABV(WebDriver webDriver) {
+    public HomePageABV(WebDriver webDriver) {
         PageFactory.initElements(webDriver, this);
     }
 

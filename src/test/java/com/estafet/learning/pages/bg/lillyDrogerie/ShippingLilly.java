@@ -7,54 +7,54 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class Shipping_Lilly {
+public class ShippingLilly {
 
     @FindBy(name = "telephone")
-    WebElement txt_telephone;
+    WebElement txtTelephone;
 
     @FindBy(xpath = "/html/body/div[2]/main/div[2]/div/div[3]/div[4]/ol/li[1]/div[2]/form/div/div[5]/div/div/label[2]")
-    WebElement btn_radioDeliveryAddress;
+    WebElement btnRadioDeliveryAddress;
 
     @FindBy(xpath = "/html/body/div[2]/main/div[2]/div/div[3]/div[4]/ol/li[1]/div[2]/form/div/div[6]/div/span/span[1]/span")
-    WebElement btn_TownDropDown;
+    WebElement btnTownDropDown;
 
     @FindBy(xpath = "/html/body/span/span/span[1]/input")
-    WebElement txt_EnterTown;
+    WebElement txtEnterTown;
 
     @FindBy(xpath = "/html/body/span/span/span[2]/ul/li")
-    WebElement btn_SofiaTown;
+    WebElement btnSofiaTown;
 
     @FindBy(xpath = "/html/body/div[2]/main/div[2]/div/div[3]/div[4]/ol/li[1]/div[2]/form/div/div[9]/div/input")
-    WebElement txt_address;
+    WebElement txtAddress;
 
     @FindBy(xpath = "/html/body/div[2]/main/div[2]/div/div[3]/div[4]/ol/li[2]/div/div[3]/form/div[1]/table/tbody/tr/td[2]/span/span")
     WebElement deliveryPrice;
 
     @FindBy(className = "logo")
-    WebElement btn_navigateToHomePage;
+    WebElement btnNavigateToHomePage;
 
 
     private final WebDriver driver;
 
-    public Shipping_Lilly(WebDriver driver) {
+    public ShippingLilly(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(this.driver, this);
     }
 
     public void enterPhone(String phoneNumber) {
-        txt_telephone.sendKeys(phoneNumber);
+        txtTelephone.sendKeys(phoneNumber);
     }
 
     public void enterTown(String town) throws InterruptedException {
-        btn_radioDeliveryAddress.click();
-        btn_TownDropDown.click();
-        txt_EnterTown.sendKeys(town);
+        btnRadioDeliveryAddress.click();
+        btnTownDropDown.click();
+        txtEnterTown.sendKeys(town);
         Thread.sleep(1000);
-        btn_SofiaTown.click();
+        btnSofiaTown.click();
     }
 
     public void enterAddress(String address) {
-        txt_address.sendKeys(address);
+        txtAddress.sendKeys(address);
     }
 
 
@@ -69,6 +69,6 @@ public class Shipping_Lilly {
     }
 
     public void navigateToHomePage() {
-        btn_navigateToHomePage.click();
+        btnNavigateToHomePage.click();
     }
 }

@@ -8,7 +8,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class HomePage_Bard {
+public class HomePageBard {
 
     @FindBy(xpath = "/html/body/div[3]/div[1]/div/div[2]/div")
     WebElement myProfile;
@@ -19,7 +19,7 @@ public class HomePage_Bard {
 
     private final WebDriver driver;
 
-    public HomePage_Bard(WebDriver driver) {
+    public HomePageBard(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }

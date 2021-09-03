@@ -6,30 +6,30 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage_Lilly {
+public class LoginPageLilly {
     @FindBy(name = "login[username]")
-    WebElement txt_username;
+    WebElement txtUsername;
 
     @FindBy(name = "login[password]")
-    WebElement txt_password;
+    WebElement txtPassword;
 
     @FindBy(id = "send2")
-    WebElement btn_login;
+    WebElement btnLogin;
 
 
-    public LoginPage_Lilly(WebDriver driver) {
+    public LoginPageLilly(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }
 
 
     public void enterCredentials() throws InterruptedException {
-        txt_username.sendKeys(FileReaderManager.getInstance().CofigFile_Lilly_Reader().getUsername());
+        txtUsername.sendKeys(FileReaderManager.getInstance().CofigFile_Lilly_Reader().getUsername());
         Thread.sleep(1000);
-        txt_password.sendKeys(FileReaderManager.getInstance().CofigFile_Lilly_Reader().getPassword());
+        txtPassword.sendKeys(FileReaderManager.getInstance().CofigFile_Lilly_Reader().getPassword());
         Thread.sleep(1000);
     }
 
     public void clickLogin(){
-        btn_login.click();
+        btnLogin.click();
     }
 }

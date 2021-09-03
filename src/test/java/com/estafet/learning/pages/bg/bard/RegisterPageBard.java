@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class RegisterPage_Bard {
+public class RegisterPageBard {
     @FindBy(name = "data[email]")
     WebElement txt_email;
 
@@ -16,44 +16,42 @@ public class RegisterPage_Bard {
     WebElement txt_password;
 
     @FindBy(name = "data[password2]")
-    WebElement txt_repeatPassword;
+    WebElement txtRepeatPassword;
 
     @FindBy(name = "data[phone]")
-    WebElement txt_phone;
+    WebElement txtPhone;
 
     @FindBy(name = "data[firstname]")
-    WebElement txt_name;
+    WebElement txtName;
 
     @FindBy(name = "data[surname]")
-    WebElement txt_surname;
+    WebElement txtSurname;
 
     @FindBy(name = "data[family]")
-    WebElement txt_familyName;
+    WebElement txtFamilyName;
 
     @FindBy(name = "data[postcode]")
-    WebElement txt_postCode;
+    WebElement txtPostCode;
 
     @FindBy(name = "data[city]")
-    WebElement txt_town;
+    WebElement txtTown;
 
     @FindBy(name = "data[address]")
-    WebElement txt_address;
+    WebElement txtAddress;
 
     @FindBy(name = "data[agree_gdpr]")
-    WebElement checkBox_agreeGDPR;
+    WebElement checkBoxAgreeGDPR;
 
     @FindBy(name = "data[confirm_age]")
-    WebElement checkBox_confirmAge;
+    WebElement checkBoxConfirmAge;
 
     @FindBy(name = "data[agree_bulletin]")
-    WebElement checkBox_agreeADS;
+    WebElement checkBoxAgreeADS;
 
-    @FindBy(xpath = "/html/body/div[3]/div[2]/div/div/form/div[2]/div[6]/a")
-    WebElement btn_register;
 
-    private static WebDriver driver;
+    private final WebDriver driver;
 
-    public RegisterPage_Bard(WebDriver webDriver) {
+    public RegisterPageBard(WebDriver webDriver) {
         this.driver = webDriver;
         PageFactory.initElements(webDriver, this);
     }
@@ -75,20 +73,20 @@ public class RegisterPage_Bard {
 
             txt_email.sendKeys(mail);
             txt_password.sendKeys(pass);
-            txt_repeatPassword.sendKeys(pass2);
-            txt_phone.sendKeys(phone);
+            txtRepeatPassword.sendKeys(pass2);
+            txtPhone.sendKeys(phone);
 
-            txt_name.sendKeys(name);
-            txt_surname.sendKeys(surname);
-            txt_familyName.sendKeys(family);
-            txt_postCode.sendKeys(postCode);
-            txt_town.sendKeys(town);
-            txt_address.sendKeys(address);
+            txtName.sendKeys(name);
+            txtSurname.sendKeys(surname);
+            txtFamilyName.sendKeys(family);
+            txtPostCode.sendKeys(postCode);
+            txtTown.sendKeys(town);
+            txtAddress.sendKeys(address);
         }
 
-        checkBox_agreeGDPR.click();
-        checkBox_confirmAge.click();
-        checkBox_agreeADS.click();
+        checkBoxAgreeGDPR.click();
+        checkBoxConfirmAge.click();
+        checkBoxAgreeADS.click();
 
 //        btn_register.click();
     }

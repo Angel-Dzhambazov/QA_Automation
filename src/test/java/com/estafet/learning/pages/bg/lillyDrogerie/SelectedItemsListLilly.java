@@ -7,35 +7,35 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class SelectedItemsList_Lilly {
+public class SelectedItemsListLilly {
 
     @FindBy(xpath = "/html/body/div[2]/main/div[2]/div[1]/div[5]/div[1]/div/div[4]/select")
-    WebElement btn_sortBy;
+    WebElement btnSortBy;
 
     @FindBy(xpath = "/html/body/div[2]/main/div[2]/div[1]/div[5]/div[1]/div/div[4]/select/option[5]")
-    WebElement btn_price_a;
+    WebElement btnPriceA;
 
     @FindBy(xpath = "//*[@id=\"sorter\"]/option[6]")
-    WebElement btn_price_d;
+    WebElement btnPriceD;
 
     @FindBy(xpath = "/html/body/div[2]/header/div[2]/div[1]/a/span[1]")
-    WebElement btn_shoppingCart;
+    WebElement btnShoppingCart;
 
     private final WebDriver driver;
 
-    public SelectedItemsList_Lilly(WebDriver driver) {
+    public SelectedItemsListLilly(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(this.driver, this);
     }
 
     public void sortByPriceA() {
-        btn_sortBy.click();
-        btn_price_a.click();
+        btnSortBy.click();
+        btnPriceA.click();
     }
 
     public void sortByPriceD() {
-        btn_sortBy.click();
-        btn_price_d.click();
+        btnSortBy.click();
+        btnPriceD.click();
     }
 
     public void buyFirstShower(int numberOfShower) throws InterruptedException {
@@ -51,6 +51,6 @@ public class SelectedItemsList_Lilly {
     }
 
     public void clickOnShoppingCart() {
-        btn_shoppingCart.click();
+        btnShoppingCart.click();
     }
 }

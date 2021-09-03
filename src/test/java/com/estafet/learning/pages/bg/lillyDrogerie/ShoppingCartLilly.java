@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class ShoppingCart_Lilly {
+public class ShoppingCartLilly {
 
     @FindBy(xpath = "//*[@id=\"html-body\"]/div[2]/header/div[2]/div[1]/a/span[3]/span")
     WebElement totalPrice;
@@ -17,7 +17,7 @@ public class ShoppingCart_Lilly {
 
     private final WebDriver driver;
 
-    public ShoppingCart_Lilly(WebDriver driver) {
+    public ShoppingCartLilly(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(this.driver, this);
     }

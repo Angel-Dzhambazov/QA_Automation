@@ -1,8 +1,8 @@
 package com.estafet.learning.stepDefinitions.selenium.bg.abv;
 
-import com.estafet.learning.pages.bg.abv.CookiesPage_ABV;
-import com.estafet.learning.pages.bg.abv.HomePage_ABV;
-import com.estafet.learning.pages.bg.abv.LoginPage_ABV;
+import com.estafet.learning.pages.bg.abv.CookiesPageABV;
+import com.estafet.learning.pages.bg.abv.HomePageABV;
+import com.estafet.learning.pages.bg.abv.LoginPageABV;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -13,11 +13,11 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
-public class LoginSteps_ABV {
+public class LoginStepsABV {
     WebDriver driver = null;
-    LoginPage_ABV login;
-    HomePage_ABV home;
-    CookiesPage_ABV cookies;
+    LoginPageABV login;
+    HomePageABV home;
+    CookiesPageABV cookies;
 
     @Given("Browser is open")
     public void isBrowserOpen() {
@@ -39,8 +39,8 @@ public class LoginSteps_ABV {
 
     @And("user accepts cookies")
     public void acceptCookies(){
-        login = new LoginPage_ABV(driver);
-        cookies = new CookiesPage_ABV(driver);
+        login = new LoginPageABV(driver);
+        cookies = new CookiesPageABV(driver);
         cookies.acceptCookies();
     }
 
@@ -60,7 +60,7 @@ public class LoginSteps_ABV {
 
     @Then("user is navigated to the home page")
     public void navigateToHomePage() throws InterruptedException {
-        home = new HomePage_ABV(driver);
+        home = new HomePageABV(driver);
         home.logout();
         driver.close();
         driver.quit();
