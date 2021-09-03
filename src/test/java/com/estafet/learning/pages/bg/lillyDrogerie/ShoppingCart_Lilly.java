@@ -7,8 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import javax.sound.midi.Soundbank;
-
 public class ShoppingCart_Lilly {
 
     @FindBy(xpath = "//*[@id=\"html-body\"]/div[2]/header/div[2]/div[1]/a/span[3]/span")
@@ -43,9 +41,4 @@ public class ShoppingCart_Lilly {
             }
         }
     }
-
-    public void navigateToHomePage() {
-
-    }
-
 }

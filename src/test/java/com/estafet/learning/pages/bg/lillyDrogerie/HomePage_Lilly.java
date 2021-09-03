@@ -14,10 +14,8 @@ public class HomePage_Lilly {
     @FindBy(xpath = "/html/body/div[2]/div[3]/div/div/div[2]/a[1]")
     WebElement btn_accpectCookies;
 
-
     @FindBy(id = "ui-id-8")
     WebElement btn_manCare;
-
 
     @FindBy(id = "ui-id-9")
     WebElement btn_perfumes;

@@ -7,7 +7,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class ShowerGels_Lilly {
+public class SelectedItemsList_Lilly {
 
     @FindBy(xpath = "/html/body/div[2]/main/div[2]/div[1]/div[5]/div[1]/div/div[4]/select")
     WebElement btn_sortBy;
@@ -23,7 +23,7 @@ public class ShowerGels_Lilly {
 
     private final WebDriver driver;
 
-    public ShowerGels_Lilly(WebDriver driver) {
+    public SelectedItemsList_Lilly(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(this.driver, this);
     }
