@@ -99,6 +99,8 @@ public class BuyProducts_Lilly_Steps {
 
         shippingPage.enterAddress(lillyReader.getAddress());
 
+        shippingPage.chooseOffice();
+
     }
 
     @And("^delivery cost should be (.*)$")
