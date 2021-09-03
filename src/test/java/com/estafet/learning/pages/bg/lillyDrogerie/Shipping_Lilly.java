@@ -1,5 +1,7 @@
 package com.estafet.learning.pages.bg.lillyDrogerie;
 
+import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -56,8 +58,17 @@ public class Shipping_Lilly {
     }
 
 
-    public void getDeliveryPrice() {
-        System.out.println(deliveryPrice.getAttribute("data-bind=\"text: getFormattedPrice(method.price_excl_tax)\""));
+    public void getDeliveryPrice(String expectedPrice) {
+        String actualPrice = driver.findElement(By.xpath("//span[@class=\"price\"]/span[@class=\"price\"]")).getText();
+        actualPrice = actualPrice.replaceAll(",", ".");
+        double priceForDelivery = Double.parseDouble(actualPrice.substring(0, actualPrice.length() - 4));
+
+        double expectedPriceD = Double.parseDouble(expectedPrice);
+
+        Assert.assertEquals("Delivery price is not as expected!", priceForDelivery, expectedPriceD, 0.0);
+    }
+
+    public void navigateToHomePage() {
         btn_navigateToHomePage.click();
     }
 }

@@ -11,7 +11,7 @@ import javax.sound.midi.Soundbank;
 
 public class ShoppingCart_Lilly {
 
-    @FindBy(xpath = "/html/body/div[2]/main/div[3]/div/div[3]/div[2]/div[3]/div/table/tbody/tr[2]/td/strong/span")
+    @FindBy(xpath = "//*[@id=\"html-body\"]/div[2]/header/div[2]/div[1]/a/span[3]/span")
     WebElement totalPrice;
 
     @FindBy(xpath = "/html/body/div[2]/main/div[3]/div/div[3]/div[2]/ul/li/button")
@@ -24,9 +24,8 @@ public class ShoppingCart_Lilly {
         PageFactory.initElements(this.driver, this);
     }
 
-    public void getTotalPrice() {
-
-        System.out.println(totalPrice.getAttribute("data-bind=\"text: getValue()\""));
+    public String getTotalPrice() {
+        return totalPrice.getText();
     }
 
     public void finishOrder() {
@@ -43,6 +42,10 @@ public class ShoppingCart_Lilly {
                 break;
             }
         }
+    }
+
+    public void navigateToHomePage() {
+
     }
 
 }

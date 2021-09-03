@@ -7,6 +7,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -60,10 +61,11 @@ public class BuyProducts_Lilly_Steps {
             case "man care":
                 homePage.clickOnShowerGels();
                 break;
-            case "":
+            case "perfume":
+                homePage.clickOnPerfumes();
                 break;
             default:
-                System.out.println("Could not find category!");
+                Assert.fail("Could not find category!");
                 break;
 
         }
@@ -72,7 +74,17 @@ public class BuyProducts_Lilly_Steps {
     @And("^user arranges the items by price (.*)$")
     public void arrangeItems(String ascendType) {
         showersPage = new ShowerGels_Lilly(driver);
-        showersPage.sortByPriceA();
+        switch (ascendType) {
+            case "ascending":
+                showersPage.sortByPriceA();
+                break;
+            case "descending":
+                showersPage.sortByPriceD();
+                break;
+            default:
+                Assert.fail("could not select proper ascend way");
+        }
+
     }
 
     @And("user buys the first {int} items")
@@ -88,8 +100,23 @@ public class BuyProducts_Lilly_Steps {
         showersPage.clickOnShoppingCart();
         shoppingCartPage = new ShoppingCart_Lilly(driver);
 
+        String currentPrice = shoppingCartPage.getTotalPrice();
+        currentPrice = currentPrice.replaceAll(",", ".");
+        double currentPriceD = Double.parseDouble(currentPrice.substring(0, currentPrice.length() - 4));
+        double priceToCompareWith = Double.parseDouble(priceLimit);
 
-        shoppingCartPage.getTotalPrice();
+        switch (moreOrLess) {
+            case "less":
+                Assert.assertTrue("Current price is not as expected", currentPriceD < priceToCompareWith);
+                break;
+            case "more":
+                Assert.assertTrue("Current price is not as expected", currentPriceD >= priceToCompareWith);
+                break;
+            default:
+                Assert.fail("Could not find method to compare with!");
+                break;
+        }
+
         shoppingCartPage.finishOrder();
 
         shippingPage = new Shipping_Lilly(driver);
@@ -99,15 +126,18 @@ public class BuyProducts_Lilly_Steps {
 
         shippingPage.enterAddress(lillyReader.getAddress());
 
+
     }
 
     @And("^delivery cost should be (.*)$")
-    public void checkDeliveryPrice(String price) {
-        shippingPage.getDeliveryPrice();
+    public void checkDeliveryPrice(String deliveryPrice) throws InterruptedException {
+        Thread.sleep(1000);
+        shippingPage.getDeliveryPrice(deliveryPrice);
     }
 
     @And("delete all items from shopping cart")
     public void deleteAllItems() {
+        shippingPage.navigateToHomePage();
         homePage.navigateToCart();
         shoppingCartPage.deleteAllitems();
     }

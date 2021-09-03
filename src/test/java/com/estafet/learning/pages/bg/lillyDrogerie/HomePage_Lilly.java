@@ -11,9 +11,6 @@ public class HomePage_Lilly {
     @FindBy(xpath = "/html/body/div[2]/header/div[1]/div/ul/li[2]/a")
     WebElement btn_login;
 
-    @FindBy(xpath = "/html/body/div[2]/div[2]/div/div[2]/nav/div[2]/ul/li[1]/a")
-    WebElement btn_discounts;
-
     @FindBy(xpath = "/html/body/div[2]/div[3]/div/div/div[2]/a[1]")
     WebElement btn_accpectCookies;
 
@@ -22,11 +19,12 @@ public class HomePage_Lilly {
     WebElement btn_manCare;
 
 
+    @FindBy(id = "ui-id-9")
+    WebElement btn_perfumes;
+
     @FindBy(xpath = "/html/body/div[2]/header/div[2]/div[1]/a")
     WebElement btn_navigateToCart;
 
-//    @FindBy(xpath = "/html/body/div[2]/div[2]/div/div[2]/nav/div[1]/ul/li[7]/a")
-//    WebElement btn_manCare;
 
     public final WebDriver driver;
 
@@ -43,10 +41,6 @@ public class HomePage_Lilly {
         btn_login.click();
     }
 
-    public void clickOnDiscounts() {
-        btn_discounts.click();
-    }
-
     public void clickOnShowerGels() throws InterruptedException {
         Actions action = new Actions(driver);
         action.moveToElement(btn_manCare).build().perform();
@@ -59,5 +53,15 @@ public class HomePage_Lilly {
 
     public void navigateToCart() {
         btn_navigateToCart.click();
+    }
+
+    public void clickOnPerfumes() throws InterruptedException {
+        Actions action = new Actions(driver);
+        action.moveToElement(btn_perfumes).build().perform();
+        Thread.sleep(500);
+        WebElement we = driver.findElement(By.id("ui-id-203"));
+        action.moveToElement(we).build().perform();
+        Thread.sleep(500);
+        driver.findElement(By.id("ui-id-205")).click();
     }
 }

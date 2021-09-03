@@ -11,7 +11,7 @@ Feature: Login in shop.lillydrogerie.bg and implement two scenarios
     And delete all items from shopping cart
 
     Examples:
-      | category | order     | moreOrLess | totalPrice | deliveryCost |
-      | man care | ascending | less       | 98         | 5.5          |
-#      | perfume  | descending | more       | 98         | 0.0          |
+      | category | order      | moreOrLess | totalPrice | deliveryCost |
+      | man care | ascending  | less       | 98         | 5.50         |
+      | perfume  | descending | more       | 98         | 0.00         |
 

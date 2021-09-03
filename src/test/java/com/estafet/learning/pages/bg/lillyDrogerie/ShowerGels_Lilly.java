@@ -15,6 +15,9 @@ public class ShowerGels_Lilly {
     @FindBy(xpath = "/html/body/div[2]/main/div[2]/div[1]/div[5]/div[1]/div/div[4]/select/option[5]")
     WebElement btn_price_a;
 
+    @FindBy(xpath = "//*[@id=\"sorter\"]/option[6]")
+    WebElement btn_price_d;
+
     @FindBy(xpath = "/html/body/div[2]/header/div[2]/div[1]/a/span[1]")
     WebElement btn_shoppingCart;
 
@@ -28,6 +31,11 @@ public class ShowerGels_Lilly {
     public void sortByPriceA() {
         btn_sortBy.click();
         btn_price_a.click();
+    }
+
+    public void sortByPriceD() {
+        btn_sortBy.click();
+        btn_price_d.click();
     }
 
     public void buyFirstShower(int numberOfShower) throws InterruptedException {
