@@ -10,8 +10,6 @@ Feature: Login in shop.lillydrogerie.bg and implement two scenarios
     And delivery cost should be <deliveryCost>
 
     Examples:
-#      | category |
-#      | man care |
       | category | order     | moreOrLess | totalPrice | deliveryCost |
       | man care | ascending | less       | 98         | 5.5          |
 #      | perfume  | descending | more       | 98         | 0.0          |
