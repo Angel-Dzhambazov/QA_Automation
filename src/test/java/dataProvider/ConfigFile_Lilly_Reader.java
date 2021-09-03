@@ -67,5 +67,21 @@ public class ConfigFile_Lilly_Reader {
                         "Key:testDataResourcePath");
     }
 
+    public String getPhoneNumber() {
+        String phoneNumber = properties.getProperty("phoneNumber");
+        if (phoneNumber != null) return phoneNumber;
+        else throw new RuntimeException("phoneNumber not specified in the Configuration.properties file.");
+    }
 
+    public String getTown() {
+        String town = properties.getProperty("town");
+        if (town != null) return town;
+        else throw new RuntimeException("town not specified in the Configuration.properties file.");
+    }
+
+    public String getAddress() {
+        String address = properties.getProperty("address");
+        if (address != null) return address;
+        else throw new RuntimeException("address not specified in the Configuration.properties file.");
+    }
 }

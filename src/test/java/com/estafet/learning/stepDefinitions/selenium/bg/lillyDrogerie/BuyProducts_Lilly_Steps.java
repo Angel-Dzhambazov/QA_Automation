@@ -1,18 +1,14 @@
 package com.estafet.learning.stepDefinitions.selenium.bg.lillyDrogerie;
 
-import com.estafet.learning.pages.bg.lillyDrogerie.HomePage_Lilly;
-import com.estafet.learning.pages.bg.lillyDrogerie.LoginPage_Lilly;
-import com.estafet.learning.pages.bg.lillyDrogerie.ShowerGels_Lilly;
-import com.sun.corba.se.spi.ior.IdentifiableFactory;
+import com.estafet.learning.pages.bg.lillyDrogerie.*;
 import dataProvider.ConfigFile_Lilly_Reader;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.interactions.SourceType;
 
 import java.util.concurrent.TimeUnit;
 
@@ -20,9 +16,11 @@ public class BuyProducts_Lilly_Steps {
 
     WebDriver driver;
     ConfigFile_Lilly_Reader lillyReader;
-    HomePage_Lilly home;
-    LoginPage_Lilly login;
+    HomePage_Lilly homePage;
+    LoginPage_Lilly loginPage;
     ShowerGels_Lilly showersPage;
+    ShoppingCart_Lilly shoppingCartPage;
+    Shipping_Lilly shippingPage;
 
     @Given("Browser is open on Lilly")
     public void isBrowserOpen() {
@@ -42,15 +40,15 @@ public class BuyProducts_Lilly_Steps {
 
         Thread.sleep(1000);
 
-        home = new HomePage_Lilly(driver);
+        homePage = new HomePage_Lilly(driver);
         Thread.sleep(500);
-        home.accepctCookies();
+        homePage.accepctCookies();
         Thread.sleep(500);
-        home.clickOnLogin();
+        homePage.clickOnLogin();
 
-        login = new LoginPage_Lilly(driver);
-        login.enterCredentials();
-        login.clickLogin();
+        loginPage = new LoginPage_Lilly(driver);
+        loginPage.enterCredentials();
+        loginPage.clickLogin();
     }
 
     @When("^user clicks on category (.*)$")
@@ -60,7 +58,7 @@ public class BuyProducts_Lilly_Steps {
         System.out.println("==============================================================================");
         switch (category) {
             case "man care":
-                home.clickOnShowerGels();
+                homePage.clickOnShowerGels();
                 break;
             case "":
                 break;
@@ -78,7 +76,33 @@ public class BuyProducts_Lilly_Steps {
     }
 
     @And("user buys the first {int} items")
-    public void buyItems(int arg0) {
-        showersPage.printAllElements();
+    public void buyItems(int numberOfShowerGels) throws InterruptedException {
+        for (int i = 1; i <= numberOfShowerGels; i++) {
+            showersPage.buyFirstShower(i);
+        }
+
+    }
+
+    @Then("^total price of the order should be (.*) than (.*)$")
+    public void checkTotalPrice(String moreOrLess, String priceLimit) throws InterruptedException {
+        showersPage.clickOnShoppingCart();
+        shoppingCartPage = new ShoppingCart_Lilly(driver);
+
+
+        shoppingCartPage.getTotalPrice();
+        shoppingCartPage.finishOrder();
+
+        shippingPage = new Shipping_Lilly(driver);
+        shippingPage.enterPhone(lillyReader.getPhoneNumber());
+
+        shippingPage.enterTown(lillyReader.getTown());
+
+        shippingPage.enterAddress(lillyReader.getAddress());
+
+    }
+
+    @And("^delivery cost should be (.*)$")
+    public void checkDeliveryPrice(String price) {
+        shippingPage.getDeliveryPrice();
     }
 }

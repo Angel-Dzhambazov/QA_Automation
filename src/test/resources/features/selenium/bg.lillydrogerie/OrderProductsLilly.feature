@@ -6,8 +6,8 @@ Feature: Login in shop.lillydrogerie.bg and implement two scenarios
     When user clicks on category <category>
     And user arranges the items by price <order>
     And user buys the first 4 items
-#    Then total price of the order should be <moreOrLess> than <totalPrice>
-#    And delivery cost should be <deliveryCost>
+    Then total price of the order should be <moreOrLess> than <totalPrice>
+    And delivery cost should be <deliveryCost>
 
     Examples:
 #      | category |
