@@ -109,5 +109,6 @@ public class BuyProducts_Lilly_Steps {
     @And("delete all items from shopping cart")
     public void deleteAllItems() {
         homePage.navigateToCart();
+        shoppingCartPage.deleteAllitems();
     }
 }

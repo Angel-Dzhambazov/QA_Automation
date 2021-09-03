@@ -1,6 +1,7 @@
 package com.estafet.learning.pages.bg.lillyDrogerie;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -34,13 +35,13 @@ public class ShoppingCart_Lilly {
 
     public void deleteAllitems() {
         while (true) {
-//            try {
-            driver.findElement(By.xpath("/html/body/div[2]/main/div[3]/div/div[3]/div[1]/form/div[1]/div/div[2" +
-                    "]/div/div[4]/div/a")).click();
-//            } catch () {
-//                System.out.println("All items deleted.");
-//                break;
-//            }
+            try {
+                driver.findElement(By.xpath("/html/body/div[2]/main/div[3]/div/div[3]/div[1]/form/div[1]/div/div[2" +
+                        "]/div/div[4]/div/a")).click();
+            } catch (NoSuchElementException e) {
+                System.out.println("All items deleted.");
+                break;
+            }
         }
     }
 
