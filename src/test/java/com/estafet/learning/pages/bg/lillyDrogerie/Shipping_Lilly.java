@@ -25,6 +25,12 @@ public class Shipping_Lilly {
     @FindBy(xpath = "/html/body/div[2]/main/div[2]/div/div[3]/div[4]/ol/li[2]/div/div[3]/form/div[1]/table/tbody/tr/td[2]/span/span")
     WebElement deliveryPrice;
 
+    @FindBy(xpath = "/html/body/div[2]/main/div[2]/div/div[3]/div[4]/ol/li[1]/div[2]/form/div/div[8]/div/span/span[1]/span")
+    WebElement officeDropDown;
+
+    @FindBy(xpath = "/html/body/span/span/span[2]/ul/li[1]")
+    WebElement btn_officeSomat;
+
     private final WebDriver driver;
 
     public Shipping_Lilly(WebDriver driver) {
@@ -45,6 +51,13 @@ public class Shipping_Lilly {
 
     public void enterAddress(String address) {
         txt_address.sendKeys(address);
+    }
+
+    public void chooseOffice() throws InterruptedException {
+        officeDropDown.click();
+        Thread.sleep(1000);
+        btn_officeSomat.click();
+
     }
 
     public void getDeliveryPrice() {
