@@ -11,7 +11,7 @@ public class CookiesPageABV {
     private static final String GDPR_ACCEPT_FRAME = "gdpr-consent-notice";
 
     @FindBy(xpath = "/html/body/app-root/app-theme/div/div/app-notice/app-theme/div/div/app-home/div/div[2]/app-footer/div/div[2]/app-action-buttons/div/button[2]/span[1]/div")
-    WebElement btnАcceptCookies;
+    WebElement btnAcceptCookies;
 
 
     public CookiesPageABV(WebDriver webDriver) {
@@ -21,6 +21,6 @@ public class CookiesPageABV {
     }
 
     public void acceptCookies() {
-        btnАcceptCookies.click();
+        btnAcceptCookies.click();
     }
 }
