@@ -21,6 +21,7 @@ public class BuyProductsLillySteps {
 
     @Given("Browser is open on Lilly")
     public void isBrowserOpen() {
+        System.out.println("opening browser on lilly!");
         lillyReader = new ConfigFile_Lilly_Reader();
         WebDriverManager.chromedriver().setup();
         WebDriver driver;
@@ -33,6 +34,7 @@ public class BuyProductsLillySteps {
 
     @And("user successfully logs in")
     public void loginLilly() throws InterruptedException {
+        System.out.println("Logging in on lilly!");
         pageObjectManager.getHomePage().accepctCookies();
         Thread.sleep(500);
         pageObjectManager.getHomePage().clickOnLogin();
@@ -43,6 +45,7 @@ public class BuyProductsLillySteps {
 
     @When("^user clicks on category (.*)$")
     public void chooseCategory(String category) throws InterruptedException {
+        System.out.println("Choosing category in on lilly!");
         switch (category) {
             case "man care":
                 pageObjectManager.getHomePage().clickOnShowerGels();
