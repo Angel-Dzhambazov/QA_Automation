@@ -2,6 +2,8 @@ package com.estafet.learning.stepDefinitions.selenium.bg.lillyDrogerie;
 
 
 import dataProvider.ConfigFile_Lilly_Reader;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -18,6 +20,18 @@ public class BuyProductsLillySteps {
 
     ConfigFile_Lilly_Reader lillyReader;
     PageObjectManager pageObjectManager;
+
+    @Before("@Smoke,@Regression")
+    public void beforeScenario(){
+        System.out.println("New scenario begins");
+    }
+
+    @After("@Smoke,@Regression")
+    public void afterScenario(){
+        System.out.println("Scenario ends");
+
+
+    }
 
     @Given("Browser is open on Lilly")
     public void isBrowserOpen() {
