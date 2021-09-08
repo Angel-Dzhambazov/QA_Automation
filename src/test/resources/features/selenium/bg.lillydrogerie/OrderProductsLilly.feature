@@ -6,13 +6,13 @@ Feature: Login in shop.lillydrogerie.bg and implement two scenarios
     And user successfully logs in
     When user clicks on category <category>
     And user arranges the items by price <order>
-    And user buys the first 2 items
+    And user buys the first 5 items
     Then total price of the order should be <moreOrLess> than <totalPrice>
     And delivery cost should be <deliveryCost>
     And delete all items from shopping cart
 
     Examples:
       | category | order      | moreOrLess | totalPrice | deliveryCost |
-#      | man care | ascending  | less       | 98         | 5.50         |
+      | man care | ascending  | less       | 98         | 5.50         |
       | perfume  | descending | more       | 98         | 0.00         |
 

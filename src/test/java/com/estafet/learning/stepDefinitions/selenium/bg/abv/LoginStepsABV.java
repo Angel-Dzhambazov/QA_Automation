@@ -44,7 +44,6 @@ public class LoginStepsABV {
         cookies.acceptCookies();
     }
 
-
     @When("^user enters (.*) and (.*)$")
     public void enterCredentials(String username, String password) throws InterruptedException {
         Thread.sleep(1000 / 2);
@@ -57,7 +56,6 @@ public class LoginStepsABV {
         login.clickOnLogin();
     }
 
-
     @Then("user is navigated to the home page")
     public void navigateToHomePage() throws InterruptedException {
         home = new HomePageABV(driver);
@@ -65,6 +63,4 @@ public class LoginStepsABV {
         driver.close();
         driver.quit();
     }
-
-
 }
