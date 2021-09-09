@@ -1,7 +1,8 @@
 package com.estafet.learning.stepDefinitions.selenium.bg.lillyDrogerie;
 
 
-import dataProvider.ConfigFile_Lilly_Reader;
+import com.estafet.learning.pages.TakeScreenShot;
+import dataProvider.ConfigFileLillyReader;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
@@ -13,12 +14,13 @@ import managers.PageObjectManager;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.util.concurrent.TimeUnit;
 
 public class BuyProductsLillySteps {
 
-    ConfigFile_Lilly_Reader lillyReader;
+    ConfigFileLillyReader lillyReader;
     PageObjectManager pageObjectManager;
 
     @Before("@Smoke,@Regression")
@@ -36,13 +38,18 @@ public class BuyProductsLillySteps {
     @Given("Browser is open on Lilly")
     public void isBrowserOpen() {
         System.out.println("opening browser on lilly!");
-        lillyReader = new ConfigFile_Lilly_Reader();
+        lillyReader = new ConfigFileLillyReader();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+        options.addArguments("--window-size=1920,1080");
         WebDriverManager.chromedriver().setup();
         WebDriver driver;
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(lillyReader.getImplicitlyWait(), TimeUnit.SECONDS);
         driver.manage().window().maximize();
+        TakeScreenShot.takeSnapShot(driver);
         driver.get(lillyReader.getApplicationUrl());
+        TakeScreenShot.takeSnapShot(driver);
         pageObjectManager = new PageObjectManager(driver);
     }
 

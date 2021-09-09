@@ -9,12 +9,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
-public class ConfigFile_BardBG_Reader {
+public class ConfigFileBardBGReader {
 
     private Properties properties;
     private final String propertyFilePath = "configs//BardBG.properties";
 
-    public ConfigFile_BardBG_Reader() {
+    public ConfigFileBardBGReader() {
         BufferedReader reader;
         try {
             reader = new BufferedReader(new FileReader(propertyFilePath));
@@ -44,7 +44,7 @@ public class ConfigFile_BardBG_Reader {
     }
 
     public String getApplicationUrl() {
-        String url = properties.getProperty("url");
+        String url = properties.getProperty("urlLillyDrogerie");
         if (url != null) return url;
         else throw new RuntimeException("url not specified in the Configuration.properties file.");
     }

@@ -1,14 +1,14 @@
 package managers;
 
-import dataProvider.ConfigFile_Lilly_Reader;
-import dataProvider.ConfigFile_BardBG_Reader;
+import dataProvider.ConfigFileLillyReader;
+import dataProvider.ConfigFileBardBGReader;
 
 public class FileReaderManager {
 
 
     private static final FileReaderManager fileReaderManager = new FileReaderManager();
-    private static ConfigFile_BardBG_Reader configFileReader;
-    private static ConfigFile_Lilly_Reader configLillyFileReader;
+    private static ConfigFileBardBGReader configFileReader;
+    private static ConfigFileLillyReader configLillyFileReader;
 
     private FileReaderManager() {
     }
@@ -17,12 +17,12 @@ public class FileReaderManager {
         return fileReaderManager;
     }
 
-    public ConfigFile_BardBG_Reader getConfig_BardBG_Reader() {
-        return (configFileReader == null) ? new ConfigFile_BardBG_Reader() : configFileReader;
+    public ConfigFileBardBGReader getConfig_BardBG_Reader() {
+        return (configFileReader == null) ? new ConfigFileBardBGReader() : configFileReader;
     }
 
-    public ConfigFile_Lilly_Reader CofigFile_Lilly_Reader() {
-        return (configFileReader == null) ? new ConfigFile_Lilly_Reader() : configLillyFileReader;
+    public ConfigFileLillyReader CofigFile_Lilly_Reader() {
+        return (configFileReader == null) ? new ConfigFileLillyReader() : configLillyFileReader;
     }
 
 }

@@ -6,7 +6,7 @@ Feature: Login in shop.lillydrogerie.bg and implement two scenarios
     And user successfully logs in
     When user clicks on category <category>
     And user arranges the items by price <order>
-    And user buys the first 5 items
+    And user buys the first 4 items
     Then total price of the order should be <moreOrLess> than <totalPrice>
     And delivery cost should be <deliveryCost>
     And delete all items from shopping cart

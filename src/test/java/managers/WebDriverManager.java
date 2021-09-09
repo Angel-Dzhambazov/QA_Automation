@@ -1,6 +1,6 @@
 package managers;
 
-import dataProvider.ConfigFile_BardBG_Reader;
+import dataProvider.ConfigFileBardBGReader;
 import enums.DriverType;
 import enums.EnvironmentType;
 import org.openqa.selenium.WebDriver;
@@ -15,7 +15,7 @@ public class WebDriverManager {
     private static DriverType driverType;
     private static EnvironmentType environmentType;
     private static final String CHROME_DRIVER_PROPERTY = "webdriver.chrome.driver";
-    ConfigFile_BardBG_Reader configFileReader;
+    ConfigFileBardBGReader configFileReader;
 
     public WebDriverManager() {
         driverType = FileReaderManager.getInstance().getConfig_BardBG_Reader().getBrowser();

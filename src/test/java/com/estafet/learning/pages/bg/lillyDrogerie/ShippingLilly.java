@@ -65,7 +65,7 @@ public class ShippingLilly {
 
         double expectedPriceD = Double.parseDouble(expectedPrice);
 
-        Assert.assertEquals("Delivery price is not as expected!", priceForDelivery, expectedPriceD, 0.0);
+        Assert.assertEquals("Delivery price is not as expected!", expectedPriceD, priceForDelivery, 0.0);
     }
 
     public void navigateToHomePage() {

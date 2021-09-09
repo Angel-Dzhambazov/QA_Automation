@@ -6,12 +6,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
-public class ConfigFile_Lilly_Reader {
+public class ConfigFileLillyReader {
 
     private Properties properties;
-    private final String propertyFilePath = "configs//LillyDrogerie.properties";
+    private final String propertyFilePath = "src/test/resources/configs/Configuration.properties";
 
-    public ConfigFile_Lilly_Reader() {
+    public ConfigFileLillyReader() {
         BufferedReader reader;
         try {
             reader = new BufferedReader(new FileReader(propertyFilePath));
@@ -41,7 +41,7 @@ public class ConfigFile_Lilly_Reader {
     }
 
     public String getApplicationUrl() {
-        String url = properties.getProperty("url");
+        String url = properties.getProperty("urlLillyDrogerie");
         if (url != null) return url;
         else throw new RuntimeException("url not specified in the Configuration.properties file.");
     }

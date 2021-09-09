@@ -2,7 +2,7 @@ package com.estafet.learning.stepDefinitions.selenium.bg.bard;
 
 import com.estafet.learning.pages.bg.bard.HomePageBard;
 import com.estafet.learning.pages.bg.bard.RegisterPageBard;
-import dataProvider.ConfigFile_BardBG_Reader;
+import dataProvider.ConfigFileBardBGReader;
 
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
@@ -22,11 +22,11 @@ public class RegisterUserBardBGSteps {
     HomePageBard home;
     RegisterPageBard register;
 
-    ConfigFile_BardBG_Reader configFileReader;
+    ConfigFileBardBGReader configFileReader;
 
     @Given("Browser is open on Bard")
     public void isBrowserOpen() {
-        configFileReader = new ConfigFile_BardBG_Reader();
+        configFileReader = new ConfigFileBardBGReader();
 
         WebDriverManager.chromedriver().browserVersion(configFileReader.getBrowserVersion()).setup();
 
