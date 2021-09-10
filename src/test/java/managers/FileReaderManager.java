@@ -1,19 +1,31 @@
 package managers;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import dataProvider.ConfigFileLillyReader;
 import dataProvider.ConfigFileBardBGReader;
 
+import java.util.Properties;
+
 public class FileReaderManager {
+    private static final Logger LOGGER = LogManager.getLogger(FileReaderManager.class);
 
-
-    private static final FileReaderManager fileReaderManager = new FileReaderManager();
+    private static FileReaderManager fileReaderManager;
     private static ConfigFileBardBGReader configFileReader;
     private static ConfigFileLillyReader configLillyFileReader;
+    private Properties properties;
+    private final String propertyFilePath = "src/test/resources/configs/Configuration.properties";
 
-    private FileReaderManager() {
-    }
 
     public static FileReaderManager getInstance() {
+        if (fileReaderManager == null) {
+            synchronized (FileReaderManager.class) {
+                if (fileReaderManager == null) {
+                    fileReaderManager = new FileReaderManager();
+                }
+            }
+        }
         return fileReaderManager;
     }
 
@@ -22,7 +34,7 @@ public class FileReaderManager {
     }
 
     public ConfigFileLillyReader CofigFile_Lilly_Reader() {
-        return (configFileReader == null) ? new ConfigFileLillyReader() : configLillyFileReader;
+        return (configLillyFileReader == null) ? new ConfigFileLillyReader() : configLillyFileReader;
     }
 
 }

@@ -14,5 +14,5 @@ Feature: Login in shop.lillydrogerie.bg and implement two scenarios
     Examples:
       | category | order      | moreOrLess | totalPrice | deliveryCost |
       | man care | ascending  | less       | 98         | 5.50         |
-      | perfume  | descending | more       | 98         | 0.00         |
+#      | perfume  | descending | more       | 98         | 0.00         |
 
