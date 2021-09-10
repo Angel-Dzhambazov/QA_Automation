@@ -24,7 +24,7 @@ public class RestSteps {
 
     @Given("the user creates a new record in database")
     public void postNewEmployee() {
-        response=  manager.getBaseEmployees().createNewEmployee(new EmployeePojo());
+        response = manager.getBaseEmployees().createNewEmployee(new EmployeePojo());
     }
 
     @Given("the user gets random employee data")
