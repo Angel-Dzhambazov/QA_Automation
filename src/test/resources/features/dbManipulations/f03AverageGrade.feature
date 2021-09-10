@@ -1,10 +1,6 @@
 @sprint3
 Feature: 03) Calculate average grades in given subject
 
-#  This table is created manually as per instructions
-#  Background: Initial check for successful generation of data tables.
-#    Given Successful generation of table "grades";
-
   @grades
   Scenario: Fill 15 grades into grades datatable
     Given Table "grades" is created

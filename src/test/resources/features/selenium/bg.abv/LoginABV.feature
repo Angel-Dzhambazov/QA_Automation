@@ -1,6 +1,4 @@
 Feature:  Test login functionality
-#  user: estafet.234.sba@abv.bg
-#  pass: Estafete#1
 
   Scenario Outline: Log in into abv.bg webMail
     Given Browser is open
@@ -13,3 +11,6 @@ Feature:  Test login functionality
       | username               | password   |
       | estafet.234.sba@abv.bg | Estafete#1 |
 #      | estafet.234.sba@abv.bg | Estafete#1 |
+
+  #  user: estafet.234.sba@abv.bg
+#  pass: Estafete#1

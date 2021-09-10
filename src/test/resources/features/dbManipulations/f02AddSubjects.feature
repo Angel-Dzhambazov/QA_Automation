@@ -1,11 +1,6 @@
 @sprint3
 Feature: 02) Insert entries into table `subjects`
 
-#  This table is created manually as per instructions
-#  Background: Initial check for successful generation of data tables.
-#    Given Successful generation of table "subjects";
-
-
   @subjects
   Scenario: Adding 5 subjects into table "testdatabase.subjects"
     Given Table "subjects" is created
