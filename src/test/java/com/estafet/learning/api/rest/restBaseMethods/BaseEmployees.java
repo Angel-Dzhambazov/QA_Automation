@@ -41,7 +41,16 @@ public class BaseEmployees extends BaseConnection {
                 .get(Endpoints.EMPLOYEE + "/" + dataGenerator.getRandomInt(1, 25));
     }
 
-    public boolean areTheseTwoNames(String employeeNames) {
+    public boolean areTheseTwoNames(String responseString) {
+        String initialSubtractStringIndexStart = "employee_name"; //start of names
+        String initialSubtractStringIndexEnd = "employee_salary"; //end of names
+        String employeeNames = responseString.substring(responseString.indexOf(initialSubtractStringIndexStart),
+                responseString.indexOf(initialSubtractStringIndexEnd));
+
+        String secondSubstringStart = "\":\"";
+        String secondSubstringEnd = "\",\"";
+        employeeNames = employeeNames
+                .substring(employeeNames.indexOf(secondSubstringStart) + 3, employeeNames.indexOf(secondSubstringEnd));
         String[] names = employeeNames.split("//s+");
         if (names[0].matches("[A-Z][a-z]*") && names[1].matches("[A-Z][a-z]*")) {
             return true;
@@ -57,12 +66,11 @@ public class BaseEmployees extends BaseConnection {
                 .delete(Endpoints.DELETE + "/" + dataGenerator.getRandomInt(1, 25));
     }
 
-    public void updateSalary(String id, String employeeBody) {
+    public void updateSalary(String id, String bodyAsString) {
 
-        String employeeBody1 = employeeBody.substring(0, employeeBody.indexOf("\"employee_salary\":") + 18);
-        String employeeBody2 = employeeBody
-                .substring(employeeBody.indexOf(",\"employee_age\""));
-        String updatedBody = "{" + employeeBody1 + dataGenerator.getRandomInt(1000, 100000) + employeeBody2 + "}";
+        String employeeBody = getEmployeeBody(bodyAsString);
+
+        String updatedBody = updateSalaryInBody(employeeBody);
 
         publicRequest();
         given()
@@ -72,5 +80,17 @@ public class BaseEmployees extends BaseConnection {
                 .put(Endpoints.UPDATE + "/" + id)
                 .then()
                 .statusCode(HttpStatus.SC_OK);
+    }
+
+    private String updateSalaryInBody(String employeeBody) {
+        String employeeBody1 = employeeBody.substring(0, employeeBody.indexOf("\"employee_salary\":") + 18);
+        String employeeBody2 = employeeBody
+                .substring(employeeBody.indexOf(",\"employee_age\""));
+        return "{" + employeeBody1 + dataGenerator.getRandomInt(1000, 100000) + employeeBody2 + "}";
+    }
+
+    private String getEmployeeBody(String bodyAsString) {
+        return bodyAsString
+                .substring(bodyAsString.indexOf("\"employee_name\":"), bodyAsString.indexOf(",\"profile_image\""));
     }
 }

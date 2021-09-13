@@ -37,20 +37,8 @@ public class RestSteps {
     }
 
     @Then("confirm employee has name and surname")
-    public void getEmployeeNames() {
-        String initialSubtractStringIndexStart = "employee_name"; //start of names
-        String initialSubtractStringIndexEnd = "employee_salary"; //end of names
-
-        String responseString = response.body().asString();
-        String employeeNames = responseString.substring(responseString.indexOf(initialSubtractStringIndexStart),
-                responseString.indexOf(initialSubtractStringIndexEnd));
-
-        String secondSubstringStart = "\":\"";
-        String secondSubstringEnd = "\",\"";
-        employeeNames = employeeNames
-                .substring(employeeNames.indexOf(secondSubstringStart) + 3, employeeNames.indexOf(secondSubstringEnd));
-
-        boolean result = manager.getBaseEmployees().areTheseTwoNames(employeeNames);
+    public void confirmEmployeeNames() {
+        boolean result = manager.getBaseEmployees().areTheseTwoNames(response.body().asString());
         Assert.assertTrue("Generated names were not in pattern!", result);
     }
 
@@ -67,15 +55,7 @@ public class RestSteps {
     @Then("user updates employee's salary")
     public void updateSalary() {
         String id = getEmployeeID();
-        String employeeBody = getEmployeeBody();
-        manager.getBaseEmployees().updateSalary(id, employeeBody);
-    }
-
-    private String getEmployeeBody() {
-        String bodyAsString = response.body().asString();
-        String employeeBody = bodyAsString
-                .substring(bodyAsString.indexOf("\"employee_name\":"), bodyAsString.indexOf(",\"profile_image\""));
-        return employeeBody;
+        manager.getBaseEmployees().updateSalary(id, response.body().asString());
     }
 
     private String getEmployeeID() {
