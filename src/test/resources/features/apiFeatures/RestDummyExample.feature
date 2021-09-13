@@ -1,6 +1,5 @@
 @rest
 Feature: Rest tests
-
   @DummyApiExample
   Scenario: POST Create new record in database (employee)
     Given the user creates a new record in database
