@@ -36,11 +36,6 @@ public class RestSteps {
         Assert.assertEquals("Status code is not as expected", expectedCode, response.getStatusCode());
     }
 
-    @Then("verify that the record has been {string} added.")
-    public void verifyThatTheRecordHasBeenAdded(String status) {
-        Assert.assertTrue("Creation of record was not successful!", response.body().asString().contains(status));
-    }
-
     @Then("confirm employee has name and surname")
     public void getEmployeeNames() {
         String initialSubtractStringIndexStart = "employee_name"; //start of names
@@ -57,5 +52,35 @@ public class RestSteps {
 
         boolean result = manager.getBaseEmployees().areTheseTwoNames(employeeNames);
         Assert.assertTrue("Generated names were not in pattern!", result);
+    }
+
+    @Given("user deletes random employee")
+    public void deleteRandomEmployee() {
+        response = manager.getBaseEmployees().deleteRandomEmployeeInformation();
+    }
+
+    @Then("verify return message is {string}")
+    public void verifyReturnMessage(String expectedMessage) {
+        Assert.assertTrue("Message is not as expected!", response.body().asString().contains(expectedMessage));
+    }
+
+    @Then("user updates employee's salary")
+    public void updateSalary() {
+        String id = getEmployeeID();
+        String employeeBody = getEmployeeBody();
+        manager.getBaseEmployees().updateSalary(id, employeeBody);
+    }
+
+    private String getEmployeeBody() {
+        String bodyAsString = response.body().asString();
+        String employeeBody = bodyAsString
+                .substring(bodyAsString.indexOf("\"employee_name\":"), bodyAsString.indexOf(",\"profile_image\""));
+        return employeeBody;
+    }
+
+    private String getEmployeeID() {
+        String responseString = response.body().asString();
+        return responseString.substring(responseString.indexOf("\"id\":") + 5, responseString
+                .indexOf(",\"employee_name\""));
     }
 }

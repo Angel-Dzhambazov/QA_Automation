@@ -7,6 +7,7 @@ import com.estafet.learning.api.rest.restUtils.Endpoints;
 import io.restassured.http.ContentType;
 import io.restassured.mapper.ObjectMapperType;
 import io.restassured.response.Response;
+import org.apache.http.HttpStatus;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -47,5 +48,29 @@ public class BaseEmployees extends BaseConnection {
         } else {
             return true;
         }
+    }
+
+    public Response deleteRandomEmployeeInformation() {
+        publicRequest();
+        return given()
+                .when()
+                .delete(Endpoints.DELETE + "/" + dataGenerator.getRandomInt(1, 25));
+    }
+
+    public void updateSalary(String id, String employeeBody) {
+
+        String employeeBody1 = employeeBody.substring(0, employeeBody.indexOf("\"employee_salary\":") + 18);
+        String employeeBody2 = employeeBody
+                .substring(employeeBody.indexOf(",\"employee_age\""));
+        String updatedBody = "{" + employeeBody1 + dataGenerator.getRandomInt(1000, 100000) + employeeBody2 + "}";
+
+        publicRequest();
+        given()
+                .contentType(ContentType.JSON)
+                .body(updatedBody)
+                .when()
+                .put(Endpoints.UPDATE + "/" + id)
+                .then()
+                .statusCode(HttpStatus.SC_OK);
     }
 }
