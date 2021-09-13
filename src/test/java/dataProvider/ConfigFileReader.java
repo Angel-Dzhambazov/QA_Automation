@@ -90,4 +90,10 @@ public class ConfigFileReader {
         if (address != null) return address;
         else throw new RuntimeException("URI not specified in the Configuration.properties file.");
     }
+
+    public String getSoapURL() {
+        String address = properties.getProperty("soapCalculatorWSDL");
+        if (address != null) return address;
+        else throw new RuntimeException("URI not specified in the Configuration.properties file.");
+    }
 }
