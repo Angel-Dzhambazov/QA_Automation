@@ -4,8 +4,7 @@ Feature: Rest tests
   @DummyApiExample
   Scenario: POST Create new record in database (employee)
     Given the user creates a new record in database
-    Then verify status of get request is 200
-
+    Then verify that the record has been "Successfully" added.
 
   @DummyApiExample
   Scenario: GET Get all employee data
@@ -15,6 +14,7 @@ Feature: Rest tests
   @DummyApiExample
   Scenario: GET Get a single employee data
     Given the user gets random employee data
+    Then confirm employee has name and surname
 
   @DummyApiExample
   Scenario: Update an employee record

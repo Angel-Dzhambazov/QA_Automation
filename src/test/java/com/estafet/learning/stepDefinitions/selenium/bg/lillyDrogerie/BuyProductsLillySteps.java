@@ -2,7 +2,7 @@ package com.estafet.learning.stepDefinitions.selenium.bg.lillyDrogerie;
 
 
 import com.estafet.learning.pages.TakeScreenShot;
-import dataProvider.ConfigFileLillyReader;
+import dataProvider.ConfigFileReader;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 
 public class BuyProductsLillySteps {
 
-    ConfigFileLillyReader lillyReader;
+    ConfigFileReader configFileReader;
     PageObjectManager pageObjectManager;
 
     @Before("@Smoke,@Regression")
@@ -38,17 +38,17 @@ public class BuyProductsLillySteps {
     @Given("Browser is open on Lilly")
     public void isBrowserOpen() {
         System.out.println("opening browser on lilly!");
-        lillyReader = new ConfigFileLillyReader();
+        configFileReader = new ConfigFileReader();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
         options.addArguments("--window-size=1920,1080");
         WebDriverManager.chromedriver().setup();
         WebDriver driver;
         driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(lillyReader.getImplicitlyWait(), TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(configFileReader.getImplicitlyWait(), TimeUnit.SECONDS);
         driver.manage().window().maximize();
         TakeScreenShot.takeSnapShot(driver);
-        driver.get(lillyReader.getApplicationUrl());
+        driver.get(configFileReader.getLillyApplicationUrl());
         TakeScreenShot.takeSnapShot(driver);
         pageObjectManager = new PageObjectManager(driver);
     }
@@ -122,9 +122,9 @@ public class BuyProductsLillySteps {
                 break;
         }
         pageObjectManager.getShoppingCartPage().finishOrder();
-        pageObjectManager.getShippingPage().enterPhone(lillyReader.getPhoneNumber());
-        pageObjectManager.getShippingPage().enterTown(lillyReader.getTown());
-        pageObjectManager.getShippingPage().enterAddress(lillyReader.getAddress());
+        pageObjectManager.getShippingPage().enterPhone(configFileReader.getPhoneNumber());
+        pageObjectManager.getShippingPage().enterTown(configFileReader.getTown());
+        pageObjectManager.getShippingPage().enterAddress(configFileReader.getAddress());
     }
 
     @And("^delivery cost should be (.*)$")

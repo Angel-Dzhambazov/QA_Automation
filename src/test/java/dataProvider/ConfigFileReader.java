@@ -6,12 +6,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
-public class ConfigFileLillyReader {
+public class ConfigFileReader {
 
     private Properties properties;
     private final String propertyFilePath = "src/test/resources/configs/Configuration.properties";
 
-    public ConfigFileLillyReader() {
+    public ConfigFileReader() {
         BufferedReader reader;
         try {
             reader = new BufferedReader(new FileReader(propertyFilePath));
@@ -40,7 +40,7 @@ public class ConfigFileLillyReader {
         else throw new RuntimeException("implicitlyWait not specified in the Configuration.properties file.");
     }
 
-    public String getApplicationUrl() {
+    public String getLillyApplicationUrl() {
         String url = properties.getProperty("urlLillyDrogerie");
         if (url != null) return url;
         else throw new RuntimeException("url not specified in the Configuration.properties file.");
@@ -83,5 +83,11 @@ public class ConfigFileLillyReader {
         String address = properties.getProperty("address");
         if (address != null) return address;
         else throw new RuntimeException("address not specified in the Configuration.properties file.");
+    }
+
+    public String getRestDummyApiURI() {
+        String address = properties.getProperty("dummyRestExampleURI");
+        if (address != null) return address;
+        else throw new RuntimeException("URI not specified in the Configuration.properties file.");
     }
 }

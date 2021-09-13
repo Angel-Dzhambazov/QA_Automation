@@ -23,9 +23,9 @@ public class LoginPageLilly {
 
 
     public void enterCredentials() throws InterruptedException {
-        txtUsername.sendKeys(FileReaderManager.getInstance().CofigFile_Lilly_Reader().getUsername());
+        txtUsername.sendKeys(FileReaderManager.getInstance().configFileReader().getUsername());
         Thread.sleep(1000);
-        txtPassword.sendKeys(FileReaderManager.getInstance().CofigFile_Lilly_Reader().getPassword());
+        txtPassword.sendKeys(FileReaderManager.getInstance().configFileReader().getPassword());
         Thread.sleep(1000);
     }
 

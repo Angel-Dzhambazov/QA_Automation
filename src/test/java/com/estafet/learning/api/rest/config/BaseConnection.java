@@ -3,9 +3,9 @@ package com.estafet.learning.api.rest.config;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
+import managers.FileReaderManager;
 
 import java.net.URI;
-
 
 import static io.restassured.RestAssured.requestSpecification;
 import static io.restassured.RestAssured.reset;
@@ -14,11 +14,9 @@ import static com.estafet.learning.api.utilsAPI.RequestResponseListener.requestL
 import static com.estafet.learning.api.utilsAPI.RequestResponseListener.responseLoggingFilter;
 
 public class BaseConnection {
-    private URI baseUrl;
 
     public void publicRequest() {
-//        baseUrl = URI.create(PropertyFileReader.getInstance("api.properties").getProperty("API_GATEWAY"));
-        baseUrl = URI.create("http://dummy.restapiexample.com/api/v1");
+        URI baseUrl = URI.create(FileReaderManager.getInstance().configFileReader().getRestDummyApiURI());
         reset();
         requestSpecification = new RequestSpecBuilder()
                 .setBaseUri(baseUrl.toString())

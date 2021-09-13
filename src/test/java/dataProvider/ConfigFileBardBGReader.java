@@ -12,7 +12,7 @@ import java.util.Properties;
 public class ConfigFileBardBGReader {
 
     private Properties properties;
-    private final String propertyFilePath = "configs//BardBG.properties";
+    private final String propertyFilePath = "confis//BardBG.properties";
 
     public ConfigFileBardBGReader() {
         BufferedReader reader;
@@ -69,5 +69,4 @@ public class ConfigFileBardBGReader {
         if(windowSize != null) return Boolean.valueOf(windowSize);
         return true;
     }
-
 }

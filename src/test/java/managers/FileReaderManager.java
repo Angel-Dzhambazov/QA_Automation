@@ -3,7 +3,7 @@ package managers;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import dataProvider.ConfigFileLillyReader;
+import dataProvider.ConfigFileReader;
 import dataProvider.ConfigFileBardBGReader;
 
 import java.util.Properties;
@@ -13,7 +13,7 @@ public class FileReaderManager {
 
     private static FileReaderManager fileReaderManager;
     private static ConfigFileBardBGReader configFileReader;
-    private static ConfigFileLillyReader configLillyFileReader;
+    private static ConfigFileReader configLillyFileReader;
     private Properties properties;
     private final String propertyFilePath = "src/test/resources/configs/Configuration.properties";
 
@@ -22,6 +22,7 @@ public class FileReaderManager {
         if (fileReaderManager == null) {
             synchronized (FileReaderManager.class) {
                 if (fileReaderManager == null) {
+                    LOGGER.debug("Creating an instance of FileReaderManager");
                     fileReaderManager = new FileReaderManager();
                 }
             }
@@ -33,8 +34,8 @@ public class FileReaderManager {
         return (configFileReader == null) ? new ConfigFileBardBGReader() : configFileReader;
     }
 
-    public ConfigFileLillyReader CofigFile_Lilly_Reader() {
-        return (configLillyFileReader == null) ? new ConfigFileLillyReader() : configLillyFileReader;
+    public ConfigFileReader configFileReader() {
+        return (configLillyFileReader == null) ? new ConfigFileReader() : configLillyFileReader;
     }
 
 }
