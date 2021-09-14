@@ -10,13 +10,14 @@ import static java.lang.String.format;
 public class BaseCalculator extends BaseSoap {
     private static final Logger LOGGER = LogManager.getLogger(BaseCalculator.class);
 
-    public int calculate(String action, int intA, int intB) {
+    public int calculate(String function, int intA, int intB) {
         String calculatorURL = FileReaderManager.getInstance().configFileReader().getSoapURL();
-        String soapBody = generateEnvelope(action, intA, intB);
-          return Integer.parseInt(sendSoapEnvelope(calculatorURL, soapBody).xmlPath().getString(format("Envelope.Body.%sResponse.%sResult", action, action)));
+        String soapBody = generateEnvelope(function, intA, intB);
+        return Integer.parseInt(sendSoapEnvelope(calculatorURL, soapBody).xmlPath()
+                .getString(format("Envelope.Body.%sResponse.%sResult", function, function)));
     }
 
-    private String generateEnvelope(String action, int intA, int intB) {
+    private String generateEnvelope(String function, int intA, int intB) {
         String result = String.format(
                 "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:tem=\"http://tempuri.org/\">\n" +
                         "   <soapenv:Header/>\n" +
@@ -26,7 +27,7 @@ public class BaseCalculator extends BaseSoap {
                         "         <tem:intB>%d</tem:intB>\n" +
                         "      </tem:%s>\n" +
                         "   </soapenv:Body>\n" +
-                        "</soapenv:Envelope>", action, intA, intB, action);
+                        "</soapenv:Envelope>", function, intA, intB, function);
         LOGGER.debug("soap body:");
         LOGGER.debug(result);
         return result;
