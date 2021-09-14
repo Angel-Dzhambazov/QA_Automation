@@ -63,4 +63,15 @@ public class RestSteps {
         return responseString.substring(responseString.indexOf("\"id\":") + 5, responseString
                 .indexOf(",\"employee_name\""));
     }
+
+    @Given("the user gets non-existing employee data")
+    public void getNoneExistingEntry() {
+        response = manager.getBaseEmployees().getRandomNonExistingEmployeeInformation();
+    }
+
+
+    @Given("the user tries to create already existing entry")
+    public void createExistingEmployee() {
+        response = manager.getBaseEmployees().postExistingEmployee();
+    }
 }

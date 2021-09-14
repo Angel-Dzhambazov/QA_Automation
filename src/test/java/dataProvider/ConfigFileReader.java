@@ -96,4 +96,10 @@ public class ConfigFileReader {
         if (address != null) return address;
         else throw new RuntimeException("URI not specified in the Configuration.properties file.");
     }
+
+    public String getExistingEmployee() {
+        String address = properties.getProperty("existingDummyEmployee");
+        if (address != null) return address;
+        else throw new RuntimeException("existingDummyEmployee not specified in the Configuration.properties file.");
+    }
 }

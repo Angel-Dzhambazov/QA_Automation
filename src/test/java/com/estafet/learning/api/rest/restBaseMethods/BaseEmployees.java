@@ -7,6 +7,7 @@ import com.estafet.learning.api.rest.restUtils.Endpoints;
 import io.restassured.http.ContentType;
 import io.restassured.mapper.ObjectMapperType;
 import io.restassured.response.Response;
+import managers.FileReaderManager;
 import org.apache.http.HttpStatus;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -92,5 +93,22 @@ public class BaseEmployees extends BaseConnection {
     private String getEmployeeBody(String bodyAsString) {
         return bodyAsString
                 .substring(bodyAsString.indexOf("\"employee_name\":"), bodyAsString.indexOf(",\"profile_image\""));
+    }
+
+    public Response getRandomNonExistingEmployeeInformation() {
+        publicRequest();
+        return given()
+                .when()
+                .get(Endpoints.EMPLOYEE + "/" + dataGenerator.getRandomInt(125, 250));
+    }
+
+    public Response postExistingEmployee() {
+        String employee = FileReaderManager.getInstance().configFileReader().getExistingEmployee();
+        publicRequest();
+        return given()
+                .contentType(ContentType.JSON)
+                .body(employee)
+                .when()
+                .post(Endpoints.CREATE);
     }
 }
