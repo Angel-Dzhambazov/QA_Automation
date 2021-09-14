@@ -28,7 +28,7 @@ public class BaseSoap {
                 .build();
     }
 
-    public Response baseSoap(String soapUrl, String soapBody) {
+    public Response sendSoapEnvelope(String soapUrl, String soapBody) {
         soapRequest(soapUrl);
         return given()
                 .contentType("text/xml;charset=UTF-8;")

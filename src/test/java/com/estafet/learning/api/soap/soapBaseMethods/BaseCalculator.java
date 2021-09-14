@@ -13,8 +13,7 @@ public class BaseCalculator extends BaseSoap {
     public int calculate(String action, int intA, int intB) {
         String calculatorURL = FileReaderManager.getInstance().configFileReader().getSoapURL();
         String soapBody = generateEnvelope(action, intA, intB);
-
-        return Integer.parseInt(baseSoap(calculatorURL, soapBody).xmlPath().getString(format("Envelope.Body.%sResponse.%sResult", action, action)));
+          return Integer.parseInt(sendSoapEnvelope(calculatorURL, soapBody).xmlPath().getString(format("Envelope.Body.%sResponse.%sResult", action, action)));
     }
 
     private String generateEnvelope(String action, int intA, int intB) {

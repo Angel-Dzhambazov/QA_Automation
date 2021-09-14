@@ -41,6 +41,7 @@ public class OrderTest {
         String expected = readLineByLine(filePath);
         String actual = testOrder.toString();
         boolean isToStringAsExpected = expected.equals(actual);
+        log.config("isToStringAsExpected = " + isToStringAsExpected);
         assertTrue("toString method is not as expected!", isToStringAsExpected);
 
         //log.info(testOrder.getItemPrice().toString());
