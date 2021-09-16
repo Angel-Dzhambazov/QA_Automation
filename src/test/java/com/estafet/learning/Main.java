@@ -1,39 +1,38 @@
 package com.estafet.learning;
 
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindAll;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
-import org.openqa.selenium.support.How;
 
-import java.util.List;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class Main {
 
-    @FindBy(how = How.CLASS_NAME, using = "classname")
-    private static List<WebElement> singlecriterion;
-
-    @FindBy(className = "classname")
-    private static List<WebElement> sameAsTop;
-
-    @FindBy(how = How.ID, using = "elementid")
-    private static WebElement element;
-
-    @FindBys({
-            @FindBy(how = How.NAME, using = "username"),
-            @FindBy(how = How.NAME, using = "password")
-    })
-    private static List<WebElement> bothcriteria;
-
-    @FindAll({
-            @FindBy(how = How.NAME, using = "username"),
-            @FindBy(how = How.NAME, using = "password")
-    })
-    private static List<WebElement> eithercriterion;
-
     public static void main(String[] args) {
-        System.out.println("Using @FindBy, we found " + singlecriterion.size() + " element(s)");
-        System.out.println("Using @FindBys, we found " + bothcriteria.size() + " element(s)");
-        System.out.println("Using @FindAll, we found " + eithercriterion.size() + " element(s)");
+        System.out.println("we are here 13");
+        try {
+//step1 load the driver class
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+
+//step2 create  the connection object
+            Connection con = DriverManager.getConnection(
+                    "jdbc:oracle:thin:@localhost:1521:xe", "SYS", "secret");
+
+//step3 create the statement object
+            Statement stmt = con.createStatement();
+
+//step4 execute query
+            ResultSet rs = stmt.executeQuery("select * from INITIAL_TEST_TABLE");
+            while (rs.next())
+                System.out.println(rs.getInt(1) + "  " + rs.getString(2) + "  " + rs.getString(3));
+
+//step5 close the connection object
+            con.close();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        System.out.println("we are here 36");
+
     }
 }

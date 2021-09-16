@@ -12,9 +12,8 @@ public class Helper {
 
     public static void printResultSet(ResultSet rs) throws SQLException {
         // Prepare metadata object and get the number of columns.
-        ResultSetMetaData rsmd = null;
 
-        rsmd = rs.getMetaData();
+        ResultSetMetaData rsmd = rs.getMetaData();
 
         StringBuilder sb = new StringBuilder();
 
