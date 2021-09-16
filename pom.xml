@@ -147,6 +147,11 @@
             <version>5.2.1</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.oracle.database.jdbc</groupId>
+            <artifactId>ojdbc5</artifactId>
+            <version>11.2.0.4</version>
+        </dependency>
 
     </dependencies>
 
