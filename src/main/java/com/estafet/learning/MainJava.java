@@ -5,6 +5,7 @@ import java.sql.*;
 
 public class MainJava {
     private static String dynamicText = "";
+
     public static void main(String[] args) {
         System.out.println("we are here 13");
         try {
@@ -20,6 +21,10 @@ public class MainJava {
 
 
 //step2 create  the connection object
+            String oracleUsername = "moroncho";
+            String oraclePassword = "moroncho";
+            String oracleSysAsSYSDBA = "SYS AS SYSDBA";
+            String oracleDefaultPass = "secret";
             Connection con = DriverManager.getConnection(
                     "jdbc:oracle:thin:@localhost:1521:xe", "SYS AS SYSDBA", "secret");
 
