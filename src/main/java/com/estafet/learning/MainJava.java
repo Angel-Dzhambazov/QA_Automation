@@ -1,93 +1,55 @@
 package com.estafet.learning;
 
-import java.sql.*;
+import com.github.javafaker.Faker;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 
 public class MainJava {
     private static String dynamicText = "";
+    private static Faker faker = new Faker();
 
     public static void main(String[] args) {
-        System.out.println("we are here 13");
-        try {
+
+        Faker faker = new Faker();
+        Date customDate = faker.date().birthday(0, 1);
 
 
-//step1 load the driver class
+        String pattern = "yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 
+        String date = simpleDateFormat.format(customDate);
+        System.out.println(date);
 
-            String driverName = "oracle.jdbc.driver.OracleDriver";
-            Class.forName(driverName).newInstance();
-            String nameForConnect = "sys as sysdba";
-            String pass = "secret";
-
-
-//step2 create  the connection object
-            String oracleUsername = "moroncho";
-            String oraclePassword = "moroncho";
-            String oracleSysAsSYSDBA = "SYS AS SYSDBA";
-            String oracleDefaultPass = "secret";
-            Connection con = DriverManager.getConnection(
-                    "jdbc:oracle:thin:@localhost:1521:xe", "SYS AS SYSDBA", "secret");
-
-//            String url = "jdbc:oracle:thin:@192.168.0.1:1521:ORCL";
-//            Connection conn = DriverManager.getConnection(url, nameForConnect, pass);
-
-//step3 create the statement object
-            Statement stmt = con.createStatement();
-
-//step4 execute query
-            ResultSet rs = stmt.executeQuery("select * from INITIAL_TEST_TABLE");
-            printResultSet(rs);
-
-            while (rs.next())
-                System.out.println(rs.getInt(1) + "  " + rs.getString(2) + "  " + rs.getString(3));
-
-//step5 close the connection object
-            con.close();
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        System.out.println("we are here 36");
 
     }
 
-    private static void printResultSet(ResultSet rs) throws SQLException {
-        ResultSetMetaData rsmd = rs.getMetaData();
-
-        StringBuilder sb = new StringBuilder();
-
-        int columnsNumber = rsmd.getColumnCount();
-
-        for (int i = 1; i <= columnsNumber; i++) {
-            sb.append(" |"); // appending a divider between column names
-            sb.append(rsmd.getColumnName(i)); //printing column name
-        }
-        //new line after finishing all elements in resultSet row. (i.e. system line separator)
-        sb.append(System.lineSeparator());
-
-        //System.out.println("");
-
-        int rowsSelected = 0; //counting rows in resultSet
-        while (rs.next()) {
-            rowsSelected++;
-            for (int i = 1; i <= columnsNumber; i++) {
-
-                if (i > 1) sb.append(" | ");
-                sb.append(rs.getString(i));
-            }
-            sb.append(System.lineSeparator());
-        }
-        if (rowsSelected > 0) {
-            StringBuilder preBuilder = new StringBuilder();
-
-            preBuilder.append("The database table looks like this: ");
-            preBuilder.append(System.lineSeparator());
-            preBuilder.append("Total rows in current ResultSet = " + rowsSelected);
-            preBuilder.append(System.lineSeparator());
-            preBuilder.append(sb);
-            System.out.println(preBuilder);
-        } else {
-            System.out.println("No records returned");
-        }
+    public Date past(int atMost, TimeUnit unit) {
+        Date now = new Date();
+        Date aBitEarlierThanNow = new Date(now.getTime() - 1000);
+        return past(atMost, unit, aBitEarlierThanNow);
     }
+
+    public Date past(int atMost, int minimum, TimeUnit unit) {
+        Date now = new Date();
+        Date minimumDate = new Date(now.getTime() - unit.toMillis(minimum));
+        return past(atMost - minimum, unit, minimumDate);
+    }
+
+    public Date past(int atMost, TimeUnit unit, Date referenceDate) {
+        long upperBound = unit.toMillis(atMost);
+
+        long futureMillis = referenceDate.getTime();
+        futureMillis -= 1 + faker.random().nextLong(upperBound - 1);
+
+        return new Date(futureMillis);
+    }
+
 }

@@ -1,0 +1,69 @@
+package com.estafet.learning.jdbc.service;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
+
+public class ConfigFileManager {
+    private static final Logger LOGGER = LogManager.getLogger(ConfigFileManager.class);
+
+    private static ConfigFileManager configFileManager;
+    private Properties properties;
+    private final String propertyFilePath = "src/main/java/com/estafet/learning/resources/configuration.properties";
+
+
+    public static ConfigFileManager getInstance() {
+        if (configFileManager == null) {
+            synchronized (ConfigFileManager.class) {
+                if (configFileManager == null) {
+                    LOGGER.debug("Creating an instance of FileReaderManager");
+                    configFileManager = new ConfigFileManager();
+                }
+            }
+        }
+        return configFileManager;
+    }
+
+    public String getMysqlJDBC() {
+        String mysqlJDBC = getProperties().getProperty("mysqlJDBC");
+        if (mysqlJDBC != null) return mysqlJDBC;
+        else throw new RuntimeException("mysqlJDBC not specified in the configuration.properties file.");
+    }
+
+    public String getMysqlUser() {
+        String mysqlUser = getProperties().getProperty("mysqlUser");
+        if (mysqlUser != null) return mysqlUser;
+        else throw new RuntimeException("mysqlUser not specified in the configuration.properties file.");
+    }
+
+    public String getMysqlPassword() {
+        String mysqlPassword = getProperties().getProperty("mysqlPassword");
+        if (mysqlPassword != null) return mysqlPassword;
+        else throw new RuntimeException("mysqlPassword not specified in the configuration.properties file.");
+    }
+
+    private Properties getProperties() {
+        if (properties == null) {
+            BufferedReader reader;
+            try {
+                reader = new BufferedReader(new FileReader(propertyFilePath));
+                properties = new Properties();
+                try {
+                    properties.load(reader);
+                    reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                throw new RuntimeException("Configuration.properties not found at " + propertyFilePath);
+            }
+        }
+        return properties;
+    }
+}
