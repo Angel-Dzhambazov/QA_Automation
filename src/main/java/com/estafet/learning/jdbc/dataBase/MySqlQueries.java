@@ -78,6 +78,8 @@ public interface MySqlQueries {
             "    LastUpdatedTS Timestamp(3)\n" +
             "  );";
 
+
+    /*
     default Connection setConnection(String jdbcURL, String username, String password) {
         try {
             return DriverManager.getConnection(jdbcURL, username, password);
@@ -86,6 +88,8 @@ public interface MySqlQueries {
         }
         return null;
     }
+
+     */
 
     public default String getCreateQuery(String tableName) {
         switch (tableName) {

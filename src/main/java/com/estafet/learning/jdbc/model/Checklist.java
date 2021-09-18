@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 public class Checklist {
+    private int id;
     private String name;
     private Double cost;
     private String initiatedOn;

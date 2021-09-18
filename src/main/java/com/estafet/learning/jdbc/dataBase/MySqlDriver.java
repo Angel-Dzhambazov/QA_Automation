@@ -4,13 +4,14 @@ import com.estafet.learning.jdbc.model.Checklist;
 import com.estafet.learning.jdbc.model.Customer;
 import com.estafet.learning.jdbc.model.Product;
 import com.estafet.learning.jdbc.service.ConfigFileManager;
+import com.estafet.learning.jdbc.utils.DatabaseDriver;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class MySqlDriver implements MySqlQueries {
+public class MySqlDriver extends DatabaseDriver implements MySqlQueries {
     private static Connection connection = null;
     private static Statement statement = null;
 
@@ -41,6 +42,21 @@ public class MySqlDriver implements MySqlQueries {
         }
     }
 
+
+
+    public static boolean executeUpdateQueryBoolean(String query) {
+        int result = -9999;
+
+        try {
+            System.out.println("Update query is: \n" + query);
+            result = statement.executeUpdate(query);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return result >= 0;
+    }
+
+    @Override
     public void connect() {
         if (connection == null) {
             connection = setConnection(
@@ -56,37 +72,7 @@ public class MySqlDriver implements MySqlQueries {
         }
     }
 
-    public static boolean executeUpdateQueryBoolean(String query) {
-        int result = -9999;
-
-        try {
-            System.out.println("Update query is: \n" + query);
-            result = statement.executeUpdate(query);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return result >= 0;
-    }
-
-    public void insertRandomCheckList(int numberOfChecklists) {
-        for (int i = 0; i < numberOfChecklists; i++) {
-            Checklist checklist = new Checklist();
-            PreparedStatement preparedStatement = null;
-            try {
-                preparedStatement = connection.prepareStatement(INSERT_INTO_CHECKLISTS);
-                //         "(name, cost, initiated_on, is_completed) VALUES (?, ?, ?, ?);";
-                preparedStatement.setString(1, checklist.getName());
-                preparedStatement.setDouble(2, checklist.getCost());
-                preparedStatement.setString(3, checklist.getInitiatedOn());
-                preparedStatement.setInt(4, checklist.getIsCompleted());
-                preparedStatement.execute();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
-        }
-    }
-
-
+    @Override
     public void insertRandomCustomer(int numberOfCustomers) {
         for (int i = 0; i < numberOfCustomers; i++) {
             Customer customer = new Customer();
@@ -105,6 +91,7 @@ public class MySqlDriver implements MySqlQueries {
         }
     }
 
+    @Override
     public void insertRandomProduct(int numberOfProducts) {
         for (int i = 0; i < numberOfProducts; i++) {
             Product product = new Product();
@@ -116,6 +103,25 @@ public class MySqlDriver implements MySqlQueries {
                 preparedStatement.setString(2, product.getDescription());
                 preparedStatement.setDouble(3, product.getPrice());
                 preparedStatement.setInt(4, product.getCategoryID());
+                preparedStatement.execute();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public void insertRandomCheckList(int numberOfChecklists) {
+        for (int i = 0; i < numberOfChecklists; i++) {
+            Checklist checklist = new Checklist();
+            PreparedStatement preparedStatement = null;
+            try {
+                preparedStatement = connection.prepareStatement(INSERT_INTO_CHECKLISTS);
+                //         "(name, cost, initiated_on, is_completed) VALUES (?, ?, ?, ?);";
+                preparedStatement.setString(1, checklist.getName());
+                preparedStatement.setDouble(2, checklist.getCost());
+                preparedStatement.setString(3, checklist.getInitiatedOn());
+                preparedStatement.setInt(4, checklist.getIsCompleted());
                 preparedStatement.execute();
             } catch (SQLException throwables) {
                 throwables.printStackTrace();

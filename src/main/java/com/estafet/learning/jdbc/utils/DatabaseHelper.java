@@ -1,29 +1,37 @@
 package com.estafet.learning.jdbc.utils;
 
-
-
-import com.estafet.learning.jdbc.model.Checklist;
-import com.estafet.learning.jdbc.model.Customer;
-import com.estafet.learning.jdbc.model.Product;
-
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.List;
-
 public interface DatabaseHelper {
 
-    void insertChecklist(Checklist checklist) throws SQLException;
-    void insertProduct(Product product) throws SQLException;
-    void insertCustomer(Customer customer) throws SQLException;
 
-    Checklist selectChecklist(int id);
-    Product selectProduct(int id);
-    Customer selectCustomer(int id);
+    default void insertRandomCheckList(int countOfChecklists) throws SQLException {}
+    default void insertRandomProduct(int countOfProducts) throws SQLException {}
+    default void insertRandomCustomer(int countOfCustomers) throws SQLException {}
 
-    List<Checklist> selectAllChecklists();
-    List<Product> selectAllProducts();
-    List<Customer> selectAllCustomers();
+    /*
+      Checklist selectChecklist(int id);
+      Product selectProduct(int id);
+      Customer selectCustomer(int id);
 
-    void getDataById(int id);
-    int getTableCount(String schemaName);
-    String getName(int id);
+      List<Checklist> selectAllChecklists();
+      List<Product> selectAllProducts();
+      List<Customer> selectAllCustomers();
+
+      void getDataById(int id);
+      int getTableCount(String schemaName);
+      String getName(int id);
+
+       */
+    default Connection setConnection(String jdbcURL, String username, String password) {
+        try {
+            return DriverManager.getConnection(jdbcURL, username, password);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+
 }

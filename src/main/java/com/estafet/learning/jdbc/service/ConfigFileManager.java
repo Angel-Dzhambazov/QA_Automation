@@ -66,4 +66,22 @@ public class ConfigFileManager {
         }
         return properties;
     }
+
+    public String getOracleJDBC() {
+        String oracleJDBC = getProperties().getProperty("oracleJDBC");
+        if (oracleJDBC != null) return oracleJDBC;
+        else throw new RuntimeException("oracleJDBC not specified in the configuration.properties file.");
+    }
+
+    public String getOracleUser() {
+        String oracleUserName = getProperties().getProperty("oracleUserName");
+        if (oracleUserName != null) return oracleUserName;
+        else throw new RuntimeException("oracleUserName not specified in the configuration.properties file.");
+    }
+
+    public String getOraclePassword() {
+        String oraclePassword = getProperties().getProperty("oraclePassword");
+        if (oraclePassword != null) return oraclePassword;
+        else throw new RuntimeException("oraclePassword not specified in the configuration.properties file.");
+    }
 }
