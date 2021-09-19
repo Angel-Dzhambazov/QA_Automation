@@ -16,4 +16,9 @@ public abstract class DatabaseDriver implements DatabaseHelper {
         }
         return null;
     }
+
+
+    public void createTables() {
+
+    }
 }

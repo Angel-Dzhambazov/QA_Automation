@@ -4,12 +4,14 @@ import com.estafet.learning.jdbc.dataBase.MySqlDriver;
 import com.estafet.learning.jdbc.dataBase.OracleDriver;
 
 public class Engine {
+
+
     public static void main(String[] args) {
         // MySQl manipulation. Connect, create, insert entries
 
-        /*
 
         MySqlDriver sqlDriver = new MySqlDriver();
+ /*
 
         sqlDriver.createTables();
         sqlDriver.insertRandomCheckList(4);
@@ -21,6 +23,9 @@ public class Engine {
 
         // Oracle manipulation. Connect, create, read entries from mysql, insert into Oracle
         OracleDriver oracleDriver = new OracleDriver();
+        DAO sqlDao = new DAO(sqlDriver);
+        sqlDao.getHelper().createTables();
+
 
 //        String query = "CREATE table employee (employee_id(5) NOT NULL, employee_name varchar2(30), employment_length" +
 //                " varchar2 (40))";

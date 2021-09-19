@@ -19,6 +19,7 @@ public interface DatabaseHelper {
 
     void insertRandomCustomer(int countOfCustomers) throws SQLException;
 
+
     /*
       Checklist selectChecklist(int id);
       Product selectProduct(int id);
