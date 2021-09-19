@@ -6,6 +6,9 @@ import com.estafet.learning.jdbc.dataBase.OracleDriver;
 public class Engine {
     public static void main(String[] args) {
         // MySQl manipulation. Connect, create, insert entries
+
+        /*
+
         MySqlDriver sqlDriver = new MySqlDriver();
 
         sqlDriver.createTables();
@@ -13,10 +16,17 @@ public class Engine {
         sqlDriver.insertRandomCustomer(4);
         sqlDriver.insertRandomProduct(4);
 
+
+         */
+
         // Oracle manipulation. Connect, create, read entries from mysql, insert into Oracle
         OracleDriver oracleDriver = new OracleDriver();
 
-//        oracleDriver.createTables();
+//        String query = "CREATE table employee (employee_id(5) NOT NULL, employee_name varchar2(30), employment_length" +
+//                " varchar2 (40))";
+//        oracleDriver.executeQuery(query);
+        oracleDriver.createTables();
+
 
         // get list of all IDs in mySql table
         // for each ID extract POJO and add it to list of POJOs.

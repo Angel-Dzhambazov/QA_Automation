@@ -1,14 +1,23 @@
 package com.estafet.learning.jdbc.utils;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.List;
+
 public interface DatabaseHelper {
 
+    List<String> TABLE_NAMES =
+            Arrays.asList("checklists", "products", "customers");
 
-    default void insertRandomCheckList(int countOfChecklists) throws SQLException {}
-    default void insertRandomProduct(int countOfProducts) throws SQLException {}
-    default void insertRandomCustomer(int countOfCustomers) throws SQLException {}
+    void connect();
+
+    void createTables();
+
+    void insertRandomCheckList(int countOfChecklists) throws SQLException;
+
+    void insertRandomProduct(int countOfProducts) throws SQLException;
+
+    void insertRandomCustomer(int countOfCustomers) throws SQLException;
 
     /*
       Checklist selectChecklist(int id);
@@ -24,14 +33,5 @@ public interface DatabaseHelper {
       String getName(int id);
 
        */
-    default Connection setConnection(String jdbcURL, String username, String password) {
-        try {
-            return DriverManager.getConnection(jdbcURL, username, password);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return null;
-    }
-
 
 }

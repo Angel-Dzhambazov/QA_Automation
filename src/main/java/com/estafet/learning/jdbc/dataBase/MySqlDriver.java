@@ -12,17 +12,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class MySqlDriver extends DatabaseDriver implements MySqlQueries {
-    private static Connection connection = null;
-    private static Statement statement = null;
-
-    /*
-    private String jdbcURL = "jdbc:mysql://localhost:3306/demo?useSSL=false";
-    private String mysqlJDBC = ConfigFileManager.getInstance().getMysqlJDBC();
-    private String jdbcUsername = "root";
-    private String mysqlJDBCUsername = ConfigFileManager.getInstance().getMysqlUser();
-    private String jdbcPassword = "root";
-    private String mysqlJDBCPassword = ConfigFileManager.getInstance().getMysqlPassword();
-     */
+    private static Connection mySqlConnection = null;
+    private static Statement mySqlStatement = null;
 
     private static final String INSERT_USERS_SQL = "INSERT INTO users" + "  (name, email, country) VALUES "
             + " (?, ?, ?);";
@@ -36,35 +27,31 @@ public class MySqlDriver extends DatabaseDriver implements MySqlQueries {
         connect();
     }
 
+    @Override
     public void createTables() {
         for (String tableName : TABLE_NAMES) {
             executeUpdateQueryBoolean(getCreateQuery(tableName));
         }
     }
 
-
-
-    public static boolean executeUpdateQueryBoolean(String query) {
-        int result = -9999;
-
+    private void executeUpdateQueryBoolean(String query) {
         try {
             System.out.println("Update query is: \n" + query);
-            result = statement.executeUpdate(query);
+            mySqlStatement.executeUpdate(query);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return result >= 0;
     }
 
-    @Override
+
     public void connect() {
-        if (connection == null) {
-            connection = setConnection(
+        if (mySqlConnection == null) {
+            mySqlConnection = setConnection(
                     ConfigFileManager.getInstance().getMysqlJDBC(),
                     ConfigFileManager.getInstance().getMysqlUser(),
                     ConfigFileManager.getInstance().getMysqlPassword());
             try {
-                statement = connection.createStatement();
+                mySqlStatement = mySqlConnection.createStatement();
                 System.out.println("Statement created!");
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
@@ -78,7 +65,7 @@ public class MySqlDriver extends DatabaseDriver implements MySqlQueries {
             Customer customer = new Customer();
             PreparedStatement preparedStatement = null;
             try {
-                preparedStatement = connection.prepareStatement(INSERT_INTO_CUSTOMERS);
+                preparedStatement = mySqlConnection.prepareStatement(INSERT_INTO_CUSTOMERS);
                 // "(name, address, website, credit_limit) VALUES (?, ?, ?, ?);";
                 preparedStatement.setString(1, customer.getName());
                 preparedStatement.setString(2, customer.getAddress());
@@ -97,7 +84,7 @@ public class MySqlDriver extends DatabaseDriver implements MySqlQueries {
             Product product = new Product();
             PreparedStatement preparedStatement = null;
             try {
-                preparedStatement = connection.prepareStatement(INSERT_INTO_PRODUCTS);
+                preparedStatement = mySqlConnection.prepareStatement(INSERT_INTO_PRODUCTS);
                 // (name, description, list_price, category_id) VALUES (?, ?, ?, ?);"
                 preparedStatement.setString(1, product.getName());
                 preparedStatement.setString(2, product.getDescription());
@@ -116,7 +103,7 @@ public class MySqlDriver extends DatabaseDriver implements MySqlQueries {
             Checklist checklist = new Checklist();
             PreparedStatement preparedStatement = null;
             try {
-                preparedStatement = connection.prepareStatement(INSERT_INTO_CHECKLISTS);
+                preparedStatement = mySqlConnection.prepareStatement(INSERT_INTO_CHECKLISTS);
                 //         "(name, cost, initiated_on, is_completed) VALUES (?, ?, ?, ?);";
                 preparedStatement.setString(1, checklist.getName());
                 preparedStatement.setDouble(2, checklist.getCost());

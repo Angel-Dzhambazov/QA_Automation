@@ -2,17 +2,26 @@ package com.estafet.learning.jdbc.dataBase;
 
 public interface OracleQueries {
 
-    public static final String CREATE_TABLE_CHECKLISTS ="CREATE TABLE checklists (\n" +
-            "    todo_id INTEGER NOT NULL PRIMARY KEY,\n" +
-            "    name VARCHAR2(255),\n" +
+    String INSERT_INTO_CHECKLISTS = "INSERT INTO checklists " +
+            "(name, cost, initiated_on, is_completed, MigratedTS, LastUpdatedTS) VALUES (?, ?, ?, ?, ?, ?);";
+
+    String INSERT_INTO_PRODUCTS = "INSERT INTO products " +
+            "(name, description, list_price, category_id, MigratedTS, LastUpdatedTS) VALUES (?, ?, ?, ?, ?, ?);";
+
+    String INSERT_INTO_CUSTOMERS = "INSERT INTO customers " +
+            "(name, address, website, credit_limit, MigratedTS, LastUpdatedTS) VALUES (?, ?, ?, ?, ?, ?);";
+
+    String CREATE_TABLE_CHECKLISTS = "CREATE TABLE checklists (\n" +
+            "    todo_id INT NOT NULL PRIMARY KEY,\n" +
+            "    name VARCHAR (255),\n" +
             "    cost NUMBER (7,2),\n" +
-            "    initiated_on VARCHAR2(255),\n" +
+            "    initiated_on VARCHAR (255),\n" +
             "    is_completed NUMBER(1) DEFAULT 0 NOT NULL,\n" +
             "    MigratedTS Timestamp(3),\n" +
             "    LastUpdatedTS Timestamp(3)\n" +
-            ");";
+            ")";
 
-    public static final String CREATE_TABLE_PRODUCTS ="CREATE TABLE products (\n" +
+    String CREATE_TABLE_PRODUCTS = "CREATE TABLE products (\n" +
             "    product_id INTEGER NOT NULL PRIMARY KEY,\n" +
             "    name VARCHAR2(255) NOT NULL,\n" +
             "    description VARCHAR2(2000),\n" +
@@ -20,10 +29,9 @@ public interface OracleQueries {
             "    category_id NUMBER NOT NULL,\n" +
             "    MigratedTS Timestamp(3),\n" +
             "    LastUpdatedTS Timestamp(3)\n" +
-            "  );";
+            "  )";
 
-
-    public static final String CREATE_TABLE_CUSTOMERS ="CREATE TABLE customers (\n" +
+    String CREATE_TABLE_CUSTOMERS = "CREATE TABLE customers (\n" +
             "    customer_id INTEGER NOT NULL PRIMARY KEY,\n" +
             "    name VARCHAR2(255) NOT NULL,\n" +
             "    address VARCHAR2(255),\n" +
@@ -31,5 +39,19 @@ public interface OracleQueries {
             "    credit_limit NUMBER(8, 2),\n" +
             "    MigratedTS Timestamp(3),\n" +
             "    LastUpdatedTS Timestamp(3)\n" +
-            "  );";
+            "  )";
+
+    default String getCreateQuery(String tableName) {
+        switch (tableName) {
+            case "checklists":
+                return CREATE_TABLE_CHECKLISTS;
+            case "products":
+                return CREATE_TABLE_PRODUCTS;
+            case "customers":
+                return CREATE_TABLE_CUSTOMERS;
+            default:
+                System.out.println("ERROR!");
+                return null;
+        }
+    }
 }
