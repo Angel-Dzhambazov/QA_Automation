@@ -28,7 +28,7 @@ public class DataGenerator {
     }
 
     public String getAddress() {
-        return faker.address().streetAddressNumber();
+        return faker.address().streetAddress();
     }
 
     public String getWebsite() {

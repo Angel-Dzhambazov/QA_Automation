@@ -3,13 +3,16 @@ package com.estafet.learning.jdbc.dataBase;
 public interface OracleQueries {
 
     String INSERT_INTO_CHECKLISTS = "INSERT INTO checklists " +
-            "(name, cost, initiated_on, is_completed, MigratedTS, LastUpdatedTS) VALUES (?, ?, ?, ?, ?, ?);";
+            "(todo_id, name, cost, initiated_on, is_completed, MigratedTS, LastUpdatedTS) " +
+            "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
     String INSERT_INTO_PRODUCTS = "INSERT INTO products " +
-            "(name, description, list_price, category_id, MigratedTS, LastUpdatedTS) VALUES (?, ?, ?, ?, ?, ?);";
+            "(product_id, name, description, list_price, category_id, MigratedTS, LastUpdatedTS) " +
+            "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
     String INSERT_INTO_CUSTOMERS = "INSERT INTO customers " +
-            "(name, address, website, credit_limit, MigratedTS, LastUpdatedTS) VALUES (?, ?, ?, ?, ?, ?);";
+            "(customer_id, name, address, website, credit_limit, MigratedTS, LastUpdatedTS) " +
+            "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
     String CREATE_TABLE_CHECKLISTS = "CREATE TABLE checklists (\n" +
             "    todo_id INT NOT NULL PRIMARY KEY,\n" +
@@ -40,6 +43,11 @@ public interface OracleQueries {
             "    MigratedTS Timestamp(3),\n" +
             "    LastUpdatedTS Timestamp(3)\n" +
             "  )";
+
+    String SELECT_ALL_TABLES = "select object_name as table_name\n" +
+            "from user_objects\n" +
+            "where object_type = 'TABLE' \n" +
+            "order by object_name";
 
     default String getCreateQuery(String tableName) {
         switch (tableName) {

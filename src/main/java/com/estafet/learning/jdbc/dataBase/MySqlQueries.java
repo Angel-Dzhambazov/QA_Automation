@@ -34,6 +34,7 @@ public interface MySqlQueries {
             "    website VARCHAR(255),\n" +
             "    credit_limit DECIMAL(8, 2) \n" +
             "  );";
+    String SELECT_ALL_TABLES = "show tables";
 
 
     default String getCreateQuery(String tableName) {
