@@ -59,21 +59,32 @@ public class CompareDatabasesSteps {
     @When("Information about tables is collected.")
     public void collectTableInfo() {
         mySqlTables = sqlDao.getHelper().selectAllTables();
-        Assert.assertTrue("No tables are present in MySQL Database!", mySqlTables.size() > 0);
-        oracleTables = oracleDao.getHelper().selectAllTables();
-        Assert.assertTrue("No tables are present in Oracle Database!", oracleTables.size() > 0);
 
+        int countOfSqlTables = mySqlTables.size();
+        System.out.println("countOfSqlTables = " + countOfSqlTables);
+        Assert.assertTrue("No tables are present in MySQL Database!", countOfSqlTables > 0);
+
+        oracleTables = oracleDao.getHelper().selectAllTables();
+        int countOfOracleTables = oracleTables.size();
+        System.out.println("countOfOracleTables = " + countOfOracleTables);
+        Assert.assertTrue("No tables are present in Oracle Database!", countOfOracleTables > 0);
+
+
+        System.out.println("count entries in mySQL DB!");
         mySqlTableNamesAndEntriesCount = new HashMap<>();
         for (String tableName : mySqlTables) {
             int countOfEntries = sqlDao.getHelper().getTotalEntriesOfTable(tableName);
-            mySqlTableNamesAndEntriesCount.put(tableName, countOfEntries);
+            System.out.println("tableName + countOfEntries = " + tableName + " " + countOfEntries);
+            mySqlTableNamesAndEntriesCount.put(tableName.toLowerCase(), countOfEntries);
         }
 
         oracleTableNamesAndEntriesCount = new HashMap<>();
 
+        System.out.println("count entries in oracle DB!");
         for (String tableName : oracleTables) {
             int countOfEntries = oracleDao.getHelper().getTotalEntriesOfTable(tableName);
-            mySqlTableNamesAndEntriesCount.put(tableName, countOfEntries);
+            System.out.println("tableName + countOfEntries = " + tableName + " " + countOfEntries);
+            oracleTableNamesAndEntriesCount.put(tableName.toLowerCase(), countOfEntries);
         }
 
 
@@ -83,6 +94,7 @@ public class CompareDatabasesSteps {
     public void compareEntryCount() {
         Assert.assertEquals("Count of tables is not the same!", mySqlTables.size(), oracleTables.size());
 
+        String debug = "";
         for (String tableName : mySqlTableNamesAndEntriesCount.keySet()) {
             int sqlEntriesInTable = mySqlTableNamesAndEntriesCount.get(tableName);
             int oracleEntriesInTable = oracleTableNamesAndEntriesCount.get(tableName);

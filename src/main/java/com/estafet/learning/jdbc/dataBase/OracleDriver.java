@@ -149,7 +149,10 @@ public class OracleDriver extends DatabaseDriver implements OracleQueries {
     public int getTotalEntriesOfTable(String tableName) {
         ResultSet rs;
         try {
-            rs = oracleStatement.executeQuery(SELECT_COUNT_FROM_TABLE + tableName);
+            String query = SELECT_COUNT_FROM_TABLE + tableName;
+            System.out.println("get total count of entries query  = \n" + query);
+            rs = oracleStatement.executeQuery(query);
+            rs.next();
             return rs.getInt(1);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
