@@ -50,6 +50,7 @@ public interface OracleQueries {
             "order by object_name";
 
     default String getCreateQuery(String tableName) {
+
         switch (tableName) {
             case "checklists":
                 return CREATE_TABLE_CHECKLISTS;
@@ -60,6 +61,7 @@ public interface OracleQueries {
             default:
                 System.out.println("ERROR!");
                 return null;
+
         }
     }
 }

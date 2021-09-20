@@ -7,6 +7,8 @@ import com.estafet.learning.jdbc.model.Checklist;
 import com.estafet.learning.jdbc.model.Customer;
 import com.estafet.learning.jdbc.model.Product;
 import com.estafet.learning.stepDefinitions.utils.Helper;
+import com.github.javafaker.Faker;
+import flex.messaging.io.ArrayList;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -33,6 +35,8 @@ public class CompareDatabasesSteps {
     Map<String, Integer> mySqlTableNamesAndEntriesCount;
     Map<String, Integer> oracleTableNamesAndEntriesCount;
 
+    List<Integer> ids;
+
     @When("I pick a random {string}")
     public void pickRandomCustomer(String tableName) {
         randomID = Helper.getRandomUniqueIDFromTable(tableName);
@@ -58,6 +62,8 @@ public class CompareDatabasesSteps {
 
     @When("Information about tables is collected.")
     public void collectTableInfo() {
+
+        System.out.println("Collect table information!");
         mySqlTables = sqlDao.getHelper().selectAllTables();
 
         int countOfSqlTables = mySqlTables.size();
@@ -104,8 +110,44 @@ public class CompareDatabasesSteps {
 
     @And("{int} random IDs are chosen")
     public void collectRandomEntries(int countOfEntries) {
-        List<Customer> customersAsList = sqlDao.getHelper().selectAllCustomers();
-        List<Product> productsAsList = sqlDao.getHelper().selectAllProducts();
-        List<Checklist> checklistsAsList = sqlDao.getHelper().selectAllChecklists();
+        ids = new ArrayList();
+        Faker faker = new Faker();
+        while (ids.size() < 5) {
+            int tempInt = faker.number().numberBetween(1, 10);
+            if (!ids.contains(tempInt)) {
+                ids.add(tempInt);
+            }
+        }
+        System.out.println(ids);
+    }
+
+    @Then("data from MySQL and Oracle should be the same")
+    public void compareObjects() {
+        List<Customer> customersAsListMySQL = new ArrayList();
+        List<Product> productsAsListMySQL = new ArrayList();
+        List<Checklist> checklistsAsListsMySQL = new ArrayList();
+
+        List<Customer> customersAsListOracle = new ArrayList();
+        List<Product> productsAsListOracle = new ArrayList();
+        List<Checklist> checklistsAsListsOracle = new ArrayList();
+
+        for (Integer currentId : ids) {
+            customersAsListMySQL.add(sqlDao.getHelper().selectCustomerById(currentId));
+            productsAsListMySQL.add(sqlDao.getHelper().selectProductById(currentId));
+            checklistsAsListsMySQL.add(sqlDao.getHelper().selectChecklistById(currentId));
+
+            customersAsListOracle.add(sqlDao.getHelper().selectCustomerById(currentId));
+            productsAsListOracle.add(sqlDao.getHelper().selectProductById(currentId));
+            checklistsAsListsOracle.add(sqlDao.getHelper().selectChecklistById(currentId));
+        }
+
+
+        boolean compareCustomers = customersAsListMySQL.equals(customersAsListOracle);
+        boolean compareProducts = productsAsListMySQL.equals(productsAsListOracle);
+        boolean compareChecklists = checklistsAsListsMySQL.equals(checklistsAsListsOracle);
+
+        Assert.assertFalse("Tables are equal!", compareCustomers);
+        Assert.assertFalse("Tables are equal!", compareProducts);
+        Assert.assertTrue("Tables are equal!", compareChecklists);
     }
 }

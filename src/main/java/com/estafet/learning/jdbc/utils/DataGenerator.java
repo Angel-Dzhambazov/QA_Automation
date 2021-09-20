@@ -23,7 +23,9 @@ public class DataGenerator {
     }
 
     public Double getRandomDouble() {
+
         double result = faker.random().nextDouble();
+
         return result < 0.0 ? result * -1 : result;
     }
 

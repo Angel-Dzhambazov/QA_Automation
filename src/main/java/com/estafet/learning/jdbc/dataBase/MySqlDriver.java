@@ -17,11 +17,6 @@ public class MySqlDriver extends DatabaseDriver implements MySqlQueries {
     private static final String INSERT_USERS_SQL = "INSERT INTO users" + "  (name, email, country) VALUES "
             + " (?, ?, ?);";
 
-    private static final String SELECT_USER_BY_ID = "select id,name,email,country from users where id =?";
-    private static final String SELECT_ALL_USERS = "select * from users";
-    private static final String DELETE_USERS_SQL = "delete from users where id = ?;";
-    private static final String UPDATE_USERS_SQL = "update users set name = ?,email= ?, country =? where id = ?;";
-
     public MySqlDriver() {
         connect();
     }
@@ -270,5 +265,77 @@ public class MySqlDriver extends DatabaseDriver implements MySqlQueries {
             throwables.printStackTrace();
         }
         return 0;
+    }
+
+    @Override
+    public Checklist selectChecklistById(Integer currentId) {
+        ResultSet rs;
+        try {
+            String query = SELECT_CHECKLIST_BY_ID + currentId;
+            System.out.println("Select query  = \n" + query);
+            rs = mySqlStatement.executeQuery(query);
+            rs.next();
+
+            //  int id, String name, Double cost, String initiatedOn, int isCompleted
+            int id = rs.getInt(1);
+            String name = rs.getString(2);
+            Double cost = rs.getDouble(3);
+            String initiatedOn = rs.getString(4);
+            int isCompleted = rs.getInt(5);
+
+            return new Checklist(id, name, cost, initiatedOn, isCompleted);
+
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public Customer selectCustomerById(Integer currentId) {
+        ResultSet rs;
+        try {
+            String query = SELECT_CUSTOMER_BY_ID + currentId;
+            System.out.println("Select query  = \n" + query);
+            rs = mySqlStatement.executeQuery(query);
+            rs.next();
+
+            //int id, String name, String address, String website, Double creditLimit
+            int id = rs.getInt(1);
+            String name = rs.getString(2);
+            String address = rs.getString(3);
+            String website = rs.getString(4);
+            Double creditLimit = rs.getDouble(5);
+
+            return new Customer(id, name, address, website, creditLimit);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+
+    }
+
+    @Override
+    public Product selectProductById(Integer currentId) {
+        ResultSet rs;
+        try {
+            String query = SELECT_PRODUCT_BY_ID + currentId;
+            System.out.println("Select query  = \n" + query);
+            rs = mySqlStatement.executeQuery(query);
+            rs.next();
+
+            //int id, String name, String description, Double price, int categoryID
+            int id = rs.getInt(1);
+            String name = rs.getString(2);
+            String description = rs.getString(3);
+            Double price = rs.getDouble(4);
+            int categoryID = rs.getInt(4);
+
+            return new Product(id, name, description, price, categoryID);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
     }
 }

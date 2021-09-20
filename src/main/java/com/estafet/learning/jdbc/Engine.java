@@ -23,9 +23,9 @@ public class Engine {
 //        sqlDao.getHelper().dropAllTables();
 //        oracleDao.getHelper().dropAllTables();
 
-        createAndPopulateMySqlSchema(sqlDriver);
-        oracleDriver.createTables();
-
+//        createAndPopulateMySqlSchema(sqlDriver);
+//        oracleDriver.createTables();
+//
         populateOracleTables(oracleDriver, sqlDao);
 
     }
