@@ -257,4 +257,15 @@ public class MySqlDriver extends DatabaseDriver implements MySqlQueries {
     }
 
 
+    @Override
+    public int getTotalEntriesOfTable(String tableName) {
+        ResultSet rs;
+        try {
+            rs = mySqlStatement.executeQuery(SELECT_COUNT_FROM_TABLE + tableName);
+            return rs.getInt(1);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return 0;
+    }
 }

@@ -146,6 +146,18 @@ public class OracleDriver extends DatabaseDriver implements OracleQueries {
     }
 
     @Override
+    public int getTotalEntriesOfTable(String tableName) {
+        ResultSet rs;
+        try {
+            rs = oracleStatement.executeQuery(SELECT_COUNT_FROM_TABLE + tableName);
+            return rs.getInt(1);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return 0;
+    }
+
+    @Override
     public void createTables() {
         for (String tableName : TABLE_NAMES) {
             executeUpdateQueryBoolean(getCreateQuery(tableName));

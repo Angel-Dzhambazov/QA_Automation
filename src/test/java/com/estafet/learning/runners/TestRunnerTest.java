@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "src/test/resources/features", plugin = {"pretty"}, tags = "@lilly",
+@CucumberOptions(features = "src/test/resources/features", plugin = {"pretty"}, tags = "@SQLvsORACLE",
         glue = {"com.estafet.learning.stepDefinitions"})
 public class TestRunnerTest {
 

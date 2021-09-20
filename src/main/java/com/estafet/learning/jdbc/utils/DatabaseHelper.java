@@ -18,6 +18,7 @@ public interface DatabaseHelper {
     String SELECT_ALL_FROM_PRODUCTS = "SELECT * FROM products";
     String SELECT_ALL_FROM_CUSTOMERS = "SELECT * FROM customers";
     String DROP_TABLE = "DROP TABLE ";
+    String SELECT_COUNT_FROM_TABLE = "SELECT COUNT(*) FROM ";
 
     void connect();
 
@@ -42,18 +43,6 @@ public interface DatabaseHelper {
 
     List<Customer> selectAllCustomers();
 
-
-    /*
-      Checklist selectChecklist(int id);
-      Product selectProduct(int id);
-      Customer selectCustomer(int id);
-
-
-
-      void getDataById(int id);
-      int getTableCount(String schemaName);
-      String getName(int id);
-
-       */
+    int getTotalEntriesOfTable(String tableName);
 
 }

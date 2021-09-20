@@ -50,4 +50,6 @@ public interface MySqlQueries {
                 return null;
         }
     }
+
+    int getTotalEntriesOfTable(String tableName);
 }
