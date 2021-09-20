@@ -3,7 +3,11 @@ package com.estafet.learning.stepDefinitions.oracleVsMySqlSteps;
 import com.estafet.learning.jdbc.DAO;
 import com.estafet.learning.jdbc.dataBase.MySqlDriver;
 import com.estafet.learning.jdbc.dataBase.OracleDriver;
+import com.estafet.learning.jdbc.model.Checklist;
+import com.estafet.learning.jdbc.model.Customer;
+import com.estafet.learning.jdbc.model.Product;
 import com.estafet.learning.stepDefinitions.utils.Helper;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -84,5 +88,12 @@ public class CompareDatabasesSteps {
             int oracleEntriesInTable = oracleTableNamesAndEntriesCount.get(tableName);
             Assert.assertEquals("Count of entries is not the same!", sqlEntriesInTable, oracleEntriesInTable);
         }
+    }
+
+    @And("{int} random IDs are chosen")
+    public void collectRandomEntries(int countOfEntries) {
+        List<Customer> customersAsList = sqlDao.getHelper().selectAllCustomers();
+        List<Product> productsAsList = sqlDao.getHelper().selectAllProducts();
+        List<Checklist> checklistsAsList = sqlDao.getHelper().selectAllChecklists();
     }
 }

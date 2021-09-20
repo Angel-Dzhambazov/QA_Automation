@@ -23,13 +23,18 @@ public class Engine {
 //        sqlDao.getHelper().dropAllTables();
 //        oracleDao.getHelper().dropAllTables();
 
-//        createAndPopulateMySqlSchema(sqlDriver);
-//        oracleDriver.createTables();
+        createAndPopulateMySqlSchema(sqlDriver);
+        oracleDriver.createTables();
 
         populateOracleTables(oracleDriver, sqlDao);
 
     }
 
+    /**
+     * Extract all entries from SQL database and import it via oracleDriver
+     * @param oracleDriver
+     * @param sqlDao
+     */
     private static void populateOracleTables(OracleDriver oracleDriver, DAO sqlDao) {
         List<Checklist> allCheckList = sqlDao.getHelper().selectAllChecklists();
         List<Product> allProductsList = sqlDao.getHelper().selectAllProducts();
