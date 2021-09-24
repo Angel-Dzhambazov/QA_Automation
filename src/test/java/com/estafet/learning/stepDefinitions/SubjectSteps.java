@@ -10,7 +10,6 @@ import java.sql.*;
 import static org.junit.Assert.*;
 
 public class SubjectSteps {
-//    private static List<List<String>> subjectsEntries = null;
 
     @Given("Table {string} is created")
     public void isTableCreated(String tableName) {

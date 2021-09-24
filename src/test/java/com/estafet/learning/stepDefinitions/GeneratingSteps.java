@@ -154,7 +154,6 @@ public class GeneratingSteps {
             int quantity = Integer.parseInt(columns.get(2));
             double price = Double.parseDouble(columns.get(3));
 
-
             try {
                 Helper.getStatement().executeUpdate(
                         "INSERT INTO " + tableName + " (product_name, product_description, quantity, price)\n" +

@@ -133,20 +133,51 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>RELEASE</version>
-            <scope>test</scope>
+            <version>1.18.20</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.12.5</version>
         </dependency>
+        <!-- Start of Soap UI  dependencies    -->
+        <dependency>
+            <groupId>smartbear</groupId>
+            <artifactId>soapui</artifactId>
+            <version>5.1.2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/smartbear/soapui/5.1.2/soapui-5.1.2.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>smartbear</groupId>
+            <artifactId>soapui-maven-plugin</artifactId>
+            <version>5.1.2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/smartbear/soapui-maven-plugin/5.1.2/soapui-maven-plugin-5.1.2.jar</systemPath>
+        </dependency>
+
+        <!--
         <dependency>
             <groupId>com.smartbear.soapui</groupId>
             <artifactId>soapui</artifactId>
             <version>5.2.1</version>
-            <scope>test</scope>
+            <scope>system</scope>
         </dependency>
+        <dependency>
+            <groupId>com.smartbear.soapui</groupId>
+            <artifactId>soapui-maven-plugin</artifactId>
+            <version>5.2.1</version>
+            <scope>system</scope>
+        </dependency>
+         -->
+        <dependency>
+            <groupId>wsdl4j</groupId>
+            <artifactId>wsdl4j</artifactId>
+            <version>1.6.2</version>
+        </dependency>
+
+
         <dependency>
             <groupId>com.oracle.database.jdbc</groupId>
             <artifactId>ojdbc5</artifactId>
@@ -164,7 +195,10 @@
             <version>4.4</version>
         </dependency>
 
+
     </dependencies>
+
+    <!-- for SoapUI-->
 
     <repositories>
         <repository>
@@ -173,7 +207,6 @@
             <url>http://smartbearsoftware.com/repository/maven2</url>
         </repository>
     </repositories>
-
 
     <build>
         <plugins>

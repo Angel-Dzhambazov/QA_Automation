@@ -8,13 +8,13 @@ import com.estafet.learning.jdbc.model.Customer;
 import com.estafet.learning.jdbc.model.Product;
 import com.estafet.learning.stepDefinitions.utils.Helper;
 import com.github.javafaker.Faker;
-import flex.messaging.io.ArrayList;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

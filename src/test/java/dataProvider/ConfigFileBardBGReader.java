@@ -31,6 +31,8 @@ public class ConfigFileBardBGReader {
         }
     }
 
+
+
     public String getBrowserVersion() {
         String browserVersion = properties.getProperty("browserVersion");
         if (browserVersion != null) return browserVersion;
@@ -68,5 +70,11 @@ public class ConfigFileBardBGReader {
         String windowSize = properties.getProperty("windowMaximize");
         if(windowSize != null) return Boolean.valueOf(windowSize);
         return true;
+    }
+
+    public String getSoapCountriesWSDL() {
+        String soapCountriesWSDL = properties.getProperty("soapCountriesWSDL");
+        if (soapCountriesWSDL != null) return soapCountriesWSDL;
+        else throw new RuntimeException("soapCountriesWSDL not specified in the Configuration.properties file.");
     }
 }

@@ -33,3 +33,4 @@ public class BaseCalculator extends BaseSoap {
         return result;
     }
 }
+

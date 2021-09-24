@@ -23,6 +23,9 @@ public class HomePageLilly {
     @FindBy(xpath = "/html/body/div[2]/header/div[2]/div[1]/a")
     WebElement btnNavigateToCart;
 
+    @FindBy(xpath = "//*[@id=\"html-body\"]/div[2]/header/div[2]/div[1]/a/span[3]/span")
+    WebElement priceAtCart;
+
 
     public final WebDriver driver;
 
@@ -62,4 +65,6 @@ public class HomePageLilly {
         Thread.sleep(500);
         driver.findElement(By.id("ui-id-205")).click();
     }
+
+
 }
