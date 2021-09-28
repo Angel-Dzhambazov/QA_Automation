@@ -23,8 +23,8 @@ public class Wsdl {
 
 
         WsdlProject project = new WsdlProject();
-        /*
-        WsdlInterface[] wsdls = WsdlImporter.importWsdl(project, endPointUrl);
+
+        WsdlInterface[] wsdls = WsdlImporter.importWsdl(project, "http://webservices.oorsprong.org/websamples.countryinfo/CountryInfoService.wso?WSDL");
         WsdlInterface wsdl = wsdls[0];
 
 
@@ -36,7 +36,7 @@ public class Wsdl {
             System.out.println(op.createResponse(true));
         }
 
-
+    /*
         WsdlOperation op = (WsdlOperation) operation;
         WsdlRequest wsdlRequest = op.addNewRequest();
 
@@ -53,6 +53,7 @@ public class Wsdl {
         soapResponse = response.getContentAsString();
 
 
-         */
+     */
+
     }
 }
