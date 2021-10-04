@@ -1,0 +1,10 @@
+version: "3.9"
+
+services:
+  chromedp:
+    image: chromedp/headless-shell #headless Chrome browser
+    ports:
+      - "9222:9222"
+networks:
+  default:
+    name: my-swarm-network

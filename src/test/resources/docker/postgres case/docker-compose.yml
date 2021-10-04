@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  db:
+    container_name: my-postgres-container-db
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    ports:
+    - "5432:5432"
+
+networks:
+  default:
+    name: my-postgres-ubuntu-network

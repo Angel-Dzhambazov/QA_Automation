@@ -6,6 +6,7 @@ import com.eviware.soapui.model.iface.Operation;
 import com.eviware.soapui.model.iface.Response;
 
 import java.util.concurrent.TimeUnit;
+
 public class Wsdl02 {
     private static final String GET_CONTINENTS = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:web=\"http://www.oorsprong.org/websamples.countryinfo\">\n" +
             "   <soapenv:Header/>\n" +
@@ -13,10 +14,13 @@ public class Wsdl02 {
             "      <web:ListOfContinentsByCode/>\n" +
             "   </soapenv:Body>\n" +
             "</soapenv:Envelope>";
+
     public static void main(String[] args) throws Exception {
 
-        WsdlProject project = new WsdlProject();
+        WsdlProject project = new WsdlProject("this should fail");
+
         String urlWsdl = "http://webservices.oorsprong.org/websamples.countryinfo/CountryInfoService.wso?WSDL";
+
         WsdlInterface[] wsdls = WsdlImporter.importWsdl(project, urlWsdl);
         WsdlInterface wsdl = wsdls[0];
 
