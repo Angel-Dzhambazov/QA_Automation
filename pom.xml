@@ -195,8 +195,16 @@
             <artifactId>httpcore</artifactId>
             <version>4.4</version>
         </dependency>
-
-
+        <dependency>
+            <groupId>com.github.docker-java</groupId>
+            <artifactId>docker-java</artifactId>
+            <version>3.2.12</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.docker-java</groupId>
+            <artifactId>docker-java-core</artifactId>
+            <version>3.2.12</version>
+        </dependency>
     </dependencies>
 
     <!-- for SoapUI-->
