@@ -12,3 +12,4 @@ services:
 networks:
   default:
     name: my-postgres-ubuntu-network
+

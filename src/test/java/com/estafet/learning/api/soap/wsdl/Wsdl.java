@@ -1,11 +1,6 @@
 package com.estafet.learning.api.soap.wsdl;
 
-import com.eviware.soapui.impl.WsdlInterfaceFactory;
-import com.eviware.soapui.impl.wsdl.*;
-import com.eviware.soapui.impl.wsdl.support.wsdl.WsdlImporter;
-import com.eviware.soapui.model.iface.Operation;
-import com.eviware.soapui.model.iface.Response;
-import com.eviware.soapui.support.SoapUIException;
+
 import org.apache.xmlbeans.XmlException;
 
 import java.io.IOException;
@@ -21,20 +16,20 @@ public class Wsdl {
 
 //        String endPointUrl = "http://webservices.oorsprong.org/websamples.countryinfo/CountryInfoService.wso?WSDL";
 
-
-        WsdlProject project = new WsdlProject();
-
-        WsdlInterface[] wsdls = WsdlImporter.importWsdl(project, "http://webservices.oorsprong.org/websamples.countryinfo/CountryInfoService.wso?WSDL");
-        WsdlInterface wsdl = wsdls[0];
-
-
-        for (Operation operation : wsdl.getOperationList()) {
-            WsdlOperation op = (WsdlOperation) operation;
-            System.out.println("OP:" + op.getName());
-            System.out.println(op.createRequest(true));
-            System.out.println("Response:");
-            System.out.println(op.createResponse(true));
-        }
+//
+//        WsdlProject project = new WsdlProject();
+//
+//        WsdlInterface[] wsdls = WsdlImporter.importWsdl(project, "http://webservices.oorsprong.org/websamples.countryinfo/CountryInfoService.wso?WSDL");
+//        WsdlInterface wsdl = wsdls[0];
+//
+//
+//        for (Operation operation : wsdl.getOperationList()) {
+//            WsdlOperation op = (WsdlOperation) operation;
+//            System.out.println("OP:" + op.getName());
+//            System.out.println(op.createRequest(true));
+//            System.out.println("Response:");
+//            System.out.println(op.createResponse(true));
+//        }
 
     /*
         WsdlOperation op = (WsdlOperation) operation;

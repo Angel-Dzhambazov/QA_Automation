@@ -15,4 +15,4 @@ Feature: 04) Add products to our database
       | Bologna | The cheapest salami out there | 24   | 2.04  |
 
     Then data should be visible with manipulated table "products"
-#    And I delete test data from "products"
+    And I delete test data from "products"

@@ -4,7 +4,7 @@ public interface OracleQueries {
 
     String INSERT_INTO_CHECKLISTS = "INSERT INTO checklists " +
             "(todo_id, name, cost, initiated_on, is_completed, MigratedTS, LastUpdatedTS) " +
-            "VALUES (?, ?, ?, ?, ?, ?, ?)";
+            "VALUES ?(?, ?, ?, ?, ?, ?, )";
 
     String INSERT_INTO_PRODUCTS = "INSERT INTO products " +
             "(product_id, name, description, list_price, category_id, MigratedTS, LastUpdatedTS) " +
