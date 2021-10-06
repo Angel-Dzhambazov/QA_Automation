@@ -1,0 +1,56 @@
+#docker-compose.yml (Base)
+version: '3.9'
+services:
+  basket-api:
+    image: eshop/basket-api:${TAG:-latest}
+    build:
+      context: .
+      dockerfile: src/Services/Basket/Basket.API/Dockerfile
+    depends_on:
+      - basketdata
+      - identity-api
+      - rabbitmq
+
+  catalog-api:
+    image: eshop/catalog-api:${TAG:-latest}
+    build:
+      context: .
+      dockerfile: src/Services/Catalog/Catalog.API/Dockerfile
+    depends_on:
+      - sqldata
+      - rabbitmq
+
+  marketing-api:
+    image: eshop/marketing-api:${TAG:-latest}
+    build:
+      context: .
+      dockerfile: src/Services/Marketing/Marketing.API/Dockerfile
+    depends_on:
+      - sqldata
+      - nosqldata
+      - identity-api
+      - rabbitmq
+
+  webmvc:
+    image: eshop/webmvc:${TAG:-latest}
+    build:
+      context: .
+      dockerfile: src/Web/WebMVC/Dockerfile
+    depends_on:
+      - catalog-api
+      - ordering-api
+      - identity-api
+      - basket-api
+      - marketing-api
+
+  sqldata:
+    image: mcr.microsoft.com/mssql/server:2017-latest
+
+  nosqldata:
+    image: mongo
+
+  basketdata:
+    image: redis
+
+  rabbitmq:
+    image: rabbitmq:3-management
