@@ -8,7 +8,10 @@ import com.github.dockerjava.core.DefaultDockerClientConfig;
 import com.github.dockerjava.core.DockerClientBuilder;
 import com.github.dockerjava.core.DockerClientConfig;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class CreateContainer extends  Docker {
     public static void main(String[] args) {
@@ -18,10 +21,15 @@ public class CreateContainer extends  Docker {
                 = dockerClient.createContainerCmd("ubuntu")
                 .withName("mongo-ubuntu").exec();
 
+
+
+
+
+
         // from Dockerfile
 
-        File appFile = new File("src/test/resources/docker/postgres case/docker-compose.yml");
-
+//        File appFile = new File("src/test/resources/docker/postgres case/docker-compose.yml");
+//
 //        ImageFromDockerfile image = new ImageFromDockerfile()
 //                .withDockerfileFromBuilder(builder -> builder.from("payara/micro:5.193")
 //                        .cmd("--deploymentDir", "/opt/payara/deployments", "--noCluster")
@@ -30,4 +38,6 @@ public class CreateContainer extends  Docker {
 //                .withFileFromFile(appName, appFile);
 
     }
+
+
 }
