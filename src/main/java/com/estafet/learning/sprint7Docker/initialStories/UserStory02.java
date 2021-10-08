@@ -14,7 +14,7 @@ import static com.github.dockerjava.api.model.HostConfig.newHostConfig;
 public class UserStory02 extends BasicDocker {
     public static void main(String[] args) {
 
-        /*
+
         //create and populate MySQL container with DB and data
         String mysqlContainerName = "automated-mysql-container";
         String mysqlDockerfileLocation = "src/main/resources/mysqlimageDockerfile/Dockerfile";
@@ -22,7 +22,7 @@ public class UserStory02 extends BasicDocker {
         Integer defaultMySQLPort = 3306;
         Integer hostMySqlPort = 3307;
         createAndPopulateDB(mysqlContainerName, mysqlDockerfileLocation, defaultMySQLPort, hostMySqlPort);
-         */
+
 
 
         //Create and populate PostgreSQL container with DB and data

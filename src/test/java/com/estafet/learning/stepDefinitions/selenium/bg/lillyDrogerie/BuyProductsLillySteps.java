@@ -45,6 +45,7 @@ public class BuyProductsLillySteps {
 //        options.addArguments("--headless");
         options.addArguments("--window-size=1920,1080");
         WebDriverManager.chromedriver().setup();
+
         WebDriver driver;
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(configFileReader.getImplicitlyWait(), TimeUnit.SECONDS);
