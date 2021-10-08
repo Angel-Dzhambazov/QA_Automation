@@ -42,4 +42,5 @@ public abstract class BasicDocker {
         System.out.println("Downloading latest version!");
         pullImage(imageName, "latest");
     }
+
 }

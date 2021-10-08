@@ -18,7 +18,7 @@ public class ListContainers  extends  Docker{
         sendCommand(command);
 
 
-        /*
+
         // docker container ps -a
         List<Container> containerList = dockerClient.listContainersCmd().withShowAll(true).exec();
 
@@ -37,6 +37,6 @@ public class ListContainers  extends  Docker{
             System.out.println(container.getImage() + " " + container.getStatus());
         }
 
-         */
+
     }
 }

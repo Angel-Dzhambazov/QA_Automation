@@ -1,2 +1,5 @@
 FROM ubuntu:latest
-LABEL maintainer="myname@somecompany.com"
+LABEL maintainer="angel"
+RUN apt-get update -y
+RUN apt-get install iputils-ping -y
+CMD ["ping","localhost"]
