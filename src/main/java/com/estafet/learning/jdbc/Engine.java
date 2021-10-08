@@ -13,20 +13,23 @@ import java.util.List;
 public class Engine {
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         MySqlDriver sqlDriver = new MySqlDriver();
-        OracleDriver oracleDriver = new OracleDriver();
+//        OracleDriver oracleDriver = new OracleDriver();
 
         DAO sqlDao = new DAO(sqlDriver);
-        DAO oracleDao = new DAO(oracleDriver);
+//        DAO oracleDao = new DAO(oracleDriver);
 
-//        sqlDao.getHelper().dropAllTables();
+        sqlDao.getHelper().dropAllTables();
 //        oracleDao.getHelper().dropAllTables();
 
-//        createAndPopulateMySqlSchema(sqlDriver);
+        System.out.println("Sleeping for 3 seconds!");
+        Thread.sleep(1000*3);
+        createAndPopulateMySqlSchema(sqlDriver);
 //        oracleDriver.createTables();
-//
-        populateOracleTables(oracleDriver, sqlDao);
+
+
+//        populateOracleTables(oracleDriver, sqlDao);
 
     }
 

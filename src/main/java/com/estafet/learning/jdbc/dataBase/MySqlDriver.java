@@ -66,6 +66,7 @@ public class MySqlDriver extends DatabaseDriver implements MySqlQueries {
             preparedStatement.setString(3, customer.getWebsite());
             preparedStatement.setDouble(4, customer.getCreditLimit());
             preparedStatement.execute();
+            System.out.println(preparedStatement);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -94,6 +95,7 @@ public class MySqlDriver extends DatabaseDriver implements MySqlQueries {
             preparedStatement.setDouble(3, product.getPrice());
             preparedStatement.setInt(4, product.getCategoryID());
             preparedStatement.execute();
+            System.out.println(preparedStatement);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -110,6 +112,7 @@ public class MySqlDriver extends DatabaseDriver implements MySqlQueries {
             preparedStatement.setString(3, checklist.getInitiatedOn());
             preparedStatement.setInt(4, checklist.getIsCompleted());
             preparedStatement.execute();
+            System.out.println(preparedStatement);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
