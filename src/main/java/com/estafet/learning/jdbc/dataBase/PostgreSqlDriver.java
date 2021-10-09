@@ -3,15 +3,33 @@ package com.estafet.learning.jdbc.dataBase;
 import com.estafet.learning.jdbc.model.Checklist;
 import com.estafet.learning.jdbc.model.Customer;
 import com.estafet.learning.jdbc.model.Product;
+import com.estafet.learning.jdbc.service.ConfigFileManager;
 import com.estafet.learning.jdbc.utils.DatabaseDriver;
 
+import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 public class PostgreSqlDriver extends DatabaseDriver {
+
+    private static Connection postgreConnection = null;
+    private static Statement postgreStatement = null;
+
     @Override
     public void connect() {
-
+        if (postgreConnection == null) {
+            postgreConnection = setConnection(
+                    ConfigFileManager.getInstance().getOracleJDBC(),
+                    ConfigFileManager.getInstance().getOracleUser(),
+                    ConfigFileManager.getInstance().getOraclePassword());
+            try {
+                postgreStatement = postgreConnection.createStatement();
+                System.out.println("Statement created!");
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
     }
 
     @Override

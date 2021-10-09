@@ -6,7 +6,8 @@ import java.io.IOException;
 
 public class UserStory03 extends BasicDocker {
     public static void main(String[] args) throws IOException {
-        String filepathSelenium = "E:\\Estafet\\QA_Automation\\src\\main\\resources\\seleniumGrid\\docker-compose.yml";
+//        String filepathSelenium = "E:\\Estafet\\QA_Automation\\src\\main\\resources\\seleniumGrid\\docker-compose.yml";
+        String filepathSelenium = "D:\\intelliJ\\QA_Automation\\src\\main\\resources\\seleniumGrid\\docker-compose.yml";
         String seleniumGridCommand = "docker-compose -f " + filepathSelenium + " up -d";
 
         System.out.println(seleniumGridCommand);

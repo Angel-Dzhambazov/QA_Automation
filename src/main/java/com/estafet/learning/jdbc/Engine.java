@@ -2,6 +2,7 @@ package com.estafet.learning.jdbc;
 
 import com.estafet.learning.jdbc.dataBase.MySqlDriver;
 import com.estafet.learning.jdbc.dataBase.OracleDriver;
+import com.estafet.learning.jdbc.dataBase.PostgreSqlDriver;
 import com.estafet.learning.jdbc.model.Checklist;
 import com.estafet.learning.jdbc.model.Customer;
 import com.estafet.learning.jdbc.model.Product;
@@ -15,26 +16,31 @@ public class Engine {
 
     public static void main(String[] args) throws InterruptedException {
         MySqlDriver sqlDriver = new MySqlDriver();
-//        OracleDriver oracleDriver = new OracleDriver();
+        OracleDriver oracleDriver = new OracleDriver();
+
+        PostgreSqlDriver postgreDriver = new PostgreSqlDriver();
+
 
         DAO sqlDao = new DAO(sqlDriver);
-//        DAO oracleDao = new DAO(oracleDriver);
+        DAO postgreDao = new DAO(postgreDriver);
+        DAO oracleDao = new DAO(oracleDriver);
 
         sqlDao.getHelper().dropAllTables();
-//        oracleDao.getHelper().dropAllTables();
+        oracleDao.getHelper().dropAllTables();
 
         System.out.println("Sleeping for 3 seconds!");
-        Thread.sleep(1000*3);
+        Thread.sleep(1000 * 3);
         createAndPopulateMySqlSchema(sqlDriver);
-//        oracleDriver.createTables();
+        oracleDriver.createTables();
 
 
-//        populateOracleTables(oracleDriver, sqlDao);
+        populateOracleTables(oracleDriver, sqlDao);
 
     }
 
     /**
      * Extract all entries from SQL database and import it via oracleDriver
+     *
      * @param oracleDriver
      * @param sqlDao
      */

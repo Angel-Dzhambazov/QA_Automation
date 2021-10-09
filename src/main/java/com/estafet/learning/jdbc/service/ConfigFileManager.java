@@ -84,4 +84,22 @@ public class ConfigFileManager {
         if (oraclePassword != null) return oraclePassword;
         else throw new RuntimeException("oraclePassword not specified in the configuration.properties file.");
     }
+
+    public String getPostgreJDBC() {
+        String postgreJDBC = getProperties().getProperty("postgre");
+        if (postgreJDBC != null) return postgreJDBC;
+        else throw new RuntimeException("postgre not specified in the configuration.properties file.");
+    }
+
+    public String getPostgreUser() {
+        String postgreUserName = getProperties().getProperty("postgreUserName");
+        if (postgreUserName != null) return postgreUserName;
+        else throw new RuntimeException("postgreUserName not specified in the configuration.properties file.");
+    }
+
+    public String getPostgrePassword() {
+        String postgrePassword = getProperties().getProperty("postgrePassword");
+        if (postgrePassword != null) return postgrePassword;
+        else throw new RuntimeException("postgrePassword not specified in the configuration.properties file.");
+    }
 }
