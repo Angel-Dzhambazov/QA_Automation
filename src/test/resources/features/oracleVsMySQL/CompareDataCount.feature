@@ -8,7 +8,7 @@ Feature: Compare data in MySQL and Oracle databases
 
 
     Scenario: Pick 5 random IDs from each table in MySQL and select the same IDs from Oracle. Then compare
-      Given Established connection to MySQL and Oracle databases.
+      Given Established connection to "MySQL" and "Oracle" databases.
       When Information about tables is collected.
       And 5 random IDs are chosen
       Then data from MySQL and Oracle should be the same
