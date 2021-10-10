@@ -3,6 +3,7 @@ package com.estafet.learning.stepDefinitions.oracleVsMySqlSteps;
 import com.estafet.learning.jdbc.DAO;
 import com.estafet.learning.jdbc.dataBase.MySqlDriver;
 import com.estafet.learning.jdbc.dataBase.OracleDriver;
+import com.estafet.learning.jdbc.dataBase.PostgreSqlDriver;
 import com.estafet.learning.jdbc.model.Checklist;
 import com.estafet.learning.jdbc.model.Customer;
 import com.estafet.learning.jdbc.model.Product;
@@ -25,15 +26,19 @@ public class CompareDatabasesSteps {
 
     private static MySqlDriver mySqlDriver;
     private static OracleDriver oracleDriver;
+    private static PostgreSqlDriver postgreSqlDriver;
 
     private static DAO sqlDao;
     private static DAO oracleDao;
+    private static DAO postgreDao;
 
     List<String> mySqlTables;
     List<String> oracleTables;
+    List<String> postgreTables;
 
     Map<String, Integer> mySqlTableNamesAndEntriesCount;
     Map<String, Integer> oracleTableNamesAndEntriesCount;
+    Map<String, Integer> postgreTableNamesAndEntriesCount;
 
     List<Integer> ids;
 
@@ -47,17 +52,37 @@ public class CompareDatabasesSteps {
 
     }
 
-    @Given("Established connection to MySQL and Oracle databases.")
-    public void connectToMySqlAndOracle() {
-        mySqlDriver = new MySqlDriver();
-        Assert.assertNotNull("Could not establish MySQL connection!", mySqlDriver);
-        oracleDriver = new OracleDriver();
-        Assert.assertNotNull("Could not establish Oracle connection!", oracleDriver);
+    @Given("Established connection to {string} and {string}} databases.")
+    public void connectToMySqlAndOracle(String db1, String db2) {
+        // MySQL
+        // Oracle
+        connectToGivenDB (db1);
+        connectToGivenDB (db2);
 
         sqlDao = new DAO(mySqlDriver);
         Assert.assertNotNull("Could not Create MySQL Dao object!", sqlDao);
         oracleDao = new DAO(oracleDriver);
         Assert.assertNotNull("Could not Create Oracle Dao object!", oracleDao);
+    }
+
+    private static void connectToGivenDB(String dbType) {
+        switch (dbType) {
+            case "MySQL":
+                mySqlDriver = new MySqlDriver();
+                Assert.assertNotNull("Could not establish MySQL connection!", mySqlDriver);
+                break;
+            case "Oracle":
+                oracleDriver = new OracleDriver();
+                Assert.assertNotNull("Could not establish Oracle connection!", oracleDriver);
+                break;
+            case "Postgre":
+                postgreSqlDriver = new PostgreSqlDriver();
+                Assert.assertNotNull("Could not establish Postgre connection!", postgreSqlDriver);
+                break;
+            default:
+                Assert.fail("Could not establish type of database!");
+                break;
+        }
     }
 
     @When("Information about tables is collected.")

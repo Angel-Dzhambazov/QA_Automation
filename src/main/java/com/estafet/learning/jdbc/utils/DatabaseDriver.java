@@ -70,5 +70,4 @@ public abstract class DatabaseDriver implements DatabaseHelper {
         return result;
     }
 
-
 }

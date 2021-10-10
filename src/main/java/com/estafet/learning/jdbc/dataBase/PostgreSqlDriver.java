@@ -6,15 +6,18 @@ import com.estafet.learning.jdbc.model.Product;
 import com.estafet.learning.jdbc.service.ConfigFileManager;
 import com.estafet.learning.jdbc.utils.DatabaseDriver;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.List;
 
 public class PostgreSqlDriver extends DatabaseDriver {
 
     private static Connection postgreConnection = null;
     private static Statement postgreStatement = null;
+
+
+    public PostgreSqlDriver() {
+        connect();
+    }
 
     @Override
     public void connect() {
@@ -49,12 +52,28 @@ public class PostgreSqlDriver extends DatabaseDriver {
 
     @Override
     public void executeQuery(String query) {
-
+        try {
+            ResultSet rs = postgreStatement.executeQuery(query);
+            System.out.println("printResultSet(rs)");
+            printResultSet(rs);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     @Override
     public void dropAllTables() {
-
+        PreparedStatement preparedStatement;
+        try {
+            for (String tableName : TABLE_NAMES) {
+                preparedStatement = postgreConnection.prepareStatement(DROP_TABLE + tableName);
+                System.out.println("preparedStatement.toString()");
+                System.out.println(preparedStatement.toString());
+                preparedStatement.execute();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     @Override

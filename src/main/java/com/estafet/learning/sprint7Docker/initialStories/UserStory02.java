@@ -32,7 +32,6 @@ public class UserStory02 extends BasicDocker {
         Integer defaultPostgresPort = 5432;
         Integer hostPostgresPort = 5432;
         createAndPopulateDB(postgresContainerName, postgresDockerfileLocation, defaultPostgresPort, hostPostgresPort);
-
     }
 
     private static void createAndPopulateDB(String containerName, String dockerfileLocation, Integer defaultPort, Integer hostPort){

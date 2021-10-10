@@ -2,7 +2,7 @@
 Feature: Compare data in MySQL and PostgreSQL databases
 
   Scenario: Connect to MySQL & PostgreSQL. Collect table information. Then compare.
-    Given Established connection to MySQL and PostgreSQL databases.
+    Given Established connection to "MySQL" and "Postgre" databases.
     When Information about tables is collected.
     Then Count of tables and rows should be equal.
 

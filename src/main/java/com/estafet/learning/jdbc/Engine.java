@@ -7,6 +7,9 @@ import com.estafet.learning.jdbc.model.Checklist;
 import com.estafet.learning.jdbc.model.Customer;
 import com.estafet.learning.jdbc.model.Product;
 
+import javax.xml.transform.Result;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,26 +18,29 @@ public class Engine {
 
 
     public static void main(String[] args) throws InterruptedException {
-        MySqlDriver sqlDriver = new MySqlDriver();
-        OracleDriver oracleDriver = new OracleDriver();
+//        MySqlDriver sqlDriver = new MySqlDriver();
+//        OracleDriver oracleDriver = new OracleDriver();
 
         PostgreSqlDriver postgreDriver = new PostgreSqlDriver();
+        String selectAllTablesQuery = "select * from information_schema.tables where table_schema = 'public'";
 
-
-        DAO sqlDao = new DAO(sqlDriver);
+        postgreDriver.executeQuery(selectAllTablesQuery);
+//        DAO sqlDao = new DAO(sqlDriver);
         DAO postgreDao = new DAO(postgreDriver);
-        DAO oracleDao = new DAO(oracleDriver);
+//        DAO oracleDao = new DAO(oracleDriver);
+//
+//        sqlDao.getHelper().dropAllTables();
+//        oracleDao.getHelper().dropAllTables();
+//        postgreDao.getHelper().dropAllTables();
 
-        sqlDao.getHelper().dropAllTables();
-        oracleDao.getHelper().dropAllTables();
-
-        System.out.println("Sleeping for 3 seconds!");
-        Thread.sleep(1000 * 3);
-        createAndPopulateMySqlSchema(sqlDriver);
-        oracleDriver.createTables();
-
-
-        populateOracleTables(oracleDriver, sqlDao);
+//
+//        System.out.println("Sleeping for 3 seconds!");
+//        Thread.sleep(1000 * 3);
+//        createAndPopulateMySqlSchema(sqlDriver);
+//        oracleDriver.createTables();
+//
+//
+//        populateOracleTables(oracleDriver, sqlDao);
 
     }
 

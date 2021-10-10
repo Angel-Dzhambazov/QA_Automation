@@ -19,7 +19,7 @@ public class SubjectSteps {
     }
 
     @And("Total entries in {string} table should be greater or equal to {int}")
-    public void areThereAnyEntries(String table, int expectedCount) {
+    public void  areThereAnyEntries(String table, int expectedCount) {
         System.out.println("Checking for minimum amount of entries");
         assertTrue("Entries in the table '" + table + "' are not as expected!", Helper.getTotalEntriesInTable(table) >= expectedCount);
     }
