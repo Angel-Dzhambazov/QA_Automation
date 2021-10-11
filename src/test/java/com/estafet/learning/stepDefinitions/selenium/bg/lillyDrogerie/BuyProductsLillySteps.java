@@ -16,8 +16,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 public class BuyProductsLillySteps {
@@ -26,34 +29,53 @@ public class BuyProductsLillySteps {
     PageObjectManager pageObjectManager;
 
     @Before("@Smoke,@Regression")
-    public void beforeScenario(){
+    public void beforeScenario() {
         System.out.println("New scenario begins");
     }
 
     @After("@Smoke,@Regression")
-    public void afterScenario(){
+    public void afterScenario() {
         System.out.println("Scenario ends");
 
 
     }
 
-    @Given("Browser is open on Lilly")
-    public void isBrowserOpen() {
-        System.out.println("opening browser on lilly!");
-        configFileReader = new ConfigFileReader();
-        ChromeOptions options = new ChromeOptions();
-//        options.addArguments("--headless");
-        options.addArguments("--window-size=1920,1080");
-        WebDriverManager.chromedriver().setup();
+    @Given("{string} Browser is open on Lilly")
+    public void isBrowserOpen(String type) {
 
-        WebDriver driver;
-        driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(configFileReader.getImplicitlyWait(), TimeUnit.SECONDS);
-        driver.manage().window().maximize();
-        TakeScreenShot.takeSnapShot(driver);
-        driver.get(configFileReader.getLillyApplicationUrl());
-        TakeScreenShot.takeSnapShot(driver);
-        pageObjectManager = new PageObjectManager(driver);
+        if ("Local".equals(type)) {
+            System.out.println("opening browser on lilly!");
+            configFileReader = new ConfigFileReader();
+            ChromeOptions options = new ChromeOptions();
+//        options.addArguments("--headless");
+            options.addArguments("--window-size=1920,1080");
+            WebDriverManager.chromedriver().setup();
+
+            WebDriver driver;
+            driver = new ChromeDriver(options);
+            driver.manage().timeouts().implicitlyWait(configFileReader.getImplicitlyWait(), TimeUnit.SECONDS);
+            driver.manage().window().maximize();
+            TakeScreenShot.takeSnapShot(driver);
+            driver.get(configFileReader.getLillyApplicationUrl());
+            TakeScreenShot.takeSnapShot(driver);
+            pageObjectManager = new PageObjectManager(driver);
+        } else if ("Docker".equals(type)) {
+            try {
+                URL dockerURL = new URL("http://localhost:4445/wd/hub");
+                ChromeOptions options = new ChromeOptions();
+                options.addArguments("PlatformName", "Linux");
+                options.addArguments("--disable-dev-shm-usage");
+                options.addArguments("--no-sandbox");
+                options.addArguments("--headless");
+                options.addArguments("--window-size=1920,1080");
+                options.addArguments("--start-maximized");
+                options.addArguments("--headless");
+                WebDriver driver = new RemoteWebDriver(dockerURL, options);
+                pageObjectManager = new PageObjectManager(driver);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @And("user successfully logs in")

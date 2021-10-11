@@ -16,7 +16,7 @@ public class UserStory02 extends BasicDocker {
 
 
         //create and populate MySQL container with DB and data
-        String mysqlContainerName = "automated-mysql-container";
+        String mysqlContainerName = "automated-mysql-container1";
         String mysqlDockerfileLocation = "src/main/resources/mysqlimageDockerfile/Dockerfile";
 
         Integer defaultMySQLPort = 3306;
@@ -26,7 +26,7 @@ public class UserStory02 extends BasicDocker {
 
 
         //Create and populate PostgreSQL container with DB and data
-        String postgresContainerName = "automated-postgres-container";
+        String postgresContainerName = "automated-postgres-container1";
         String postgresDockerfileLocation = "src/main/resources/postgresImageDockerfile/Dockerfile";
 
         Integer defaultPostgresPort = 5432;

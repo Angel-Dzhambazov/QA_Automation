@@ -12,7 +12,7 @@ import java.util.Properties;
 public class ConfigFileBardBGReader {
 
     private Properties properties;
-    private final String propertyFilePath = "confis//BardBG.properties";
+    private final String propertyFilePath = "src/test/resources/configs/Configuration.properties";
 
     public ConfigFileBardBGReader() {
         BufferedReader reader;
@@ -45,8 +45,8 @@ public class ConfigFileBardBGReader {
         else throw new RuntimeException("implicitlyWait not specified in the Configuration.properties file.");
     }
 
-    public String getApplicationUrl() {
-        String url = properties.getProperty("urlLillyDrogerie");
+    public String getBardApplicationUrl() {
+        String url = properties.getProperty("bardURL");
         if (url != null) return url;
         else throw new RuntimeException("url not specified in the Configuration.properties file.");
     }

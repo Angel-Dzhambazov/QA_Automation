@@ -2,7 +2,7 @@
 Feature: Login in shop.lillydrogerie.bg and implement two scenarios
 
   Scenario Outline: Login, change product page order some products for less than 49E
-    Given "Local" Browser is open on Lilly
+    Given "Docker" Browser is open on Lilly
     And user successfully logs in
     When user clicks on category <category>
     And user arranges the items by price <order>
