@@ -16,6 +16,9 @@ public class HomePageBard {
     @FindBy(linkText = "Регистрация")
     WebElement registration;
 
+    @FindBy(linkText = "Вход")
+    WebElement login;
+
 
     private final WebDriver driver;
 
@@ -25,14 +28,33 @@ public class HomePageBard {
     }
 
 
-    public void clickOnRegistration() throws InterruptedException {
+    public void clickOnRegistration() {
         Actions action = new Actions(driver);
         action.moveToElement(myProfile).build().perform();
         WebElement we = driver.findElement(By.xpath("/html/body/div[3]/div[1]/div/div[2]/div"));
         action.moveToElement(we).build().perform();
 
-        Thread.sleep(1000 * 3);
+        try {
+            Thread.sleep(1000 * 3);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         registration.click();
+    }
+
+    public void clickOnLogin() {
+        Actions action = new Actions(driver);
+        action.moveToElement(myProfile).build().perform();
+        WebElement we = driver.findElement(By.xpath("/html/body/div[3]/div[1]/div/div[2]/div"));
+        action.moveToElement(we).build().perform();
+
+        try {
+            Thread.sleep(1000 * 3);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        login.click();
     }
 }

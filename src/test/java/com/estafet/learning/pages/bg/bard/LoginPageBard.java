@@ -14,6 +14,13 @@ public class LoginPageBard {
     @FindBy(xpath = "/html/body/div[3]/div[1]/div/div[2]/div/div/ul/li[3]/a")
     WebElement btn_register;
 
+    @FindBy(xpath = "//*[@id=\"members_login\"]/div/div/form/input[1]")
+    WebElement txt_username;
+
+    @FindBy(xpath = "//*[@id=\"members_login\"]/div/div/form/input[2]")
+    WebElement txt_password;
+
+
     WebDriver webDriver;
 
 

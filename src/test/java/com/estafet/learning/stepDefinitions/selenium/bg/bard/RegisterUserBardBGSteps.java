@@ -1,6 +1,8 @@
 package com.estafet.learning.stepDefinitions.selenium.bg.bard;
 
+import com.estafet.learning.pages.bg.bard.BardPageManager;
 import com.estafet.learning.pages.bg.bard.HomePageBard;
+import com.estafet.learning.pages.bg.bard.LoginPageBard;
 import com.estafet.learning.pages.bg.bard.RegisterPageBard;
 import dataProvider.ConfigFileBardBGReader;
 
@@ -25,23 +27,25 @@ public class RegisterUserBardBGSteps {
     WebDriver driver = null;
     HomePageBard home;
     RegisterPageBard register;
+    LoginPageBard loginBard;
 
     ConfigFileBardBGReader configFileReader;
+    BardPageManager pageManager;
 
     @Given("{string} Browser is open on Bard")
     public void isBrowserOpen(String hostType) {
         configFileReader = new ConfigFileBardBGReader();
 
-        if("Local".equals(hostType)){
-        WebDriverManager.chromedriver().setup();
-        ChromeOptions options = new ChromeOptions();
+        if ("Local".equals(hostType)) {
+            WebDriverManager.chromedriver().setup();
+            ChromeOptions options = new ChromeOptions();
 //        options.addArguments("--headless");
-        options.addArguments("--window-size=1920,1080");
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(configFileReader.getImplicitlyWait(), TimeUnit.SECONDS);
-        driver.manage().timeouts().pageLoadTimeout(configFileReader.getImplicitlyWait(), TimeUnit.SECONDS);
-        driver.manage().window().maximize();
+            options.addArguments("--window-size=1920,1080");
+            WebDriverManager.chromedriver().setup();
+            driver = new ChromeDriver(options);
+            driver.manage().timeouts().implicitlyWait(configFileReader.getImplicitlyWait(), TimeUnit.SECONDS);
+            driver.manage().timeouts().pageLoadTimeout(configFileReader.getImplicitlyWait(), TimeUnit.SECONDS);
+            driver.manage().window().maximize();
         } else if ("Docker".equals(hostType)) {
             try {
                 URL dockerURL = new URL("http://localhost:4444/wd/hub");
@@ -63,7 +67,12 @@ public class RegisterUserBardBGSteps {
     @And("user is on bard page")
     public void isLoginPage() throws InterruptedException {
         driver.get(configFileReader.getBardApplicationUrl());
-        Thread.sleep(1000);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        pageManager = new BardPageManager(driver);
     }
 
     @When("I click on registration page")
@@ -82,8 +91,14 @@ public class RegisterUserBardBGSteps {
     public void isHomePageVisible() {
     }
 
-    @When("created user logs in")
+    @And("created user logs in")
     public void createdUserLogsIn() {
+        home = new HomePageBard(driver);
+        home.clickOnLogin();
+
+        loginBard = new LoginPageBard(driver);
+//        loginBard.
+
     }
 
     @Then("user page is shown")

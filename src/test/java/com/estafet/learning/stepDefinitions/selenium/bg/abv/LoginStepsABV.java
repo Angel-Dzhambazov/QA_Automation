@@ -19,6 +19,7 @@ public class LoginStepsABV {
     HomePageABV home;
     CookiesPageABV cookies;
 
+
     @Given("Browser is open")
     public void isBrowserOpen() {
         WebDriverManager.chromedriver().setup();
