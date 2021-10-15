@@ -39,7 +39,7 @@ public class RegisterUserBardBGSteps {
         if ("Local".equals(hostType)) {
             WebDriverManager.chromedriver().setup();
             ChromeOptions options = new ChromeOptions();
-//        options.addArguments("--headless");
+            options.addArguments("--headless");
             options.addArguments("--window-size=1920,1080");
             WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver(options);
