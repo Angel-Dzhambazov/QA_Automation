@@ -1,5 +1,6 @@
 Feature: register and login into bard.bg
 
+  @bardbg
   Scenario: Open bard.bg and register a new user
     Given "Local" Browser is open on Bard
     And user is on bard page

@@ -42,11 +42,6 @@ public class CompareDatabasesSteps {
 
     List<Integer> ids;
 
-    @When("I pick a random {string}")
-    public void pickRandomCustomer(String tableName) {
-        randomID = Helper.getRandomUniqueIDFromTable(tableName);
-    }
-
     @Given("^successful connection to MySQL database (.*)$")
     public void successfulConnectionToMySQLDatabaseTable(String tableName) {
 
