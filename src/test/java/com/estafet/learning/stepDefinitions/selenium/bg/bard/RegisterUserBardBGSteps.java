@@ -39,7 +39,7 @@ public class RegisterUserBardBGSteps {
         if ("Local".equals(hostType)) {
             WebDriverManager.chromedriver().setup();
             ChromeOptions options = new ChromeOptions();
-            options.addArguments("--headless");
+//            options.addArguments("--headless");
             options.addArguments("--window-size=1920,1080");
             WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver(options);
@@ -53,11 +53,22 @@ public class RegisterUserBardBGSteps {
                 options.addArguments("PlatformName", "Linux");
                 options.addArguments("--disable-dev-shm-usage");
                 options.addArguments("--no-sandbox");
-                options.addArguments("--headless");
                 options.addArguments("--window-size=1920,1080");
                 options.addArguments("--start-maximized");
                 options.addArguments("--headless");
                 driver = new RemoteWebDriver(dockerURL, options);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+        } else if ("Remote".equals(hostType)){
+            ChromeOptions options = new ChromeOptions();
+//            options.addArguments("--headless");
+            options.addArguments("--window-size=1920,1080");
+            try {
+                WebDriver driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options);
+                driver.manage().timeouts().implicitlyWait(configFileReader.getImplicitlyWait(), TimeUnit.SECONDS);
+                driver.manage().timeouts().pageLoadTimeout(configFileReader.getImplicitlyWait(), TimeUnit.SECONDS);
+                driver.manage().window().maximize();
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
