@@ -35,44 +35,34 @@ public class RegisterUserBardBGSteps {
     @Given("{string} Browser is open on Bard")
     public void isBrowserOpen(String hostType) {
         configFileReader = new ConfigFileBardBGReader();
-
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+        options.addArguments("--window-size=1920,1080");
+        options.addArguments("--start-maximized");
         if ("Local".equals(hostType)) {
             WebDriverManager.chromedriver().setup();
-            ChromeOptions options = new ChromeOptions();
-//            options.addArguments("--headless");
-            options.addArguments("--window-size=1920,1080");
-            WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver(options);
-            driver.manage().timeouts().implicitlyWait(configFileReader.getImplicitlyWait(), TimeUnit.SECONDS);
-            driver.manage().timeouts().pageLoadTimeout(configFileReader.getImplicitlyWait(), TimeUnit.SECONDS);
-            driver.manage().window().maximize();
+
         } else if ("Docker".equals(hostType)) {
             try {
                 URL dockerURL = new URL("http://localhost:4444/wd/hub");
-                ChromeOptions options = new ChromeOptions();
                 options.addArguments("PlatformName", "Linux");
                 options.addArguments("--disable-dev-shm-usage");
                 options.addArguments("--no-sandbox");
-                options.addArguments("--window-size=1920,1080");
-                options.addArguments("--start-maximized");
-                options.addArguments("--headless");
                 driver = new RemoteWebDriver(dockerURL, options);
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
-        } else if ("Remote".equals(hostType)){
-            ChromeOptions options = new ChromeOptions();
-//            options.addArguments("--headless");
-            options.addArguments("--window-size=1920,1080");
+        } else if ("Remote".equals(hostType)) {
             try {
-                WebDriver driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options);
-                driver.manage().timeouts().implicitlyWait(configFileReader.getImplicitlyWait(), TimeUnit.SECONDS);
-                driver.manage().timeouts().pageLoadTimeout(configFileReader.getImplicitlyWait(), TimeUnit.SECONDS);
-                driver.manage().window().maximize();
+                driver = new RemoteWebDriver(new URL("http://localhost:4445/wd/hub"), options);
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
         }
+        driver.manage().timeouts().implicitlyWait(configFileReader.getImplicitlyWait(), TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(configFileReader.getImplicitlyWait(), TimeUnit.SECONDS);
+        driver.manage().window().maximize();
     }
 
     @And("user is on bard page")
