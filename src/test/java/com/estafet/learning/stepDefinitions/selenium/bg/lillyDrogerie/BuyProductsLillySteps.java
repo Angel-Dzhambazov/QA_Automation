@@ -47,7 +47,7 @@ public class BuyProductsLillySteps {
             System.out.println("opening browser on lilly!");
             configFileReader = new ConfigFileReader();
             ChromeOptions options = new ChromeOptions();
-//        options.addArguments("--headless");
+        options.addArguments("--headless");
             options.addArguments("--window-size=1920,1080");
             WebDriverManager.chromedriver().setup();
 

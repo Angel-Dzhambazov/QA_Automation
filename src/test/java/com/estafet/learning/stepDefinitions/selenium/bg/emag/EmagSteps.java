@@ -19,6 +19,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public class EmagSteps {
@@ -61,7 +62,7 @@ public class EmagSteps {
                 e.printStackTrace();
             }
         }
-        waitDriver = new WebDriverWait(driver, configFileReader.getImplicitlyWait());
+        waitDriver = new WebDriverWait(driver, (configFileReader.getImplicitlyWait()));
         driver.manage().timeouts().implicitlyWait(configFileReader.getImplicitlyWait(), TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(configFileReader.getImplicitlyWait(), TimeUnit.SECONDS);
         driver.manage().window().maximize();
@@ -71,8 +72,6 @@ public class EmagSteps {
 
     @When("user searches for a {string} in search filed")
     public void searchForItem(String item) {
-
-        homePageEmag.homePageLogo.click();
         homePageEmag.search.sendKeys(item);
         homePageEmag.search.sendKeys(Keys.ENTER);
     }
@@ -80,12 +79,12 @@ public class EmagSteps {
     @And("user logs in")
     public void login() {
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        homePageEmag.myAccount.click();
+//        try {
+//            Thread.sleep(1000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+        homePageEmag.navigateToLogin();
         loginPageEmag = new LoginPageEmag(driver);
         loginPageEmag.login(configFileReader);
 

@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "classpath:/features/selenium/bg.bard",
         plugin = {"pretty", "html:target/cucumber-report.html", "json:target/cucumber-report.json"},
-        tags = "@bardbg",
+        tags = "@bardbg and @SOAPcalc",
         glue = {"com.estafet.learning.stepDefinitions"})
 public class TestRunnerTest {
 }

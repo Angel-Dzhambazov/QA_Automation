@@ -1,3 +1,4 @@
+@SOAPcalc
 Feature: SOAP Calculator tests
 
   Scenario Outline: Test different functions of calculator

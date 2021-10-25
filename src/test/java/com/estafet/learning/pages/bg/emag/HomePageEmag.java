@@ -22,6 +22,10 @@ public class HomePageEmag {
     @FindBy(xpath = "//*[@id=\"my_account\"]/span")
     public WebElement myAccount;
 
+
+    @FindBy(xpath = "/html/body/div[7]/div/div[2]/a[1]")
+    public WebElement loginBTN;
+
     @FindBy(xpath = "//*[@id=\"masthead\"]/div/div/div[1]/a/img")
     public WebElement homePageLogo;
 
@@ -41,4 +45,10 @@ public class HomePageEmag {
     }
 
 
+    public void navigateToLogin() {
+        actions.moveToElement(myAccount).perform();
+        actions.moveToElement(loginBTN).perform();
+        actions.moveToElement(loginBTN).click();
+
+    }
 }

@@ -23,7 +23,7 @@ public class LoginStepsABV {
     @Given("Browser is open")
     public void isBrowserOpen() {
         WebDriverManager.chromedriver().setup();
-        WebDriverManager.chromedriver().browserVersion("77.0.3865.40").setup();
+
 
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
