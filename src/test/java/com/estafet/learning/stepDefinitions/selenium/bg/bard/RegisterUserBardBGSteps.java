@@ -36,7 +36,7 @@ public class RegisterUserBardBGSteps {
     public void isBrowserOpen(String hostType) {
         configFileReader = new ConfigFileBardBGReader();
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
+//        options.addArguments("--headless");
         options.addArguments("--window-size=1920,1080");
         options.addArguments("--start-maximized");
         if ("Local".equals(hostType)) {
