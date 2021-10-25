@@ -77,4 +77,6 @@ public class ConfigFileBardBGReader {
         if (soapCountriesWSDL != null) return soapCountriesWSDL;
         else throw new RuntimeException("soapCountriesWSDL not specified in the Configuration.properties file.");
     }
+
+
 }

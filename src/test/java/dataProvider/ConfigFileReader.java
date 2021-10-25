@@ -102,4 +102,16 @@ public class ConfigFileReader {
         if (address != null) return address;
         else throw new RuntimeException("existingDummyEmployee not specified in the Configuration.properties file.");
     }
+
+    public String getEmagUrl() {
+        String emagURL = properties.getProperty("emagURL");
+        if (emagURL != null) return emagURL;
+        else throw new RuntimeException("emagURL not specified in the Configuration.properties file.");
+    }
+
+    public String getEmagUsername() {
+        String usernameEmag = properties.getProperty("usernameEmag");
+        if (usernameEmag != null) return usernameEmag;
+        else throw new RuntimeException("usernameEmag not specified in the Configuration.properties file.");
+    }
 }
